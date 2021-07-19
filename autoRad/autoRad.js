@@ -1224,32 +1224,59 @@ function dotsbg(){//background
     dots_circle_counter = 0;
   }
 }
-function notebookbg(width){
-  console.log("notebook");
-  bgType = "notebook";
-  framingShape_failsafe = 10; //failsafe, sets framingShape higher
-  let NumLayers = 8;   // smaller values = bigger blobs
-  let Speed = 12;       // smaller values = faster animation
-  if(type=="light"){background(0);}else{background(255);}
-  let defaultcolor = type == "light" ? color(0, 0,0) : color(255,255,255);
-  let altcolor = type == "light" ? color(255, 255, 255): color(0,0,0);
-  let thisColor = defaultcolor;
-   let layerHeight = 3.0/NumLayers;
-   loadPixels();
-   for (let y=0; y<width; y++) {
-      for (let x=0; x<width; x++) {
-         let noiseVal = noise(x*0.018, y*0.018);
-         let noiseBump = lerp(0, layerHeight, (frameCount % Speed)/(1.0*Speed));
-         let whichColor = Math.floor((noiseVal+noiseBump)/layerHeight);
-         let startingColor = type == "light" ? 0 : (((Math.floor(frameCount/Speed) % 2) == 0) ? 0 : 1);
-         if (((whichColor+startingColor) % 2) == 0){ thisColor = defaultcolor;}
-         else{thisColor = altcolor;}
-         pixels[(y*width)+x] = thisColor;
-      }
-   }
-   updatePixels();
-   Speed = 1;
+function notebookbg(width) {
+  // console.log("notebook");
+  // bgType = "notebook";
+  // framingShape_failsafe = 10; //failsafe, sets framingShape higher
+  // let NumLayers = 8;   // smaller values = bigger blobs
+  // let Speed = 12;       // smaller values = faster animation
+  // if(type=="light"){background(0);}else{background(255);}
+  // let defaultcolor = type == "light" ? color(0, 0,0) : color(255,255,255);
+  // let altcolor = type == "light" ? color(255, 255, 255): color(0,0,0);
+  // let thisColor = defaultcolor;
+  //  let layerHeight = 3.0/NumLayers;
+  //  loadPixels();
+  //  for (let y=0; y<width; y++) {
+  //     for (let x=0; x<width; x++) {
+  //        let noiseVal = noise(x*0.018, y*0.018);
+  //        let noiseBump = lerp(0, layerHeight, (frameCount % Speed)/(1.0*Speed));
+  //        let whichColor = Math.floor((noiseVal+noiseBump)/layerHeight);
+  //        let startingColor = type == "light" ? 0 : (((Math.floor(frameCount/Speed) % 2) == 0) ? 0 : 1);
+  //        if (((whichColor+startingColor) % 2) == 0){ thisColor = defaultcolor;}
+  //        else{thisColor = altcolor;}
+  //        pixels[(y*width)+x] = thisColor;
+  //     }
+  //  }
+  //  updatePixels();
+  // Speed = 1;
+  'use strict'
+  let grid = []
+  let notebook = []
+  let s = 1
+  let f = 0.01 //original .01
+  let seed
+
+  seed = floor(random(99999)) // GENERATES RANDOM SEED FOR NOISE
+  noiseSeed(seed) // SET THIS TO USE HASH IN FINAL VERSION
+
+  notebook[0] = color("#000000");
+  notebook[1] = color("FFFFFF");
+
+
+  for (let y = 0; y < 1024; y += s) {
+    for (let x = 0; x <= 1024; x += s) {
+      let i = floor(noise(x * f, y * f) * notebook.length)
+      grid.push({ x, y, i });
+    }
+  }
+
+  grid.forEach((g, index) => {
+
+    fill(notebook[g.i]);
+    rect(g.x, g.y, 2, 2);// original -->rect(g.x, g.y, s, s)
+  }
 }
+
 function grid3Dbg(){
     bgType = "3Dgrid";
     background(type =="light"?255:0);
