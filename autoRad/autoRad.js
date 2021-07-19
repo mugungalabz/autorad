@@ -133,7 +133,7 @@ for(var i = 0; i < 5; i++){
 let randomOffset = xx(16);
 if (randomOffset < 63){ randomOffset *=-5;}
 else if(randomOffset < 126){ randomOffset *=2;}
-else if(randomOffset < 189){ randomOffset *=-3;}
+else if(randomOffset < 189){ randomOffset *=-3; randomOffset/=2;}
 else { randomOffset /=2;}
 let randomOffset2 = xx(26) < 165 ? 0-xx(26):xx(26);
 let randomOffset3 = xx(46) < 165 ? 0-xx(46):xx(46);
