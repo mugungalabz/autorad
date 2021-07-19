@@ -188,7 +188,7 @@ if(type == "dark"){ // DARK BACKGROUNDS -----------------------------------
    for (var i = y_lerp; i <= y_lerp+h_lerp; i++) {
       let inter = map(i, y_lerp, y_lerp+h_lerp, 0, 1);
       let c = lerpColor(based_bg1, based_bg2, inter);
-      basedGradient.strokeWeight(1);
+      basedGradient.strokeWeight(2);
       basedGradient.stroke(c);
       basedGradient.line(x_lerp-2, i, x_lerp+w_lerp, i);
     }
@@ -272,7 +272,7 @@ if (framingShape>40 && framingShape <50){ //--------gradient default framing tri
   for (var i = y_lerp; i <= y_lerp+h_lerp; i++) {
       let inter = map(i, y_lerp, y_lerp+h_lerp, 0, 1);
      let c = lerpColor(clrs[0], clrs[1], inter);
-      sourceDefaultFramingTriangle.strokeWeight(1);
+      sourceDefaultFramingTriangle.strokeWeight(2);
       sourceDefaultFramingTriangle.stroke(c);
       sourceDefaultFramingTriangle.line(x_lerp, i, x_lerp+w_lerp, i);
     }
@@ -310,7 +310,7 @@ if (framingShape>49 && framingShape <75){ //--------gradient flipped framing tri
       //c = lerpColor(clrs[0], clrs[4], inter);
       //}
       
-      sourceFlippedFramingTriangle.strokeWeight(1);
+      sourceFlippedFramingTriangle.strokeWeight(2);
       sourceFlippedFramingTriangle.stroke(c);
       sourceFlippedFramingTriangle.line(x_lerp, i, x_lerp+w_lerp, i);
     }
@@ -342,7 +342,7 @@ if (framingShape > 119 && framingShape < 150){ //gradient framing ellipse
   for (var i = y_lerp; i <= y_lerp+h_lerp; i++) {
       let inter = map(i, y_lerp, y_lerp+h_lerp, 0, 1);
      let c = lerpColor(clrs[3], clrs[4], inter);
-      sourceGradientFrameEllipse.strokeWeight(1);
+      sourceGradientFrameEllipse.strokeWeight(2);
       sourceGradientFrameEllipse.stroke(c);
       sourceGradientFrameEllipse.line(i, x_lerp,i,x_lerp+w_lerp);
     }
@@ -475,7 +475,7 @@ if (centeredShape > 224 && frameShape != "square" && type == "dark"){ // gradien
   for (var i = (320+rect_mover2); i <= ((320+rect_mover2)+(rect_size*2+320))*2 ; i++) {
       let inter = map(i, y_lerp, y_lerp+h_lerp, 0, 1);
      let c = lerpColor(clrs[2], clrs[0], inter);
-      sourceGradientRect.strokeWeight(1);
+      sourceGradientRect.strokeWeight(2);
       sourceGradientRect.stroke(c);
       sourceGradientRect.line(0, i, 1024+w_lerp, i);
   }
@@ -816,7 +816,7 @@ if (curveType < 16){ // gradient tertiary flourish
   for (let i = y_lerp; i <= y_lerp+h_lerp; i++) {
       let inter = map(i, y_lerp, y_lerp+h_lerp, 0, 1);
      let c = lerpColor(clrs[0], clrs[1], inter);
-      sourceGradientCurve.strokeWeight(1);
+      sourceGradientCurve.strokeWeight(2);
       sourceGradientCurve.stroke(c);
       sourceGradientCurve.line(i, x_lerp,i,x_lerp+w_lerp);
     }
@@ -948,7 +948,7 @@ if (curveType > 240){ //alt flourish gradient
   for (let i = y_lerp; i <= y_lerp+h_lerp; i++) {
       let inter = map(i, y_lerp, y_lerp+h_lerp, 0, 1);
      let c = lerpColor(clrs[0], clrs[1], inter);
-      sourceCurve.strokeWeight(1);
+      sourceCurve.strokeWeight(2);
       sourceCurve.stroke(c);
       sourceCurve.line(x_lerp, i, x_lerp+w_lerp, i);
     }
@@ -1037,7 +1037,7 @@ if (floatingShape2 < 50 && type == "dark" && clrs[2] !=color('#000000') && clrs[
   for (let i = y_lerp; i <= y_lerp+h_lerp; i++) {
       let inter = map(i, y_lerp, y_lerp+h_lerp, 0, 1);
      let c = lerpColor(clrs[2], clrs[3], inter);
-      sourceGradient.strokeWeight(1);
+      sourceGradient.strokeWeight(2);
       sourceGradient.stroke(c);
       sourceGradient.line(x_lerp, i, x_lerp+w_lerp, i);
     }
@@ -1289,7 +1289,7 @@ function fakegridbg(){
   for (var i = y_lerp; i <= y_lerp+h_lerp; i++) {
       let inter = map(i, y_lerp, y_lerp+h_lerp, 0, 1);
       let c = lerpColor(clrs[0], clrs[1], inter);
-      fakeGrid.strokeWeight(1);fakeGrid.stroke(c);
+      fakeGrid.strokeWeight(2);fakeGrid.stroke(c);
       fakeGrid.line(x_lerp, i, x_lerp+w_lerp, i);
     }
     image(fakeGrid,0,0);//draw the fakeGrid to a graphics buffer
