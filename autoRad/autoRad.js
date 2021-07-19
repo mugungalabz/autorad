@@ -1264,7 +1264,7 @@ function grid3Dbg(){
     }
     while(GridwCounter < 1024){
       line(GridwCounter,516,GridwCounter-(64*GridLoop),1024);
-      GridLoop *=  -1;
+      GridLoop -= 1;
       GridwCounter += +64;
     }
 }
