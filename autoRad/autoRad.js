@@ -1233,7 +1233,8 @@ function notebookbg(width) {
       noiseSeed(seed) // SET THIS TO USE HASH IN FINAL VERSION
 			notebook[0] =  color(0, 0,0);
 			notebook[1] = color(255,255,255);
-			let ratio = .23;
+  let ratio = .23;
+      //TODO
 			//if (***condition for mostly light***) { ratio = .23}
 			//if (***condition for mostly dark***) { ratio = .67}
       for (let y = 0; y < 1024; y++) {
