@@ -297,19 +297,6 @@ if (framingShape>49 && framingShape <75){ //--------gradient flipped framing tri
       let inter = map(i, y_lerp, y_lerp+h_lerp, 0, 1);
       
      let c = lerpColor(clrs[0], clrs[1], inter);
-      //if (clrs[0] != clrs[1]){
-      //c = lerpColor(clrs[0], clrs[1], inter);
-      //}
-      //if (clrs[0] == clrs[1]){
-      //c = lerpColor(clrs[0], clrs[2], inter);
-      //}
-      //if (clrs[0] == clrs[2]){
-      //c = lerpColor(clrs[0], clrs[3], inter);
-      //}
-      //if (clrs[0] == clrs[3]){
-      //c = lerpColor(clrs[0], clrs[4], inter);
-      //}
-      
       sourceFlippedFramingTriangle.strokeWeight(2);
       sourceFlippedFramingTriangle.stroke(c);
       sourceFlippedFramingTriangle.line(x_lerp, i, x_lerp+w_lerp, i);
@@ -320,7 +307,7 @@ if (framingShape>49 && framingShape <75){ //--------gradient flipped framing tri
     maskFlippedFramingTriangle.stroke(255);
     let frameOffset = randomOffset/3;
     let frameOffset2 = randomOffset2/3;
-    maskFlippedFramingTriangle.triangle(round(.878*1024)-frameOffset,round(.75*1024)+frameOffset,round(.39*1024)+frameOffset,round(.125*1024)+frameOffset2,round(.25*1024)+frameOffset,round(.94*1024)+frameOffset);
+    maskFlippedFramingTriangle.triangle(900-frameOffset,738+frameOffset,400+frameOffset,128+frameOffset2,256+frameOffset,938+frameOffset);
     applyMask(sourceFlippedFramingTriangle, maskFlippedFramingTriangle);
 }
 if (framingShape > 74 &&  framingShape < 120){ //flipped framing triangle
@@ -330,7 +317,7 @@ if (framingShape > 74 &&  framingShape < 120){ //flipped framing triangle
   if (type == "light" && clrs[4] == color('##FFFFFF'))stroke(clrs[3]);
   let frameOffset = randomOffset/3;
   let frameOffset2 = randomOffset2/3;
-  triangle(900-frameOffset,768+frameOffset,400+frameOffset,128+frameOffset2,256+frameOffset,968+frameOffset);
+  triangle(900-frameOffset,738+frameOffset,400+frameOffset,128+frameOffset2,256+frameOffset,938+frameOffset);
 }
 if (framingShape > 119 && framingShape < 150){ //gradient framing ellipse
   frameShape = "gradientellipse";
@@ -984,7 +971,7 @@ if (curveType > 240){ //alt flourish gradient
 let floatingShape2 = xx(18);
 if (floatingShape2 > 128){
   noStroke();fill(clrs[2]);
-  triangle(512+randomOffset,512+randomOffset,678-(randomOffset2/4),728,780,420-(randomOffset2/4));
+  triangle(512+randomOffset,512+randomOffset,478-(randomOffset2/4),512+randomOffset2,780,420-(randomOffset2/4));
 }
 if (floatingShape2 < 7){ // 3 rects ascending
   console.log("FloatingShape2: rects ascending");
@@ -1225,28 +1212,28 @@ function dotsbg(){//background
   }
 }
 function notebookbg(width) {
- 'use strict'
-    	let grid = []
-    	let notebook = []
-    	let f= 0.01;
-      let seed=floor(xx(17)) // GENERATES RANDOM SEED FOR NOISE
-      noiseSeed(seed) // SET THIS TO USE HASH IN FINAL VERSION
-			notebook[0] =  color(0, 0,0);
-			notebook[1] = color(255,255,255);
-      let ratio = .5;
-      //TODO
-			//if (***condition for mostly light***) { ratio = .23}
-			//if (***condition for mostly dark***) { ratio = .67}
-      for (let y = 0; y < 1024; y++) {
-        for (let x = 0; x <= 1024; x++) {
-					let i = noise(x*f,y*f) < ratio ? 1 : 0;
-          grid.push({x,y,i});
-        }
-      }
-      grid.forEach((g, index) => {
-        fill(notebook[g.i])
-        rect(g.x, g.y, 1, 1);
-      });
+  'use strict'
+  let grid = []
+  let notebook = []
+  let f= 0.02;
+  let seed=floor(xx(17)) // GENERATES RANDOM SEED FOR NOISE
+  noiseSeed(seed) // SET THIS TO USE HASH IN FINAL VERSION
+  notebook[0] =  color(0, 0,0);
+  notebook[1] = color(255,255,255);
+  let ratio = .5;
+  //TODO
+  if (type == "light") { ratio = .39 }
+  else {ratio = .58 }
+  for (let y = 0; y < 1024; y++) {
+    for (let x = 0; x <= 1024; x++) {
+      let i = noise(x*f,y*f) < ratio ? 1 : 0;
+      grid.push({x,y,i});
+    }
+  }
+  grid.forEach((g, index) => {
+    fill(notebook[g.i])
+    rect(g.x, g.y, 1, 1);
+  });
 }
 
 function grid3Dbg(){
