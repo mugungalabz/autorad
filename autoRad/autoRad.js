@@ -199,29 +199,45 @@ let framingShape = xx(22)+framingShape_failsafe;
 if (framingShape > -1 && framingShape < 8 && bgType != "notebook"){ //notebook framing ellipse
   if (type == "based"){blendMode(ADD);} //avoids bw contrast for based
   frameShape = "ellipse"; framingShapeType = "notebook";
-  //framingShape = 8; //WHY DID I PUT THIS HERE??
   let notebookFrameEllipse;
   let notebookFrameEllipseMask;
   notebookFrameEllipse = createGraphics(1024,1024);
-  let NumLayers = 8;   // smaller values = bigger blobs
-  let Speed = 12;       // smaller values = faster animation
+  // let NumLayers = 8;   // smaller values = bigger blobs
+  // let Speed = 12;       // smaller values = faster animation
   notebookFrameEllipse.background(0);
-  let blackcolor0 = color(0, 0,0);
-  let whitecolor1 = color(255, 255, 255);
-  let thisColor = blackcolor0;
-  let layerHeight = 3.0/NumLayers;
+  // let blackcolor0 = color(0, 0,0);
+  // let whitecolor1 = color(255, 255, 255);
+  // let thisColor = blackcolor0;
+  // let layerHeight = 3.0/NumLayers;
   notebookFrameEllipse.loadPixels();
+  let f = 0.02;
+  'use strict'
+  let grid = []
+  let notebook = []
+  var seed=floor(xx(18)) // GENERATES RANDOM SEED FOR NOISE
+  noiseSeed(seed) // SET THIS TO USE HASH IN FINAL VERSION
+  notebook[0] =  color(0, 0,0);
+  notebook[1] = color(255,255,255);
+  let ratio = .5;
+  if (type == "light") { ratio = .39 }
+  else {ratio = .58 }
   for (var y=0; y<1024; y++) {
-    for (var x=0; x<1024; x++) {
-         let noiseVal = noise(x*0.018, y*0.018);
-         let noiseBump = lerp(0, layerHeight, Math.floor((frameCount % Speed)/(1.0*Speed)));
-         let whichColor = int((noiseVal+noiseBump)/layerHeight);
-         let startingColor = (((frameCount/Speed) % 2) == 0) ? 0 : 1;
-         if (((whichColor+startingColor) % 2) == 0){thisColor = blackcolor0;}
-         else{thisColor = whitecolor1;}
-         notebookFrameEllipse.pixels[(y*1024)+x] = thisColor; 
-      }
-   }
+    for (var x = 0; x < 1024; x++) {
+      let i = noise(x*f,y*f) < ratio ? 1 : 0;
+      grid.push({x,y,i});
+        //  let noiseVal = noise(x*f, y*f);
+        //  let noiseBump = lerp(0, layerHeight, Math.floor((frameCount % Speed)/(1.0*Speed)));
+        //  let whichColor = int((noiseVal+noiseBump)/layerHeight);
+        //  let startingColor = (((frameCount/Speed) % 2) == 0) ? 0 : 1;
+        //  if (((whichColor+startingColor) % 2) == 0){thisColor = blackcolor0;}
+        //  else{thisColor = whitecolor1;}
+        //  notebookFrameEllipse.pixels[(y*1024)+x] = thisColor; 
+    }
+  }
+  grid.forEach((g, index) => {
+    fill(notebook[g.i])
+    notebookFrameEllipse.rect(g.x, g.y, 1, 1);
+  });
    notebookFrameEllipse.updatePixels();
    Speed = 1;
    notebookFrameEllipseMask = createGraphics(1024,1024);
@@ -230,7 +246,7 @@ if (framingShape > -1 && framingShape < 8 && bgType != "notebook"){ //notebook f
    let frameOffset = randomOffset/3;
    let frameOffset2 = randomOffset2/3;
    notebookFrameEllipseMask.ellipse(512+frameOffset,512+frameOffset2,1024-456-frameOffset,1024-456-frameOffset);
-  applyMask(notebookFrameEllipse, notebookFrameEllipseMask);
+   applyMask(notebookFrameEllipse, notebookFrameEllipseMask);
    noFill();stroke(clrs[4]);strokeWeight(16);
    ellipse(512+frameOffset,512+frameOffset2,1024-456-frameOffset,1024-456-frameOffset);
    blendMode(BLEND);
@@ -532,25 +548,42 @@ if (floatingShape1 > 64 && floatingShape1 < 80 && bgType != "notebook" && framin
   console.log("FloatingShape1: light notebook ellipse");
   let sourceNotebook;let maskNotebook;
   sourceNotebook = createGraphics(1024,1024);
-  let NumLayers = 8;   // smaller values = bigger blobs
-  let Speed = 12;       // smaller values = faster animation
+  // let NumLayers = 8;   // smaller values = bigger blobs
+  // let Speed = 12;       // smaller values = faster animation
   sourceNotebook.background(0);
- let blackcolor0 = color(0, 0,0);
- let whitecolor1 = color(255, 255, 255);
- let thisColor = blackcolor0;
-  let layerHeight = Math.floor(3.0/NumLayers);
+//  let blackcolor0 = color(0, 0,0);
+//  let whitecolor1 = color(255, 255, 255);
+//  let thisColor = blackcolor0;
+//   let layerHeight = Math.floor(3.0/NumLayers);
   sourceNotebook.loadPixels();
+  'use strict'
+  let grid = []
+  let notebook = []
+  let f= 0.02;
+  let seed=floor(xx(17)) // GENERATES RANDOM SEED FOR NOISE
+  noiseSeed(seed) // SET THIS TO USE HASH IN FINAL VERSION
+  notebook[0] =  color(0, 0,0);
+  notebook[1] = color(255,255,255);
+  let ratio = .5;
+  if (type == "light") { ratio = .39 }
+  else {ratio = .58 }
   for (let y=0; y<1024; y++) {
-    for (let x=0; x<1024; x++) {
-      let noiseVal = noise(x*(0.018), y*(0.018));
-      let noiseBump = lerp(0, layerHeight, Math.floor((frameCount % Speed)/(1.0*Speed)));
-      let whichColor = Math.floor((noiseVal+noiseBump)/layerHeight);
-      let startingColor = ((Math.floor(frameCount/Speed) % 2) == 0) ? 0 : 1;
-      if (((whichColor+startingColor) % 2) == 0) {thisColor = blackcolor0;}
-      else {thisColor = whitecolor1;}
-      sourceNotebook.pixels[(y*1024)+x] = thisColor;
+    for (let x = 0; x < 1024; x++) {
+      let i = noise(x*f,y*f) < ratio ? 1 : 0;
+      grid.push({x,y,i});
+      // let noiseVal = noise(x*(0.018), y*(0.018));
+      // let noiseBump = lerp(0, layerHeight, Math.floor((frameCount % Speed)/(1.0*Speed)));
+      // let whichColor = Math.floor((noiseVal+noiseBump)/layerHeight);
+      // let startingColor = ((Math.floor(frameCount/Speed) % 2) == 0) ? 0 : 1;
+      // if (((whichColor+startingColor) % 2) == 0) {thisColor = blackcolor0;}
+      // else {thisColor = whitecolor1;}
+      // sourceNotebook.pixels[(y*1024)+x] = thisColor;
      }
-   }
+  }
+  grid.forEach((g, index) => {
+    fill(notebook[g.i])
+    sourceNotebook.rect(g.x, g.y, 1, 1);
+  });
    sourceNotebook.updatePixels();
    Speed = 1;
    maskNotebook = createGraphics(1024,1024);
@@ -1221,7 +1254,6 @@ function notebookbg(width) {
   notebook[0] =  color(0, 0,0);
   notebook[1] = color(255,255,255);
   let ratio = .5;
-  //TODO
   if (type == "light") { ratio = .39 }
   else {ratio = .58 }
   for (let y = 0; y < 1024; y++) {
@@ -1235,7 +1267,6 @@ function notebookbg(width) {
     rect(g.x, g.y, 1, 1);
   });
 }
-
 function grid3Dbg(){
     bgType = "3Dgrid";
     background(type =="light"?255:0);
