@@ -1,6 +1,6 @@
 var surfaceConstant = 1024; let type; let bars_used = false;
 let grid_used = false; let sprinkles_used = false;
-let checkerEven = false; let two_straight = false; let worms_used = false;
+let checkerEven = false; let two_straight = false; let worms_used = false; let ss_circle = false;
 var frameShape; var bgType; var floatingShapeType;
 var centeredShapeType; var framingShapeType; var blackfailsafe;
 var framingShape_failsafe = 0; var hash; var clrs;
@@ -97,8 +97,10 @@ function draw(){
   let testhash4 = "0x6a8e7e4a2eeba9d6aee2bc75f1172d02adaa051805728d4e97d5baceefbf0a"; //notebook bg
   let testhash5 = "0x0a011c727ee0455047a573987a7c8fd82655abd6bf9241cf3dc8fba1ce0803"; //light notebook ellipse
   let testhash6 = "0x7b892b356738095b266887c131935f7dd8f132bc8d3a71f9affd178cb8c548"; //gradient flourish test
+  let testhash7 = "0x6c646f816692db533cf00dae1e12c4c46bd68efaabaf296ad738b9cc2b8901"; //gradient ellipse + dots circle
   //hash = testhash5;
   // hash = testhash1;
+  //hash = testhash7;
 
 	randomSeed(hash);
   //let testhash2 = "0xeffd5385f1a54db2be85629448375f2c9a80a3a5ca261acaebe175b1f74e09";
@@ -574,6 +576,7 @@ if (floatingShape1 > 64 && floatingShape1 < 80 && bgType != "notebook" && framin
 }
 if (floatingShape1 > 79 && floatingShape1 < 100){ //Masked circles filled w Sprinkles
   console.log("FloatingShape1: Sprinkles Circle");
+  ss_circle = true;
   sprinkles_used = true;
   let sourceSprinksCircle;
   let maskSprinksCircle;
@@ -1045,6 +1048,9 @@ if (floatingShape2 > 50 && type == "dark" && clrs[2] !=color('#000000') && clrs[
   let x_lerp =0;let y_lerp = 0;
   let gradientShapePosX = int(random(228,724));
   let gradientShapePosY = int(random(228,724));
+  if (floatingShapeType == "dots_circle" && (512+randomOffset) < 500){gradientShapePosX+=300; }
+  if (ss_circle==true && (512+randomOffset) < 500){shift_gEllipse = gradientShapePosX+=300;}
+  if (gradientShapePosX > 700){gradientShapePosX-=200;} //edge failsafe
   let w_lerp = gradientShapePosX+340;
   let h_lerp = gradientShapePosY+340;
   for (let i = y_lerp; i <= y_lerp+h_lerp; i++) {
