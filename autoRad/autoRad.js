@@ -13,7 +13,7 @@ function setup(){
   clrs = [color(000000),color(000000),color(000000),color(000000),color(000000)];
   palettes = [
   [//LIGHT
-    [color('##FFFFFF'), color('#ec89b5'), color('#7ecfbc'), color('#f4ef94'), color('#acd6d4')],
+    [color('#FFFFFF'), color('#ec89b5'), color('#7ecfbc'), color('#f4ef94'), color('#acd6d4')],
     [color('#000000'), color('#ec89b5'), color('#7ecfbc'), color('#f4ef94'), color('#acd6d4')],
     [color('#554bf9'), color('#34ffec'), color('#ffbeff'), color('#f3abae'), color('#fc6f00')],
     [color('#ffeb84'), color('#f2d8db'), color('#ffbae0'), color('#9fe6d6'), color('#000000')],
@@ -94,7 +94,12 @@ function draw(){
   let testhash1 = "0xf553bed38bd649dba715cc70201624463a28a1baeff19cfd03b2d39f20a598";
   let testhash2 = "0xb400272b2ec7fc76a0ec390393b401298ccd78f24212b135a6e96203267056";
   let testhash3 = "0x7c964593c7d69ba14aee67ea780ecee59d9ee7cd69c833e02608facb64560f";
+  let testhash4 = "0x6a8e7e4a2eeba9d6aee2bc75f1172d02adaa051805728d4e97d5baceefbf0a"; //notebook bg
+  let testhash5 = "0x0a011c727ee0455047a573987a7c8fd82655abd6bf9241cf3dc8fba1ce0803"; //light notebook ellipse
+  let testhash6 = "0x7b892b356738095b266887c131935f7dd8f132bc8d3a71f9affd178cb8c548"; //gradient flourish test
+  //hash = testhash5;
   // hash = testhash1;
+
 	randomSeed(hash);
   //let testhash2 = "0xeffd5385f1a54db2be85629448375f2c9a80a3a5ca261acaebe175b1f74e09";
   // let testhash2 = "0x34fa801c3882a8fd35308517e204566bb0e9a0f48b98db6e91eec7b8519053";
@@ -110,6 +115,7 @@ function draw(){
 
 
 type=xx(2)==69?"based":xx(2)<200?"light":"dark";
+
 let palette_select = round(xx(4)/10); //out of 255, divides by 10 and rounds to get 1 of 25 palettes
 if(palette_select == 0){palette_select = 25;}
 let palette = palettes[2][0];
@@ -139,41 +145,28 @@ let randomOffset2 = xx(26) < 165 ? 0-xx(26):xx(26);
 let randomOffset3 = xx(46) < 165 ? 0-xx(46):xx(46);
 let randomOffset4 = xx(48) % 2 == 0 ? 0-xx(48):xx(48);
 let randomOffset5 = xx(52) % 2 == 0 ? 0-xx(52):xx(52);
-let bgSelect = xx(2);
+  console.log("randomOffset:",randomOffset,"randomOffset2:", randomOffset2,"randomOffset3:", randomOffset3,"randomOffset4:", randomOffset4,"randomOffset5:", randomOffset5);
+let bgSelect = xx(3);
+  
+
 if(type == "light"){ // LIGHT BACKGROUNDS -----------------------------------
   if (bgSelect < 6){background(255,255,255);}
-  if (bgSelect > 5 && bgSelect < 100){dotsbg();}
+  if (bgSelect > 5 && bgSelect < 50){dotsbg();}
+  if (bgSelect > 49 && bgSelect < 100){ gridbg();}
   if (bgSelect > 99 && bgSelect < 126){ notebookbg(width);}
   if (bgSelect >125 && bgSelect <160){ grid3Dbg();}
   if (bgSelect > 159 && bgSelect < 200){ horizonbg();}
-  if (bgSelect > 199 && bgSelect < 226){ gridbg();}
+  if (bgSelect > 199 && bgSelect <226){wormsbg();} //added for p5js
   if (bgSelect > 225){ fakegridbg();}
 } //END LIGHT BACKGROUNDS
 if(type == "dark"){ // DARK BACKGROUNDS -----------------------------------
   if (bgSelect < 8){dotsbg();}
-  if (bgSelect >7 && bgSelect < 17){background(00,00,00);}
-  if (bgSelect > 225){ notebookbg();}
-  if (bgSelect > 16 && bgSelect < 26){ //-----------starscape
-    bgType = "starscape";
-     let starAmt = abs(randomOffset5)*40;
-     let bigBang = 0;
-     let starPosX = randomOffset5*4;
-     let starPosY = randomOffset4*4;
-     let starSize = 1;
-      noStroke();fill(255);background(0);   
-  while (bigBang < starAmt){
-    ellipse(starPosX,starPosY,starSize,starSize);
-    randomOffset5 = int(random(-255,255)); //NOT DETERMINATIVE
-    randomOffset4 = int(random(-255,255)); //NOT DETERMINATIVE
-    starPosX = randomOffset5*4;
-    starPosY = randomOffset4*4;
-    starSize = starSize+1;
-    if (starSize > 5){starSize = 1;}bigBang += 1;
-  }
-}    
+  if (bgSelect >7 && bgSelect < 17){background(00,00,00);} 
+  if (bgSelect > 16 && bgSelect < 26){starscapebg(randomOffset4,randomOffset5);}
   if (bgSelect > 25 && bgSelect < 100){gridbg();}
   if (bgSelect >99 && bgSelect <126){ grid3Dbg();}
-  if (bgSelect > 125 && bgSelect < 226){ horizonbg();}
+  if (bgSelect > 125 && bgSelect < 176){ horizonbg();}
+  if (bgSelect > 175 && bgSelect <227){ notebookbg();}
   if (bgSelect > 226){ fakegridbg();}
 } // END DARK BACKGROUNDS
  if (type =="based"){
@@ -181,8 +174,8 @@ if(type == "dark"){ // DARK BACKGROUNDS -----------------------------------
    let x_lerp =0; let y_lerp = 0;
    let w_lerp = 1024+(bgSelect < 128 ? 4 : 0);
    let h_lerp = 1024;
-   let based_bg1 = bgSelect < 128 ? color('##00b0d7') : color('##ffb7af');
-   let based_bg2 = bgSelect < 128 ? color('##ffb7af') : color('##00b0d7');
+   let based_bg1 = bgSelect < 128 ? color('#00b0d7') : color('#ffb7af');
+   let based_bg2 = bgSelect < 128 ? color('#ffb7af') : color('#00b0d7');
    let basedGradient;
    basedGradient = createGraphics(1024,1024);
    for (var i = y_lerp; i <= y_lerp+h_lerp; i++) {
@@ -196,20 +189,14 @@ if(type == "dark"){ // DARK BACKGROUNDS -----------------------------------
  } 
 console.log("Background: ", type," ", bgSelect," ", bgType," Palette:", palette_select);
 let framingShape = xx(22)+framingShape_failsafe;
+  console.log("FramingShape#:",framingShape);
 if (framingShape > -1 && framingShape < 8 && bgType != "notebook"){ //notebook framing ellipse
+  console.log("FramingShape: notebook framing ellipse");
   if (type == "based"){blendMode(ADD);} //avoids bw contrast for based
   frameShape = "ellipse"; framingShapeType = "notebook";
   let notebookFrameEllipse;
   let notebookFrameEllipseMask;
   notebookFrameEllipse = createGraphics(1024,1024);
-  // let NumLayers = 8;   // smaller values = bigger blobs
-  // let Speed = 12;       // smaller values = faster animation
-  notebookFrameEllipse.background(0);
-  // let blackcolor0 = color(0, 0,0);
-  // let whitecolor1 = color(255, 255, 255);
-  // let thisColor = blackcolor0;
-  // let layerHeight = 3.0/NumLayers;
-  notebookFrameEllipse.loadPixels();
   let f = 0.02;
   'use strict'
   let grid = []
@@ -221,25 +208,17 @@ if (framingShape > -1 && framingShape < 8 && bgType != "notebook"){ //notebook f
   let ratio = .5;
   if (type == "light") { ratio = .39 }
   else {ratio = .58 }
+  notebookFrameEllipse.noStroke();
   for (var y=0; y<1024; y++) {
     for (var x = 0; x < 1024; x++) {
       let i = noise(x*f,y*f) < ratio ? 1 : 0;
       grid.push({x,y,i});
-        //  let noiseVal = noise(x*f, y*f);
-        //  let noiseBump = lerp(0, layerHeight, Math.floor((frameCount % Speed)/(1.0*Speed)));
-        //  let whichColor = int((noiseVal+noiseBump)/layerHeight);
-        //  let startingColor = (((frameCount/Speed) % 2) == 0) ? 0 : 1;
-        //  if (((whichColor+startingColor) % 2) == 0){thisColor = blackcolor0;}
-        //  else{thisColor = whitecolor1;}
-        //  notebookFrameEllipse.pixels[(y*1024)+x] = thisColor; 
     }
   }
   grid.forEach((g, index) => {
-    fill(notebook[g.i])
+    notebookFrameEllipse.fill(notebook[g.i])
     notebookFrameEllipse.rect(g.x, g.y, 1, 1);
   });
-   notebookFrameEllipse.updatePixels();
-   Speed = 1;
    notebookFrameEllipseMask = createGraphics(1024,1024);
    notebookFrameEllipseMask.noStroke();
    notebookFrameEllipseMask.fill(255);
@@ -273,7 +252,7 @@ if (framingShape > 25 && framingShape < 41 ){ //default framing triangle
   frameShape = "default_triangle";
   noFill();strokeWeight(16);stroke(clrs[4]);
   if (type == "dark" && clrs[4] == blackfailsafe)stroke(clrs[3]);
-  if (type == "light" && clrs[4] ==color('##FFFFFF'))stroke(clrs[3]);
+  if (type == "light" && clrs[4] ==color('#FFFFFF'))stroke(clrs[3]);
   let frameOffset = randomOffset/3;
   let frameOffset2 = randomOffset2/3;
   triangle(128+frameOffset, 768+frameOffset, 768+frameOffset2, 128+frameOffset2, 720+frameOffset, 940+frameOffset);
@@ -329,8 +308,8 @@ if (framingShape>49 && framingShape <75){ //--------gradient flipped framing tri
 if (framingShape > 74 &&  framingShape < 120){ //flipped framing triangle
   frameShape = "flipped_triangle";
   noFill();strokeWeight(16);stroke(clrs[4]);
-  if (type == "dark" && clrs[4] == color('##000000'))stroke(clrs[3]);
-  if (type == "light" && clrs[4] == color('##FFFFFF'))stroke(clrs[3]);
+  if (type == "dark" && clrs[4] == color('#000000'))stroke(clrs[3]);
+  if (type == "light" && clrs[4] == color('#FFFFFF'))stroke(clrs[3]);
   let frameOffset = randomOffset/3;
   let frameOffset2 = randomOffset2/3;
   triangle(900-frameOffset,738+frameOffset,400+frameOffset,128+frameOffset2,256+frameOffset,938+frameOffset);
@@ -432,14 +411,18 @@ if (centeredShape >23 && centeredShape < 65 && frameShape != "ellipse" && bgType
   let horizon = 0;
   SourceRetroSun.strokeWeight(1);
   while (horizon < 1024/3){
-    SourceRetroSun.stroke(clrs[0]);
+    SourceRetroSun.stroke(clrs[0]); 
+    if (clrs[0] == "#000000"){ //black failsafe
+      console.log("Retro sun failsafe triggered");
+      SourceRetroSun.stroke(clrs[1]);
+    }
     SourceRetroSun.strokeWeight(horizon/1.5);
     SourceRetroSun.line(0,400+15*horizon,1024,400+15*horizon);
     horizon = horizon+1;
   }
   MaskRetroSun = createGraphics(1024,1024);
-  if (centeredShape < 10)centeredShape = centeredShape + 11;
-  if (centeredShape >100)centeredShape = centeredShape - 30;
+  if (centeredShape < 10){centeredShape = centeredShape + 11;}
+  if (centeredShape >100){centeredShape = centeredShape - 30;}
   MaskRetroSun.ellipse(xPos,yPos,centeredShape*7+(centeredShape),centeredShape*7+(centeredShape));
   applyMask(SourceRetroSun, MaskRetroSun);
   blendMode(BLEND);
@@ -495,6 +478,7 @@ if (floatingShape1 < 65 && floatingShape1 > 31){ //triangle
      triangle(128+1024/2+randomOffset,1024/2+randomOffset,1024/3,1024/1.5,1024/4+randomOffset,1024/4);
      console.log("FloatingShape1: Triangle");
 }
+  
 if (floatingShape1 < 32 && floatingShape1 > 16){ //strokedTriangle
      strokeWeight(16);fill(clrs[1]);stroke(clrs[3]);
      triangle(128+1024/2+randomOffset,1024/2+randomOffset,1024/3,1024/1.5,1024/4+randomOffset,1024/4);
@@ -548,15 +532,7 @@ if (floatingShape1 > 64 && floatingShape1 < 80 && bgType != "notebook" && framin
   console.log("FloatingShape1: light notebook ellipse");
   let sourceNotebook;let maskNotebook;
   sourceNotebook = createGraphics(1024,1024);
-  // let NumLayers = 8;   // smaller values = bigger blobs
-  // let Speed = 12;       // smaller values = faster animation
-  sourceNotebook.background(0);
-//  let blackcolor0 = color(0, 0,0);
-//  let whitecolor1 = color(255, 255, 255);
-//  let thisColor = blackcolor0;
-//   let layerHeight = Math.floor(3.0/NumLayers);
-  sourceNotebook.loadPixels();
-  'use strict'
+ 'use strict'
   let grid = []
   let notebook = []
   let f= 0.02;
@@ -567,25 +543,17 @@ if (floatingShape1 > 64 && floatingShape1 < 80 && bgType != "notebook" && framin
   let ratio = .5;
   if (type == "light") { ratio = .39 }
   else {ratio = .58 }
-  for (let y=0; y<1024; y++) {
-    for (let x = 0; x < 1024; x++) {
+  for (let y = 0; y < 1024; y++) {
+    for (let x = 0; x <= 1024; x++) {
       let i = noise(x*f,y*f) < ratio ? 1 : 0;
       grid.push({x,y,i});
-      // let noiseVal = noise(x*(0.018), y*(0.018));
-      // let noiseBump = lerp(0, layerHeight, Math.floor((frameCount % Speed)/(1.0*Speed)));
-      // let whichColor = Math.floor((noiseVal+noiseBump)/layerHeight);
-      // let startingColor = ((Math.floor(frameCount/Speed) % 2) == 0) ? 0 : 1;
-      // if (((whichColor+startingColor) % 2) == 0) {thisColor = blackcolor0;}
-      // else {thisColor = whitecolor1;}
-      // sourceNotebook.pixels[(y*1024)+x] = thisColor;
-     }
+    }
   }
+  sourceNotebook.noStroke();
   grid.forEach((g, index) => {
-    fill(notebook[g.i])
+    sourceNotebook.fill(notebook[g.i]) 
     sourceNotebook.rect(g.x, g.y, 1, 1);
   });
-   sourceNotebook.updatePixels();
-   Speed = 1;
    maskNotebook = createGraphics(1024,1024);
    maskNotebook.noStroke();
    maskNotebook.fill(255);
@@ -710,7 +678,7 @@ while (floatingGridCounterH < gridSize){
 if (floatingShape1 > 174 && floatingShape1 <200 && bgType != "horizon" && centeredShapeType != "horizon"){ //-------venetian circle lines circle
   console.log("FloatingShape1: venetian circle");
   bars_used = true; stroke(clrs[2]);
-  if (type == "light" && clrs[2] ==color('##FFFFFF')){stroke(clrs[3]);}
+  if (type == "light" && clrs[2] ==color('#FFFFFF')){stroke(clrs[3]);}
   if (type == "dark" && clrs[2] ==color('#000000')){stroke(clrs[3]);}
   strokeWeight(4);strokeCap(ROUND);
   let radius = xx(30);
@@ -1003,8 +971,10 @@ if (curveType > 240){ //alt flourish gradient
 }
 let floatingShape2 = xx(18);
 if (floatingShape2 > 128){
+  console.log("floating Shape 2 = f2 triangle");
   noStroke();fill(clrs[2]);
-  triangle(512+randomOffset,512+randomOffset,478-(randomOffset2/4),512+randomOffset2,780,420-(randomOffset2/4));
+  //triangle(512+randomOffset,512+randomOffset,478-(randomOffset2/4),512+randomOffset2,780,420-(randomOffset2/4)); old and busted
+  triangle(512+randomOffset,512+randomOffset,678-(randomOffset2/4),728,780,420-(randomOffset2/4));
 }
 if (floatingShape2 < 7){ // 3 rects ascending
   console.log("FloatingShape2: rects ascending");
@@ -1254,16 +1224,17 @@ function notebookbg(width) {
   notebook[0] =  color(0, 0,0);
   notebook[1] = color(255,255,255);
   let ratio = .5;
-  if (type == "light") { ratio = .39 }
-  else {ratio = .58 }
+  if (type == "light") { ratio = .58 }
+  else {ratio = .39 }
   for (let y = 0; y < 1024; y++) {
     for (let x = 0; x <= 1024; x++) {
       let i = noise(x*f,y*f) < ratio ? 1 : 0;
       grid.push({x,y,i});
     }
   }
+  noStroke();
   grid.forEach((g, index) => {
-    fill(notebook[g.i])
+    fill(notebook[g.i]) 
     rect(g.x, g.y, 1, 1);
   });
 }
@@ -1334,6 +1305,57 @@ function gridbg(){
       line(64+n,0,64+n,1024);
       n+=64;
     } 
+}
+function wormsbg(){
+  worms_used = true;
+  background(255);
+  noFill();
+  strokeCap(ROUND);
+  strokeWeight(5);
+  stroke(0,0,0,25);
+   let worm_column = 0;
+   let worm_row = 0;
+   let worm_switch = 0;
+   let bezX1 = 16;// 6 default
+   let bezX2 = 4;//4 default
+   let bezY1 = 32; // 24 default
+   while (worm_row < 1224){
+     while (worm_column < 1024){     
+     beginShape();
+      curveVertex(int(random(0,12)-bezX1)+worm_row,int(random(0,24))-bezY1+worm_column);
+      curveVertex(int(random(0,24))+worm_row,int(random(0,24))+worm_column);
+      curveVertex(int(random(0,26))+worm_row,int(random(0,24))+worm_column);
+      curveVertex(int(random(0,32))+worm_row,int(random(0,24))+worm_column);
+      curveVertex(int(random(0,36))+bezX2+worm_row,int(random(0,24))+bezY1+worm_column);
+      endShape();
+      worm_column = worm_column+24;
+     } 
+     worm_column = worm_column+158;
+   worm_switch ++;
+   worm_row=worm_row+32;
+   if (worm_switch % 2 == 0){worm_column = 0;}
+   if (worm_switch % 2 != 0){worm_column = -79;}   
+   if (worm_switch % 3 == 0){worm_column = -128;}
+}
+}
+function starscapebg(randomOffset4,randomOffset5){
+      bgType = "starscape";
+    console.log("background = starscape");
+     let starAmt = abs(randomOffset5)*40;
+     let bigBang = 0;
+     let starPosX = randomOffset5*4;
+     let starPosY = randomOffset4*4;
+     let starSize = 1;
+      noStroke();fill(255);background(0);   
+  while (bigBang < starAmt){
+    ellipse(starPosX,starPosY,starSize,starSize);
+    randomOffset5 = int(random(-255,255)); //NOT DETERMINATIVE
+    randomOffset4 = int(random(-255,255)); //NOT DETERMINATIVE
+    starPosX = randomOffset5*4;
+    starPosY = randomOffset4*4;
+    starSize = starSize+1;
+    if (starSize > 5){starSize = 1;}bigBang += 1;
+  }
 }
 function applyMask(source, target) {
   let clone;
