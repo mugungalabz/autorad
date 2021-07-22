@@ -98,9 +98,10 @@ function draw(){
   let testhash5 = "0x0a011c727ee0455047a573987a7c8fd82655abd6bf9241cf3dc8fba1ce0803"; //light notebook ellipse
   let testhash6 = "0x7b892b356738095b266887c131935f7dd8f132bc8d3a71f9affd178cb8c548"; //gradient flourish test
   let testhash7 = "0x6c646f816692db533cf00dae1e12c4c46bd68efaabaf296ad738b9cc2b8901"; //gradient ellipse + dots circle
+  let testhash8 = "0x8a50709af0d74174f86d04425fc3d483e6c5263998877c41766b8a3a608b6a"; //no flourish???
   //hash = testhash5;
   // hash = testhash1;
-  //hash = testhash7;
+ 
 
 	randomSeed(hash);
   //let testhash2 = "0xeffd5385f1a54db2be85629448375f2c9a80a3a5ca261acaebe175b1f74e09";
@@ -796,6 +797,7 @@ let curveWiggler2 = xx(18);
 let curveWiggler4 = xx(20);
 let curveWiggler5 = xx(22);
 let curveType = xx(14);
+  console.log("curveType#: ", curveType);
 if (curveType < 16){ // gradient tertiary flourish
   console.log("flourish gradient tertiary");
   let sourceGradientCurve;
@@ -878,7 +880,7 @@ let curveOffset = xx(26);
   curveVertex(flourishOffset+2400+curveOffset*4+failsafe_flourish_mover,800+curveWiggler4+(curveWiggler2/2)+curveOffset+curveHeightOffset-600);
   endShape();
 }
-if (curveType > 65 && curveType < 128){ //default flourish
+if (curveType > 64 && curveType < 128){ //default flourish
 let curveOffset = xx(26);
   let curveHeightOffset = 0;
   if (curveOffset >63 && curveOffset <100) {curveOffset = curveOffset*4;}
@@ -973,11 +975,22 @@ if (curveType > 240){ //alt flourish gradient
   applyMask(sourceCurve,maskCurve );
 }
 let floatingShape2 = xx(18);
-if (floatingShape2 > 128){
+if (floatingShape2 > 128 && floatingShape2 < 156){
   console.log("floating Shape 2 = f2 triangle");
-  noStroke();fill(clrs[2]);
-  //triangle(512+randomOffset,512+randomOffset,478-(randomOffset2/4),512+randomOffset2,780,420-(randomOffset2/4)); old and busted
-  triangle(512+randomOffset,512+randomOffset,678-(randomOffset2/4),728,780,420-(randomOffset2/4));
+  let bar_triangle;
+  bar_triangle = createGraphics(1024,1024);
+  let barp = 0;
+  bar_triangle.stroke(clrs[2]);
+  bar_triangle.strokeWeight(10);
+  bar_triangle.noFill();
+  while (barp <1424){
+    bar_triangle.line(-100,-400+barp,3400,800+barp);
+    barp+=16;
+  }
+  let bar_triangle_mask;
+  bar_triangle_mask = createGraphics(1024,1024);
+  bar_triangle_mask.triangle(512+randomOffset,512+randomOffset,678-(randomOffset2/4),728,780,420-(randomOffset2/4));
+  applyMask(bar_triangle,bar_triangle_mask);
 }
 if (floatingShape2 < 7){ // 3 rects ascending
   console.log("FloatingShape2: rects ascending");
