@@ -99,7 +99,8 @@ function draw(){
   let testhash6 = "0x7b892b356738095b266887c131935f7dd8f132bc8d3a71f9affd178cb8c548"; //gradient flourish test
   let testhash7 = "0x6c646f816692db533cf00dae1e12c4c46bd68efaabaf296ad738b9cc2b8901"; //gradient ellipse + dots circle
   let testhash8 = "0x8a50709af0d74174f86d04425fc3d483e6c5263998877c41766b8a3a608b6a"; //no flourish???
-  //hash = testhash5;
+  let testhash9 = "0x141b7cd4f6fc09488c67cfe8b6bac179ec1c8e6f94a16082c2059968ea5741"; //splinter
+	hash = testhash9;
   // hash = testhash1;
  
 
@@ -989,8 +990,12 @@ if (floatingShape2 > 128 && floatingShape2 < 156){
   }
   let bar_triangle_mask;
   bar_triangle_mask = createGraphics(1024,1024);
-  bar_triangle_mask.triangle(512+randomOffset,512+randomOffset,678-(randomOffset2/4),728,780,420-(randomOffset2/4));
-  applyMask(bar_triangle,bar_triangle_mask);
+  // bar_triangle_mask.triangle(512+randomOffset,512+randomOffset,678-(randomOffset2/4),728,780,420-(randomOffset2/4));
+    bar_triangle_mask.triangle(
+		512+randomOffset,512+randomOffset,
+		xBetween(7,400, 550 ),xBetween(19,400, 550 ),
+		xBetween(17,750,950),512 - xBetween(9,100,120));
+  applyMask(bar_triangle, bar_triangle_mask);
 }
 if (floatingShape2 < 7){ // 3 rects ascending
   console.log("FloatingShape2: rects ascending");
@@ -1214,7 +1219,10 @@ if (floatingShape1 < 16){ //strokedTriangle SPLIT TWO-PARTER DRAWN HERE OUT OF O
 noLoop();
 //saveFrame(type+"palette#"+palette_select+bgType+"-FRAME-"+frameShape+framingShape+framingShapeType+"-CENTERED-"+centeredShapeType+"-"+centeredShape+"-"+day()+"-"+minute()+"-"+second()+".png");
 } //end onMouseClick
-function xx(a){return unhex(hash.substring(a,a+2));}
+function xx(a) { return unhex(hash.substring(a, a + 2)); }
+function xBetween(x, a, b){
+  return (int) (a + (xx(x)/255.0 * (b - a)));
+}
 function dotsbg(){//background
   console.log("dots");
   let dots_circle_counter = 0;
