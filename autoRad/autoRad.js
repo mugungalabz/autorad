@@ -2,13 +2,13 @@ var surfaceConstant = 1024; let type; let bars_used = false;
 let grid_used = false; let sprinkles_used = false;
 let checkerEven = false; let two_straight = false; let worms_used = false; let ss_circle = false;
 var frameShape; var bgType; var floatingShapeType;
-var centeredShapeType; var framingShapeType; var blackfailsafe;
+var centeredShapeType; var framingShapeType;
 var framingShape_failsafe = 0; var hash; var clrs;
 var palettes; var globalBlack; var globalWhite;
 
 function setup(){ 
   createCanvas(1024,1024);
-  blackfailsafe = color('#000000'); globalBlack = color('#000000');globalWhite = color('#FFFFFF');
+  globalBlack = color('#000000');globalWhite = color('#FFFFFF');
   clrs = [color(000000),color(000000),color(000000),color(000000),color(000000)];
   palettes = [
   [//LIGHT
@@ -226,9 +226,6 @@ if (framingShape > 7 && framingShape < 16){ //default framing ellipse
   frameShape = "ellipse";
   noFill(); strokeWeight(16);
   stroke(nonBGColor(4));
-  // //bajijwa
-  // if (type == "dark" && clrs[4] == 0) stroke(clrs[3]);
-  // if (type == "dark" && clrs[4] == 0) stroke(clrs[3]);
   let frameOffset = randomOffset/3;
   let frameOffset2 = randomOffset2/3;
   ellipse(512+frameOffset,512+frameOffset2,1024-456-frameOffset,1024-456-frameOffset);
@@ -236,8 +233,6 @@ if (framingShape > 7 && framingShape < 16){ //default framing ellipse
 if (framingShape > 15 && framingShape < 26){ //default framing square
   frameShape = "square";
   noFill(); strokeWeight(16); stroke(nonBGColor(4));
-  // if (type == "dark" && clrs[4] == blackfailsafe){ stroke(clrs[3]);}
-  // if (type == "light" && clrs[4] == 255){ stroke(clrs[3]);}
   let frameOffset = Math.floor(randomOffset/3);
   let frameOffset2 = Math.floor(randomOffset2/3);
   square(256+frameOffset,256+frameOffset2,1024/2-frameOffset);
@@ -245,8 +240,6 @@ if (framingShape > 15 && framingShape < 26){ //default framing square
 if (framingShape > 25 && framingShape < 41 ){ //default framing triangle
   frameShape = "default_triangle";
   noFill();strokeWeight(16);stroke(nonBGColor(4));
-  // if (type == "dark" && clrs[4] == blackfailsafe)stroke(clrs[3]);
-  // if (type == "light" && clrs[4] ==color('#FFFFFF'))stroke(clrs[3]);
   let frameOffset = randomOffset/3;
   let frameOffset2 = randomOffset2/3;
   triangle(128+frameOffset, 768+frameOffset, 768+frameOffset2, 128+frameOffset2, 720+frameOffset, 940+frameOffset);
@@ -333,17 +326,14 @@ if (framingShape > 119 && framingShape < 150){ //gradient framing ellipse
 }
 if (framingShape > 149 && framingShape < 225 ){//inverse flipped framing triangle
   frameShape = "inverse_flipped_triangle";
-  noFill();strokeWeight(16);stroke(clrs[4]);
-  if (type == "dark" && clrs[4] == blackfailsafe)stroke(clrs[3]);
-  if (type == "light" && clrs[4] ==color('#000000'))stroke(clrs[3]);
+  noFill();strokeWeight(16);stroke(nonBGColor(4));
   let frameOffset = randomOffset/3;
   let frameOffset2 = randomOffset2/3;
   triangle(900-frameOffset,256+frameOffset,600-frameOffset,800+frameOffset2,128+frameOffset,256+frameOffset2);
 }
 if (framingShape > 224 && framingShape < 250){ //default flipped framing triangle
   frameShape = "default_flipped_triangle";
-  noFill();strokeWeight(16);stroke(clrs[4]);
-  if (type == "dark" && clrs[4] == blackfailsafe)stroke(clrs[3]);
+  noFill();strokeWeight(16);stroke(nonBGColor(4));
   let frameOffset = randomOffset/3;
   let frameOffset2 = randomOffset2/3;
   triangle(128+frameOffset, 128+frameOffset2, 512+frameOffset2, 940-frameOffset2, 720+frameOffset, 128+frameOffset);
@@ -374,8 +364,7 @@ if (framingShape > 249 && bgType !="grid"){ //diagonal grid flipped framing tria
   let frameOffset2 = randomOffset2/3;
   maskDiagGrid.triangle(128+frameOffset, 128+frameOffset2, 512+frameOffset2, 940-frameOffset2, 720+frameOffset, 128+frameOffset);
   applyMask(sourceDiagGrid, maskDiagGrid);
-  noFill();strokeWeight(16);stroke(clrs[4]);
-  if (type == "dark" && clrs[4] == blackfailsafe)stroke(clrs[3]);
+  noFill();strokeWeight(16);stroke(nonBGColor(4));
   triangle(128+frameOffset, 128+frameOffset2, 512+frameOffset2, 940-frameOffset2, 720+frameOffset, 128+frameOffset); //draws stroke over the edge of the grid triangle
   blendMode(BLEND);
 }
@@ -668,9 +657,7 @@ while (floatingGridCounterH < gridSize){
 }
 if (floatingShape1 > 174 && floatingShape1 <200 && bgType != "horizon" && centeredShapeType != "horizon"){ //-------venetian circle lines circle
   console.log("FloatingShape1: venetian circle");
-  bars_used = true; stroke(clrs[2]);
-  if (type == "light" && clrs[2] ==color('#FFFFFF')){stroke(clrs[3]);}
-  if (type == "dark" && clrs[2] ==color('#000000')){stroke(clrs[3]);}
+  bars_used = true; stroke(nonBGColor(2));
   strokeWeight(4);strokeCap(ROUND);
   let radius = xx(30);
   if (radius < 100){radius += 76;}
@@ -694,7 +681,7 @@ if (floatingShape1 > 174 && floatingShape1 <200 && bgType != "horizon" && center
   }
 }
 if (floatingShape1 >99 && floatingShape1 < 125){ //----------Floating Arcs
-  strokeWeight(32);noFill();stroke(clrs[2]);strokeCap(SQUARE);
+  strokeWeight(32);noFill();stroke(nonBGColor(2));strokeCap(SQUARE);
   let arcBegin = radians(abs(randomOffset4)+10);
   let arcEnd = radians(abs(randomOffset5)+10);
   arcBegin = arcBegin/4;
@@ -892,8 +879,7 @@ if (curveType > 129 && curveType < 241){ //alt flourish
 console.log("flourish alt");
   noFill();
   strokeWeight(10);
-  stroke(clrs[2]);
-  if (type == "dark" && clrs[2] ==color('#000000')){stroke(clrs[4]);} //low-effort failsafe for black flourishes on dark designs`
+  stroke(nonBGColor(2));
   let curveOffset = xx(26);
   if (curveWiggler1 > 170){
   curveWiggler1 = curveWiggler1-100;
@@ -992,7 +978,7 @@ if (floatingShape2 < 7){ // 3 rects ascending
 }
 if (floatingShape2 > 7 && floatingShape2 < 17 && bars_used == false && bgType != "horizon"){ //lines diamond (actually a triangle now)
   console.log("FloatingShape2: lines triangle");
-  strokeCap(ROUND);strokeWeight(4);stroke(clrs[3]);
+  strokeCap(ROUND);strokeWeight(4);stroke(nonBGColor(3));
   bars_used = true;
   let halfway_point = false;
   let line_circle_var = Math.floor(floatingShape2/2);
@@ -1106,7 +1092,7 @@ if (floatingShape2 > 127 && floatingShape2 < 160 && two_straight == false){ //ha
      console.log("FloatingShape1: half Arcnoodles");
 }
 if (floatingShape2 > 160 && floatingShape2 < 180 && two_straight == false){ //double arcnoodle
-     noFill();stroke(clrs[1]);
+     noFill();stroke(nonBGColor(1));
      strokeWeight(32);strokeCap(SQUARE);
      let noodle_failsafe = 0;
      if (randomOffset < 0){
@@ -1139,7 +1125,7 @@ if (floatingShape2 >179 && floatingShape2 < 241){ //quotemarks quad
 }
 if (floatingShape2 > 240 && floatingShape2 < 250 && two_straight == false){ //crispynoodle
      strokeWeight(24);strokeCap(SQUARE);
-     stroke(clrs[1]);noFill();
+     stroke(nonBGColor(1));noFill();
      let crispy_noodle = 24;beginShape();
      vertex(400+crispy_noodle+randomOffset,400+crispy_noodle+randomOffset);
      vertex(400+2*crispy_noodle+randomOffset,400+crispy_noodle*2+randomOffset);
@@ -1156,7 +1142,7 @@ if (floatingShape2 > 240 && floatingShape2 < 250 && two_straight == false){ //cr
 }
 if (floatingShape2 > 249){ //double crispynoodle
      strokeWeight(24);
-     strokeCap(SQUARE);stroke(clrs[1]);noFill();
+     strokeCap(SQUARE);stroke(nonBGColor(1));noFill();
      let crispy_noodle = 24;
      beginShape(); //first noodle
      vertex(400+crispy_noodle+randomOffset,400+crispy_noodle+randomOffset);
@@ -1197,8 +1183,7 @@ if (floatingShape2 > 64 && floatingShape2 < 100 && floatingShapeType != "dots_ci
   }
 }
 if (floatingShape1 < 16){ //strokedTriangle SPLIT TWO-PARTER DRAWN HERE OUT OF ORDER - still calling function from part 1
-     strokeWeight(16);noFill();stroke(clrs[3]);
-     if (clrs[3] == clrs[1]){stroke(clrs[4]);}//stroke moved to FloatingShape2 to create fun depth
+     strokeWeight(16);noFill();stroke(diffColor(clrs[1],3));
      triangle(128+1024/2+randomOffset,1024/2+randomOffset,1024/3,1024/1.5,1024/4+randomOffset,1024/4);
      console.log("FloatingShape1: StrokedTriangle TWO-PARTER part 2");
 }
