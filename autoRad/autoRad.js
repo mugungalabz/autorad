@@ -4,12 +4,11 @@ let checkerEven = false; let two_straight = false; let worms_used = false; let s
 var frameShape; var bgType; var floatingShapeType;
 var centeredShapeType; var framingShapeType; var blackfailsafe;
 var framingShape_failsafe = 0; var hash; var clrs;
-let testSwitch = true;//debugVar...delete!
-var palettes;
+var palettes; var globalBlack; var globalWhite;
 
 function setup(){ 
   createCanvas(1024,1024);
-  blackfailsafe = color('#000000');
+  blackfailsafe = color('#000000'); globalBlack = color('#000000');globalWhite = color('#FFFFFF');
   clrs = [color(000000),color(000000),color(000000),color(000000),color(000000)];
   palettes = [
   [//LIGHT
@@ -100,31 +99,20 @@ function draw(){
   let testhash7 = "0x6c646f816692db533cf00dae1e12c4c46bd68efaabaf296ad738b9cc2b8901"; //gradient ellipse + dots circle
   let testhash8 = "0x8a50709af0d74174f86d04425fc3d483e6c5263998877c41766b8a3a608b6a"; //no flourish???
   let testhash9 = "0x141b7cd4f6fc09488c67cfe8b6bac179ec1c8e6f94a16082c2059968ea5741"; //splinter
-	hash = testhash9;
-  // hash = testhash1;
- 
-
+  let testhasha = "0x141b7cd4f6fc09488c672de8b6bac179ec1c8e6f94a16082c2059968ea5741"; //splinter
+	// hash = testhasha;
 	randomSeed(hash);
-  //let testhash2 = "0xeffd5385f1a54db2be85629448375f2c9a80a3a5ca261acaebe175b1f74e09";
-  // let testhash2 = "0x34fa801c3882a8fd35308517e204566bb0e9a0f48b98db6e91eec7b8519053";
-  //if(testSwitch){
-  //  hash = testhash1;
-  //} else {
-  //  hash = testhash2;
-  //}
-  //testSwitch = !testSwitch;
-  
+
   //global variable access for production
   //hash = tokenData.hash
-
 
 type=xx(2)==69?"based":xx(2)<200?"light":"dark";
 
 let palette_select = round(xx(4)/10); //out of 255, divides by 10 and rounds to get 1 of 25 palettes
 if(palette_select == 0){palette_select = 25;}
 let palette = palettes[2][0];
-if(type=="light") palette = palettes[0][round(Math.floor(xx(4)/10))];
-if(type=="dark") palette = palettes[1][round(xx(4)/10)];
+if(type=="light") palette = palettes[0][palette_select];
+if(type=="dark") palette = palettes[1][palette_select];
 //palette = palettes[1][22];
 console.log("Palette Selected: ",type,palette_select);
 
@@ -237,26 +225,28 @@ if (framingShape > -1 && framingShape < 8 && bgType != "notebook"){ //notebook f
 if (framingShape > 7 && framingShape < 16){ //default framing ellipse
   frameShape = "ellipse";
   noFill(); strokeWeight(16);
-  stroke(clrs[4]);
-  if (type == "dark" && clrs[4] == 0) stroke(clrs[3]);
+  stroke(nonBGColor(4));
+  // //bajijwa
+  // if (type == "dark" && clrs[4] == 0) stroke(clrs[3]);
+  // if (type == "dark" && clrs[4] == 0) stroke(clrs[3]);
   let frameOffset = randomOffset/3;
   let frameOffset2 = randomOffset2/3;
   ellipse(512+frameOffset,512+frameOffset2,1024-456-frameOffset,1024-456-frameOffset);
 }
 if (framingShape > 15 && framingShape < 26){ //default framing square
   frameShape = "square";
-  noFill(); strokeWeight(16); stroke(clrs[4]);
-  if (type == "dark" && clrs[4] == blackfailsafe){ stroke(clrs[3]);}
-  if (type == "light" && clrs[4] == 255){ stroke(clrs[3]);}
+  noFill(); strokeWeight(16); stroke(nonBGColor(4));
+  // if (type == "dark" && clrs[4] == blackfailsafe){ stroke(clrs[3]);}
+  // if (type == "light" && clrs[4] == 255){ stroke(clrs[3]);}
   let frameOffset = Math.floor(randomOffset/3);
   let frameOffset2 = Math.floor(randomOffset2/3);
   square(256+frameOffset,256+frameOffset2,1024/2-frameOffset);
 }
 if (framingShape > 25 && framingShape < 41 ){ //default framing triangle
   frameShape = "default_triangle";
-  noFill();strokeWeight(16);stroke(clrs[4]);
-  if (type == "dark" && clrs[4] == blackfailsafe)stroke(clrs[3]);
-  if (type == "light" && clrs[4] ==color('#FFFFFF'))stroke(clrs[3]);
+  noFill();strokeWeight(16);stroke(nonBGColor(4));
+  // if (type == "dark" && clrs[4] == blackfailsafe)stroke(clrs[3]);
+  // if (type == "light" && clrs[4] ==color('#FFFFFF'))stroke(clrs[3]);
   let frameOffset = randomOffset/3;
   let frameOffset2 = randomOffset2/3;
   triangle(128+frameOffset, 768+frameOffset, 768+frameOffset2, 128+frameOffset2, 720+frameOffset, 940+frameOffset);
@@ -414,12 +404,8 @@ if (centeredShape >23 && centeredShape < 65 && frameShape != "ellipse" && bgType
   SourceRetroSun.background(0,0,0);
   let horizon = 0;
   SourceRetroSun.strokeWeight(1);
-  while (horizon < 1024/3){
-    SourceRetroSun.stroke(clrs[0]); 
-    if (clrs[0] == "#000000"){ //black failsafe
-      console.log("Retro sun failsafe triggered");
-      SourceRetroSun.stroke(clrs[1]);
-    }
+  while (horizon < 1024 / 3) {
+    SourceRetroSun.stroke(diffColor(globalBlack, 0)); 
     SourceRetroSun.strokeWeight(horizon/1.5);
     SourceRetroSun.line(0,400+15*horizon,1024,400+15*horizon);
     horizon = horizon+1;
@@ -981,7 +967,7 @@ if (floatingShape2 > 128 && floatingShape2 < 156){
   let bar_triangle;
   bar_triangle = createGraphics(1024,1024);
   let barp = 0;
-  bar_triangle.stroke(clrs[2]);
+  bar_triangle.stroke(nonBGColor(2));
   bar_triangle.strokeWeight(10);
   bar_triangle.noFill();
   while (barp <1424){
@@ -1388,4 +1374,14 @@ function applyMask(source, target) {
   let clone;
   (clone = source.get()).mask(target.get());
   image(clone,0,0);
+}
+function nonBGColor(i) {
+  if (type == "light") {
+    return clrs[i].toString() != globalWhite.toString() ? clrs[i] : clrs[(i + 1) % clrs.length];
+  } else if (type == "dark") {
+    return clrs[i].toString() != globalBlack.toString() ? clrs[i] : clrs[(i + 1) % clrs.length];
+  }
+}
+function diffColor(col, i) {
+	return clrs[i].toString() != col.toString() ? clrs[i] : clrs[(i + 1) % clrs.length];
 }
