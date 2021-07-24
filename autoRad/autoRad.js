@@ -956,7 +956,7 @@ if (floatingShape2 > 128 && floatingShape2 < 156){
   let bar_triangle;
   bar_triangle = createGraphics(1024,1024);
   let barp = 0;
-  bar_triangle.stroke(nonBGColor(2));
+  bar_triangle.stroke(getColor(2));
   bar_triangle.strokeWeight(10);
   bar_triangle.noFill();
   while (barp <1424){
@@ -1486,4 +1486,10 @@ function nonBGColor(i) {
 }
 function diffColor(col, i) {
 	return clrs[i].toString() != col.toString() ? clrs[i] : clrs[(i + 1) % clrs.length];
+}
+function getColor(i) {
+	while(clrs[i].toString() == globalWhite.toString() || clrs[i].toString() == globalBlack.toString()) {
+		i = (i+1)%clrs.length;
+	}
+	return clrs[i];
 }
