@@ -108,7 +108,7 @@ function draw(){
 
 type=xx(2)==69?"based":xx(2)<200?"light":"dark";
 
-let palette_select = round(xx(4)/10); //out of 255, divides by 10 and rounds to get 1 of 25 palettes
+let palette_select = Math.floor(xx(4)/10); //out of 255, divides by 10 and rounds to get 1 of 25 palettes
 if(palette_select == 0){palette_select = 25;}
 let palette = palettes[2][0];
 if(type=="light") palette = palettes[0][palette_select];
@@ -1481,6 +1481,7 @@ function nonBGColor(i) {
   } else if (type == "dark") {
     return clrs[i].toString() != globalBlack.toString() ? clrs[i] : clrs[(i + 1) % clrs.length];
   }
+  return clrs[i];
 }
 function diffColor(col, i) {
 	return clrs[i].toString() != col.toString() ? clrs[i] : clrs[(i + 1) % clrs.length];
