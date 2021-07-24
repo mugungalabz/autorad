@@ -228,9 +228,10 @@ if (framingShape > 7 && framingShape < 16){ //default framing ellipse
   frameShape = "ellipse";
   noFill(); strokeWeight(16);
   stroke(nonBGColor(4));
-  let frameOffset = randomOffset/3;
-  let frameOffset2 = randomOffset2/3;
-  ellipse(512+frameOffset,512+frameOffset2,1024-456-frameOffset,1024-456-frameOffset);
+  let frameOffset = xBetween(19,-100,100)
+  let frameOffset2 = xBetween(20,-100,100)
+	let diameter = xBetween(21, 550, 800)
+  ellipse(512+frameOffset,512+frameOffset2,diameter,diameter);
 }
 if (framingShape > 15 && framingShape < 26){ //default framing square
   frameShape = "square";
