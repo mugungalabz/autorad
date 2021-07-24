@@ -1068,14 +1068,14 @@ let noodleWaveOffset2 = random(-100,100);
 strokeWeight(6);
 strokeCap(SQUARE);
 stroke(clrs[4]);
-let rotateRAD = (3PI/4.0);
+let rotateRAD = (3*PI/4.0);
 rotate(rotateRAD); //rotate noodles
 while (arc_counter <= (6)){
 stroke(clrs[4]);
 while (arcPosx < 512){
 arc(arcPosx+shiftNoodle+noodleWaveOffset,arcPosy+noodleWaveOffset2,ellipse_constant,ellipse_constant-6,PI,TWO_PI,OPEN);
 arc(arcPosx+ellipse_constant+shiftNoodle+noodleWaveOffset,(arcPosy-3)+noodleWaveOffset2,ellipse_constant,ellipse_constant-6,0,PI,OPEN);
-arcPosx = arcPosx+2ellipse_constant;
+arcPosx = arcPosx+2*ellipse_constant;
 }
 arcPosx = 0;
 arcPosy = arcPosy - 15;
