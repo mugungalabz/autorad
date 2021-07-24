@@ -1083,6 +1083,26 @@ arc_counter+=1;
 }
 rotate(-rotateRAD); //unrotate
 }
+if (floatingShape2 > 74 && floatingShape2 < 101){
+noStroke();
+fill(clrs[4]);
+let zotOffset = random(-128,128);
+let zotOffset2 = random(-100,100);
+	beginShape();
+  vertex(728+zotOffset,240+zotOffset2); // .
+  vertex(800+zotOffset,240+zotOffset2); // -
+  vertex(768+zotOffset,320+zotOffset2); // /
+  vertex(820+zotOffset,320+zotOffset2); // -
+  vertex(778+zotOffset,400+zotOffset2); // /
+  vertex(820+zotOffset,400+zotOffset2); // -
+  vertex(738+zotOffset,540+zotOffset2); // /
+  vertex(768+zotOffset,440+zotOffset2); // \
+  vertex(720+zotOffset,440+zotOffset2); // -
+  vertex(748+zotOffset,360+zotOffset2); // /
+  vertex(680+zotOffset,360+zotOffset2); // -
+  vertex(728+zotOffset,240+zotOffset2); // /
+  endShape();
+}
 	
 if (floatingShape2 > 100 && floatingShape2 < 128){ //two straight lines
     console.log("FloatingShape2: Two Straight Lines");
