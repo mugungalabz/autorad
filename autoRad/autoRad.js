@@ -1057,6 +1057,33 @@ if (floatingShape2 > 50 && type == "dark" && clrs[2] !=color('#000000') && clrs[
 	maskGradient.ellipse(gradientShapePosX, gradientShapePosY, 340, 340);
   applyMask(sourceGradient, maskGradient);
 }
+if (floatingShape2 > 50 && floatingShape2 <75){
+	let arc_counter = 0; //from here down is the wavenoodle script
+let arcPosx = 0;
+let shiftNoodle = -512;
+let arcPosy = -712;
+let ellipse_constant = 15;
+let noodleWaveOffset = random(-128,128);
+let noodleWaveOffset2 = random(-100,100);
+strokeWeight(6);
+strokeCap(SQUARE);
+stroke(int(random(0,255)),int(random(0,255)),int(random(0,255))); //replace with clr[5]
+let rotateRAD = (3PI/4.0);
+rotate(rotateRAD); //rotate noodles
+while (arc_counter <= (6)){
+stroke(int(random(0,255)),int(random(0,255)),int(random(0,255)));
+while (arcPosx < 512){
+arc(arcPosx+shiftNoodle+noodleWaveOffset,arcPosy+noodleWaveOffset2,ellipse_constant,ellipse_constant-6,PI,TWO_PI,OPEN);
+arc(arcPosx+ellipse_constant+shiftNoodle+noodleWaveOffset,(arcPosy-3)+noodleWaveOffset2,ellipse_constant,ellipse_constant-6,0,PI,OPEN);
+arcPosx = arcPosx+2ellipse_constant;
+}
+arcPosx = 0;
+arcPosy = arcPosy - 15;
+arc_counter+=1;
+}
+rotate(-rotateRAD); //unrotate
+}
+	
 if (floatingShape2 > 100 && floatingShape2 < 128){ //two straight lines
     console.log("FloatingShape2: Two Straight Lines");
     two_straight = true;
