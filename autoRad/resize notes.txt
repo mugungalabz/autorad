@@ -1,9 +1,9 @@
 1) Hardcoded numbers get sent through a scale function, 
 which normalizes them to the default value.
 
-1024 - 456 - frameOffset
+1024 - 456
 ...becomes..
-scale(1024 - 456) - frameOffset
+scale(1024 - 456) 
 
 2) xxs(n) is the scaled version of xx(n). 
     # When comparing to a 0-255 value for modes, it remains xx(n)
@@ -12,3 +12,10 @@ scale(1024 - 456) - frameOffset
 let randomOffset2 = xx(26) < 165 ? 0 - xxs(26) : xxs(26);
 ---becomes---
 let randomOffset2 = xx(26) < 165 ? 0 - xxs(26) : xxs(26);
+
+3) Since we scale the frameOffset at the beginning, combinations of hardcode numbers
+and frame offset variables only call the scale function on the hardcoded numbers:
+
+ellipse(512 + frameOffset, 512 + frameOffset2,1024 - 456 - frameOffset, 1024 - 456 - frameOffset);
+---becomes---
+ellipse(scale(512) + frameOffset, scale(512) + frameOffset2, scale(1024 - 456) - frameOffset, scale(1024 - 456) - frameOffset);
