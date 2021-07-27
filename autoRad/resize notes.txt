@@ -1,0 +1,3 @@
+1024 - 456 - frameOffset
+...becomes..
+scale(1024 - 456) - frameOffset
