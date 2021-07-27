@@ -1,3 +1,14 @@
+1) Hardcoded numbers get sent through a scale function, 
+which normalizes them to the default value.
+
 1024 - 456 - frameOffset
 ...becomes..
 scale(1024 - 456) - frameOffset
+
+2) xxs(n) is the scaled version of xx(n). 
+    # When comparing to a 0-255 value for modes, it remains xx(n)
+    # When creating an offset or renderable value, change to xxs(n)
+
+let randomOffset2 = xx(26) < 165 ? 0 - xxs(26) : xxs(26);
+---becomes---
+let randomOffset2 = xx(26) < 165 ? 0 - xxs(26) : xxs(26);
