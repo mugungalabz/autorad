@@ -990,14 +990,14 @@ function draw() {
     strokeCap(ROUND); strokeWeight(4); stroke(nonBGColor(3));
     bars_used = true;
     let halfway_point = false;
-    let line_circle_var = Math.floor(floatingShape2 / 2);
-    let line_circle_height = floatingShape2;
+    let line_circle_var = s(Math.floor(floatingShape2 / 2));
+    let line_circle_height = s(floatingShape2);
     let line_circle_counter = 0;
     let height_adder = 0;
     let line_anchorX = s(512) + randomOffset;
     let line_anchorY = s(128) + randomOffset2;
     let line_triangle_height_failsafe = 0;
-    if ((line_anchorY + (line_circle_counter + height_adder) * line_circle_height) < 128) {
+    if ((line_anchorY + (line_circle_counter + height_adder) * line_circle_height) < s(128)) {
       line_triangle_height_failsafe = s(256);
     }
     while (line_circle_counter < 16 && line_circle_counter > -1 && height_adder < 16) {
@@ -1012,9 +1012,9 @@ function draw() {
     console.log("FloatingShape2: rects descending");
     noStroke();
     fill(clrs[2]);
-    rect(s(512) - randomOffset, 300 - randomOffset / 2, floatingShape2, floatingShape2 * 8);
-    rect(s(512) - randomOffset + 64, 300 - randomOffset / 2 + 64, floatingShape2, floatingShape2 * 8);
-    rect(s(512) - randomOffset + 128, 300 - randomOffset / 2 + 128, floatingShape2, floatingShape2 * 8);
+    rect(s(512) - randomOffset, s(300) - randomOffset / 2, s(floatingShape2), s(floatingShape2) * 8);
+    rect(s(512) - randomOffset + s(64), s(300) - randomOffset / 2 + s(64), s(floatingShape2), s(floatingShape2) * 8);
+    rect(s(512) - randomOffset + s(128), s(300) - randomOffset / 2 + s(128), s(floatingShape2), s(floatingShape2) * 8);
   }
 
   if (floatingShape2 < 50 && type == "dark" && clrs[2] != color('#000000') && clrs[3] != color('#000000')) { //gradient triangle
@@ -1034,10 +1034,10 @@ function draw() {
       sourceGradient.line(x_lerp, i, x_lerp + w_lerp, i);
     }
     maskGradient = createGraphics(DIM, DIM);
-    maskGradient.triangle(gradientShapePosX, gradientShapePosY + 128,
+    maskGradient.triangle(gradientShapePosX, gradientShapePosY + s(128),
       gradientShapePosX - gradientShapePosX * (0.5),
-      Math.floor(gradientShapePosY / 3) + 128,
-      gradientShapePosX + gradientShapePosX * (0.25), Math.floor(gradientShapePosY / 2) + 128);
+      Math.floor(gradientShapePosY / 3) + s(128),
+      gradientShapePosX + gradientShapePosX * (0.25), Math.floor(gradientShapePosY / 2) + s(128));
     applyMask(sourceGradient, maskGradient);
   }
   if (floatingShape2 > 50 && type == "dark" && clrs[2] != color('#000000') && clrs[3] != color('#000000')) { //gradient ellipse
@@ -1045,11 +1045,11 @@ function draw() {
     let sourceGradient; let maskGradient;
     sourceGradient = createGraphics(DIM, DIM);
     let x_lerp = 0; let y_lerp = 0;
-    let gradientShapePosX = int(random(228, 724));
-    let gradientShapePosY = int(random(228, 724));
-    if (floatingShapeType == "dots_circle" && (s(512) + randomOffset) < s(500)) { gradientShapePosX += 300; }
-    if (ss_circle == true && (s(512) + randomOffset) < 500) { shift_gEllipse = gradientShapePosX += 300; }
-    if (gradientShapePosX > 700) { gradientShapePosX -= 200; } //edge failsafe
+    let gradientShapePosX = int(srandom(228, 724));
+    let gradientShapePosY = int(srandom(228, 724));
+    if (floatingShapeType == "dots_circle" && (s(512) + randomOffset) < s(500)) { gradientShapePosX += s(300); }
+    if (ss_circle == true && (s(512) + randomOffset) < s(500)) { shift_gEllipse = gradientShapePosX += s(300); }
+    if (gradientShapePosX > s(700)) { gradientShapePosX -= s(200); } //edge failsafe
     let w_lerp = gradientShapePosX + s(340);
     let h_lerp = gradientShapePosY + s(340);
     for (let i = y_lerp; i <= y_lerp + h_lerp; i++) {
@@ -1068,11 +1068,11 @@ function draw() {
     let arc_counter = 0; //from here down is the wavenoodle script
     let arcPosx = 0;
     let shiftNoodle = s(-512);
-    let arcPosy = -712;
-    let ellipse_constant = 15;
+    let arcPosy = s(-712);
+    let ellipse_constant = s(15);
     let noodleWaveOffset = srandom(-128, 128);
     let noodleWaveOffset2 = srandom(-100, 100);
-    strokeWeight(6);
+    strokeWeight(s(6));
     strokeCap(SQUARE);
     stroke(clrs[4]);
     let rotateRAD = (3 * PI / 4.0);
@@ -1080,12 +1080,12 @@ function draw() {
     while (arc_counter <= (6)) {
       stroke(clrs[4]);
       while (arcPosx < s(512)) {
-        arc(arcPosx + shiftNoodle + noodleWaveOffset, arcPosy + noodleWaveOffset2, ellipse_constant, ellipse_constant - 6, PI, TWO_PI, OPEN);
-        arc(arcPosx + ellipse_constant + shiftNoodle + noodleWaveOffset, (arcPosy - 3) + noodleWaveOffset2, ellipse_constant, ellipse_constant - 6, 0, PI, OPEN);
+        arc(arcPosx + shiftNoodle + noodleWaveOffset, arcPosy + noodleWaveOffset2, ellipse_constant, ellipse_constant - s(6), PI, TWO_PI, OPEN);
+        arc(arcPosx + ellipse_constant + shiftNoodle + noodleWaveOffset, (arcPosy - 3) + noodleWaveOffset2, ellipse_constant, ellipse_constant - s(6), 0, PI, OPEN);
         arcPosx = arcPosx + 2 * ellipse_constant;
       }
       arcPosx = 0;
-      arcPosy = arcPosy - 15;
+      arcPosy = arcPosy - s(15);
       arc_counter += 1;
     }
     rotate(-rotateRAD); //unrotate
@@ -1096,43 +1096,42 @@ function draw() {
     let zotOffset = srandom(-128, 128);
     let zotOffset2 = srandom(-100, 100);
     beginShape();
-    vertex(728 + zotOffset, 240 + zotOffset2); // .
-    vertex(800 + zotOffset, 240 + zotOffset2); // -
+    vertex(s(728) + zotOffset, s(240) + zotOffset2); // .
+    vertex(s(800) + zotOffset, s(240) + zotOffset2); // -
     vertex(s(768) + zotOffset, s(320) + zotOffset2); // /
-    vertex(820 + zotOffset, s(320) + zotOffset2); // -
-    vertex(778 + zotOffset, s(400) + zotOffset2); // /
-    vertex(820 + zotOffset, s(400) + zotOffset2); // -
-    vertex(738 + zotOffset, 540 + zotOffset2); // /
+    vertex(s(820) + zotOffset, s(320) + zotOffset2); // -
+    vertex(s(778) + zotOffset, s(400) + zotOffset2); // /
+    vertex(s(820) + zotOffset, s(400) + zotOffset2); // -
+    vertex(s(738) + zotOffset, s(540) + zotOffset2); // /
     vertex(s(768) + zotOffset, s(440) + zotOffset2); // \
     vertex(s(720) + zotOffset, s(440) + zotOffset2); // -
-    vertex(748 + zotOffset, 360 + zotOffset2); // /
-    vertex(680 + zotOffset, 360 + zotOffset2); // -
-    vertex(728 + zotOffset, 240 + zotOffset2); // /
+    vertex(s(748) + zotOffset, s(360) + zotOffset2); // /
+    vertex(s(680) + zotOffset, s(360) + zotOffset2); // -
+    vertex(s(728) + zotOffset, s(240) + zotOffset2); // /
     endShape();
   }
-
   if (floatingShape2 > 100 && floatingShape2 < 128) { //two straight lines
     console.log("FloatingShape2: Two Straight Lines");
     two_straight = true;
     noFill(); stroke(clrs[1]); strokeWeight(s(16)); strokeCap(SQUARE);
     let straightLineLength = abs(randomOffset3) * 2;
     let shift_right = 0;
-    if (straightLineLength > 300) { straightLineLength = straightLineLength / 3; }
+    if (straightLineLength > s(300)) { straightLineLength = straightLineLength / 3; }
     if (floatingShape2 > 112) { shift_right = s(256); }
-    line(530 + randomOffset3 + shift_right, 360 + randomOffset2, straightLineLength + randomOffset3 + shift_right, 360 + randomOffset2);
-    line(530 + randomOffset3 + shift_right, 392 + randomOffset2, straightLineLength + randomOffset3 + shift_right, 392 + randomOffset2);
+    line(s(530) + randomOffset3 + shift_right, s(360) + randomOffset2, straightLineLength + randomOffset3 + shift_right, s(360) + randomOffset2);
+    line(s(530) + randomOffset3 + shift_right, s(392) + randomOffset2, straightLineLength + randomOffset3 + shift_right, s(392) + randomOffset2);
   }
   if (floatingShape2 > 99 && floatingShape2 < 128 && two_straight == false) { //arcnoodle 
-    noFill(); stroke(clrs[1]); strokeWeight(32); strokeCap(SQUARE);
+    noFill(); stroke(clrs[1]); strokeWeight(s(32)); strokeCap(SQUARE);
     let noodle_failsafe = 0;
-    if (randomOffset < 0) { noodle_failsafe = 250; }
+    if (randomOffset < 0) { noodle_failsafe = s(250); }
     let arcPosx = s(256) + randomOffset + noodle_failsafe;
     let arcPosy = s(512) + randomOffset;
-    arc(arcPosx, arcPosy, 128, 128, PI, TWO_PI, OPEN);
-    arc(arcPosx + 128, (arcPosy - 1), 128, 128, 0, PI, OPEN);
-    arcPosx = arcPosx + 2 * 128;
-    arc(arcPosx, arcPosy, 128, 128, PI, TWO_PI, OPEN);
-    arc(arcPosx + 128, (arcPosy - 1), 128, 128, 0, PI, OPEN);
+    arc(arcPosx, arcPosy, s(128), s(128), PI, TWO_PI, OPEN);
+    arc(arcPosx + s(128), (arcPosy - 1), s(128), s(128), 0, PI, OPEN);
+    arcPosx = arcPosx + 2 * s(128);
+    arc(arcPosx, arcPosy, s(128), s(128), PI, TWO_PI, OPEN);
+    arc(arcPosx + s(128), (arcPosy - 1), s(128), s(128), 0, PI, OPEN);
     console.log("FloatingShape2: Arcnoodles");
   }
   if (floatingShape2 > 127 && floatingShape2 < 160 && two_straight == false) { //half arcnoodle  testing
@@ -1140,11 +1139,11 @@ function draw() {
     strokeWeight(32); strokeCap(SQUARE);
     let arcPosx = s(512) + randomOffset;
     let arcPosy = s(512) + randomOffset;
-    arc(arcPosx, arcPosy, 64, 64, PI, TWO_PI, OPEN);
-    arc(arcPosx + 64, (arcPosy - 1), 64, 64, 0, PI, OPEN);
-    arcPosx = arcPosx + 2 * 64;
-    arc(arcPosx, arcPosy, 64, 64, PI, TWO_PI, OPEN);
-    arc(arcPosx + 64, (arcPosy - 1), 64, 64, 0, PI, OPEN);
+    arc(arcPosx, arcPosy, s(64), s(64), PI, TWO_PI, OPEN);
+    arc(arcPosx + s(64), (arcPosy - 1), s(64), s(64), 0, PI, OPEN);
+    arcPosx = arcPosx + 2 * s(64);
+    arc(arcPosx, arcPosy, s(64), s(64), PI, TWO_PI, OPEN);
+    arc(arcPosx + s(64), (arcPosy - 1), s(64), s(64), 0, PI, OPEN);
     console.log("FloatingShape1: half Arcnoodles");
   }
   if (floatingShape2 > 160 && floatingShape2 < 180 && two_straight == false) { //double arcnoodle
@@ -1156,18 +1155,18 @@ function draw() {
     }
     let arcPosx = s(256) + randomOffset + noodle_failsafe;
     let arcPosy = s(512) + randomOffset;
-    arc(arcPosx, arcPosy, 128, 128, PI, TWO_PI, OPEN);
-    arc(arcPosx + 128, (arcPosy - 1), 128, 128, 0, PI, OPEN);
-    arcPosx = arcPosx + 2 * 128;
-    arc(arcPosx, arcPosy, 128, 128, PI, TWO_PI, OPEN);
-    arc(arcPosx + 128, (arcPosy - 1), 128, 128, 0, PI, OPEN);
-    arcPosy = arcPosy + 128;
+    arc(arcPosx, arcPosy, s(128), s(128), PI, TWO_PI, OPEN);
+    arc(arcPosx + s(128), (arcPosy - 1), s(128), s(128), 0, PI, OPEN);
+    arcPosx = arcPosx + 2 * s(128);
+    arc(arcPosx, arcPosy, s(128), s(128), PI, TWO_PI, OPEN);
+    arc(arcPosx + s(128), (arcPosy - 1), s(128), s(128), 0, PI, OPEN);
+    arcPosy = arcPosy + s(128);
     arcPosx = s(256) + randomOffset + noodle_failsafe;
-    arc(arcPosx, arcPosy, 128, 128, PI, TWO_PI, OPEN);
-    arc(arcPosx + 128, (arcPosy - 1), 128, 128, 0, PI, OPEN);
-    arcPosx = arcPosx + 2 * 128;
-    arc(arcPosx, arcPosy, 128, 128, PI, TWO_PI, OPEN);
-    arc(arcPosx + 128, (arcPosy - 1), 128, 128, 0, PI, OPEN);
+    arc(arcPosx, arcPosy, s(128), s(128), PI, TWO_PI, OPEN);
+    arc(arcPosx + s(128), (arcPosy - 1), s(128), s(128), 0, PI, OPEN);
+    arcPosx = arcPosx + 2 * s(128);
+    arc(arcPosx, arcPosy, s(128), s(128), PI, TWO_PI, OPEN);
+    arc(arcPosx + s(128), (arcPosy - 1), s(128), s(128), 0, PI, OPEN);
     console.log("FloatingShape1: Double Arcnoodles");
   }
   if (floatingShape2 > 179 && floatingShape2 < 241) { //quotemarks quad
@@ -1175,15 +1174,14 @@ function draw() {
     let quote_gap = 0 + randomOffset2;
     let quote_mover = s(-256);
     let quote_moverH = int(srandom(-256, 100));
-    quad(quote_mover + 680 + quote_gap, quote_moverH + s(420) + quote_gap + (randomOffset / 4), quote_mover + 712 + quote_gap, quote_moverH + 432 + quote_gap + (randomOffset / 4), quote_mover + 684 + quote_gap, quote_moverH + 500 + quote_gap + (randomOffset / 4), quote_mover + 658 + quote_gap, quote_moverH + 488 + quote_gap + (randomOffset / 4));
-    quote_gap = 32 + randomOffset2;
-    quad(quote_mover + 680 + quote_gap, quote_moverH + s(420) + quote_gap + (randomOffset / 4), quote_mover + 712 + quote_gap, quote_moverH + 432 + quote_gap + (randomOffset / 4), quote_mover + 684 + quote_gap, quote_moverH + 500 + quote_gap + (randomOffset / 4), quote_mover + 658 + quote_gap, quote_moverH + 488 + quote_gap + (randomOffset / 4));
+    quad(quote_mover + s(680) + quote_gap, quote_moverH + s(420) + quote_gap + (randomOffset / 4), quote_mover + s(712) + quote_gap, quote_moverH + s(432) + quote_gap + (randomOffset / 4), quote_mover + s(684) + quote_gap, quote_moverH + s(500) + quote_gap + (randomOffset / 4), quote_mover + s(658) + quote_gap, quote_moverH + s(488) + quote_gap + (randomOffset / 4));
+    quote_gap = s(32) + randomOffset2;
+    quad(quote_mover + s(680) + quote_gap, quote_moverH + s(420) + quote_gap + (randomOffset / 4), quote_mover + s(712) + quote_gap, quote_moverH + s(432) + quote_gap + (randomOffset / 4), quote_mover + s(684) + quote_gap, quote_moverH + s(500) + quote_gap + (randomOffset / 4), quote_mover + s(658) + quote_gap, quote_moverH + s(488) + quote_gap + (randomOffset / 4));
   }
   if (floatingShape2 > 240 && floatingShape2 < 250 && two_straight == false) { //crispynoodle
     strokeWeight(24); strokeCap(SQUARE);
     stroke(nonBGColor(1)); noFill();
-    //TODO scale crispy oodle 24 -> s(24)??
-    let crispy_noodle = 24; beginShape();
+    let crispy_noodle = s(24); beginShape();
     vertex(s(400) + crispy_noodle + randomOffset, s(400) + crispy_noodle + randomOffset);
     vertex(s(400) + 2 * crispy_noodle + randomOffset, s(400) + crispy_noodle * 2 + randomOffset);
     vertex(s(400) + 3 * crispy_noodle + randomOffset, s(400) + crispy_noodle + randomOffset);
@@ -1198,9 +1196,9 @@ function draw() {
     endShape();
   }
   if (floatingShape2 > 249) { //double crispynoodle
-    strokeWeight(24);
+    strokeWeight(s(24));
     strokeCap(SQUARE); stroke(nonBGColor(1)); noFill();
-    let crispy_noodle = 24;
+    let crispy_noodle = s(24);
     beginShape(); //first noodle
     vertex(s(400) + crispy_noodle + randomOffset, s(400) + crispy_noodle + randomOffset);
     vertex(s(400) + 2 * crispy_noodle + randomOffset, s(400) + crispy_noodle * 2 + randomOffset);
@@ -1214,7 +1212,7 @@ function draw() {
     vertex(s(400) + 10 * crispy_noodle + randomOffset, s(400) + crispy_noodle * 2 + randomOffset);
     vertex(s(400) + 11 * crispy_noodle + randomOffset, s(400) + crispy_noodle + randomOffset);
     endShape();
-    let noodle_spacer = 64;
+    let noodle_spacer = s(64);
     beginShape(); //second noodle
     vertex(s(400) + crispy_noodle + randomOffset, s(400) + crispy_noodle + randomOffset + noodle_spacer);
     vertex(s(400) + 2 * crispy_noodle + randomOffset, s(400) + crispy_noodle * 2 + randomOffset + noodle_spacer);
@@ -1236,7 +1234,7 @@ function draw() {
     while (bars_square_counter < DIM / 4) {
       noFill(); stroke(clrs[2]); strokeWeight(5);
       line(floatingShape2 * 2, floatingShape2 * 2 + bars_square_counter, floatingShape2 * 6, floatingShape2 * 2 + bars_square_counter);
-      bars_square_counter = bars_square_counter + 16;
+      bars_square_counter = bars_square_counter + s(16);
     }
   }
   if (floatingShape1 < 16) { //strokedTriangle SPLIT TWO-PARTER DRAWN HERE OUT OF ORDER - still calling function from part 1
@@ -1250,7 +1248,10 @@ function draw() {
 } //end onMouseClick
 function xx(a) { return unhex(hash.substring(a, a + 2)); }
 function xxs(a) { return (unhex(hash.substring(a, a + 2) / DEFAULT_SIZE) * DIM); }
-function s(a) { return (a / DEFAULT_SIZE) * DIM }
+function s(a) {
+  scaled_val = Math.ceil((a / DEFAULT_SIZE) * DIM);
+  return scaled_val == 0 ? 1 : scaled_val;
+}
 function xBetween(x, a, b) {
   return (int)(a + (xx(x) / 255.0 * (b - a)));
 }
@@ -1271,9 +1272,9 @@ function dotsbg() {//background
       if (type == "light") { fill(0); }
       if (type == "dark") { fill(255); }
       ellipse(dots_circle_counter, dots_height_counter, 3, 3);
-      dots_circle_counter = dots_circle_counter + 64;
+      dots_circle_counter = dots_circle_counter + s(64);
     }
-    dots_height_counter = dots_height_counter + 64;
+    dots_height_counter = dots_height_counter + s(64);
     dots_circle_counter = 0;
   }
 }
@@ -1314,9 +1315,9 @@ function grid3Dbg() {
     GridCounter *= 1.1;
   }
   while (GridwCounter < DIM) {
-    line(GridwCounter, 516, GridwCounter - (64 * GridLoop), DIM);
+    line(GridwCounter, s(516), GridwCounter - (s(64) * GridLoop), DIM);
     GridLoop -= 1;
-    GridwCounter += +64;
+    GridwCounter += s(64);
   }
 }
 function horizonbg() {
@@ -1326,7 +1327,7 @@ function horizonbg() {
   let horizon = 0; strokeWeight(1);
   while (horizon < DIM) {
     stroke(type == "light" ? 0 : 255); strokeWeight(horizon / 1.5);
-    line(0, s(512) + 20 * horizon, DIM, s(512) + 20 * horizon);
+    line(0, s(512) + s(20) * horizon, DIM, s(512) + s(20) * horizon);
     horizon += 1;
   }
 }
@@ -1348,10 +1349,10 @@ function fakegridbg() {
     while (fake_grid_counter < DIM) {
       fill(type == "light" ? 255 : 0);
       noStroke();
-      square(fake_grid_counter - 16, fake_grid_counter_h - 16, 64);
-      fake_grid_counter = fake_grid_counter + 66;
+      square(fake_grid_counter - s(16), fake_grid_counter_h - s(16), s(64));
+      fake_grid_counter = fake_grid_counter + s(66);
     }
-    fake_grid_counter_h = fake_grid_counter_h + 66;
+    fake_grid_counter_h = fake_grid_counter_h + s(66);
     fake_grid_counter = 0;
   }
 }
@@ -1364,9 +1365,9 @@ function gridbg() {
     noFill();
     strokeWeight(2);
     if (type == "light") { stroke(0); } else { stroke(255, 255, 255); }
-    line(0, 64 + n, DIM, 64 + n);
-    line(64 + n, 0, 64 + n, DIM);
-    n += 64;
+    line(0, s(64) + n, DIM, s(64) + n);
+    line(s(64) + n, 0, s(64) + n, DIM);
+    n += s(64);
   }
 }
 function wormsbg() {
@@ -1379,26 +1380,26 @@ function wormsbg() {
   let worm_column = 0;
   let worm_row = 0;
   let worm_switch = 0;
-  let bezX1 = 16;// 6 default
-  let bezX2 = 4;//4 default
-  let bezY1 = 32; // 24 default
-  while (worm_row < 1224) {
+  let bezX1 = s(16);// 6 default
+  let bezX2 = s(4);//4 default
+  let bezY1 = s(32); // 24 default
+  while (worm_row < s(1224)) {
     while (worm_column < DIM) {
       beginShape();
-      curveVertex(int(random(0, 12) - bezX1) + worm_row, int(random(0, 24)) - bezY1 + worm_column);
-      curveVertex(int(random(0, 24)) + worm_row, int(random(0, 24)) + worm_column);
-      curveVertex(int(random(0, 26)) + worm_row, int(random(0, 24)) + worm_column);
-      curveVertex(int(random(0, 32)) + worm_row, int(random(0, 24)) + worm_column);
-      curveVertex(int(random(0, 36)) + bezX2 + worm_row, int(random(0, 24)) + bezY1 + worm_column);
+      curveVertex(int(srandom(0, 12) - bezX1) + worm_row, int(srandom(0, 24)) - bezY1 + worm_column);
+      curveVertex(int(srandom(0, 24)) + worm_row, int(srandom(0, 24)) + worm_column);
+      curveVertex(int(srandom(0, 26)) + worm_row, int(srandom(0, 24)) + worm_column);
+      curveVertex(int(srandom(0, 32)) + worm_row, int(srandom(0, 24)) + worm_column);
+      curveVertex(int(srandom(0, 36)) + bezX2 + worm_row, int(srandom(0, 24)) + bezY1 + worm_column);
       endShape();
-      worm_column = worm_column + 24;
+      worm_column = worm_column + s(24);
     }
-    worm_column = worm_column + 158;
+    worm_column = worm_column + s(158);
     worm_switch++;
-    worm_row = worm_row + 32;
+    worm_row = worm_row + s(32);
     if (worm_switch % 2 == 0) { worm_column = 0; }
-    if (worm_switch % 2 != 0) { worm_column = -79; }
-    if (worm_switch % 3 == 0) { worm_column = -128; }
+    if (worm_switch % 2 != 0) { worm_column = s(-79); }
+    if (worm_switch % 3 == 0) { worm_column = s(-128); }
   }
 }
 function starscapebg(randomOffset4, randomOffset5) {
@@ -1430,18 +1431,18 @@ function sprinklesbg() {
   let sprinkle_switch = 0;
   while (sprinkle_row < (round(1.1953125 * DIM))) { //UPDATED V03
     while (sprinkle_column < DIM) {
-      line(-6 + sprinkle_row, 16 + sprinkle_column, 4 + sprinkle_row, 30 + sprinkle_column);
-      line(-8 + sprinkle_row, 48 + sprinkle_column, 8 + sprinkle_row, 48 + sprinkle_column);
-      line(0 + sprinkle_row, 72 + sprinkle_column, 0 + sprinkle_row, 88 + sprinkle_column);
-      line(4 + sprinkle_row, 108 + sprinkle_column, -6 + sprinkle_row, 124 + sprinkle_column);
-      line(-8 + sprinkle_row, 148 + sprinkle_column, 8 + sprinkle_row, 148 + sprinkle_column);
-      sprinkle_column = sprinkle_column + 158;
+      line(s(-6) + sprinkle_row, s(16) + sprinkle_column, s(4) + sprinkle_row, s(30) + sprinkle_column);
+      line(s(-8) + sprinkle_row, s(48) + sprinkle_column, s(8) + sprinkle_row, s(48) + sprinkle_column);
+      line(0 + sprinkle_row, s(72) + sprinkle_column, 0 + sprinkle_row, s(88) + sprinkle_column);
+      line(s(4) + sprinkle_row, s(108) + sprinkle_column, s(-6) + sprinkle_row, s(124) + sprinkle_column);
+      line(s(-8) + sprinkle_row, s(148) + sprinkle_column, s(8) + sprinkle_row, s(148) + sprinkle_column);
+      sprinkle_column = sprinkle_column + s(158);
     }
     sprinkle_switch++;
-    sprinkle_row = sprinkle_row + 32;
+    sprinkle_row = sprinkle_row + s(32);
     if (sprinkle_switch % 2 == 0) { sprinkle_column = 0; }
-    if (sprinkle_switch % 2 != 0) { sprinkle_column = -79; }
-    if (sprinkle_switch % 3 == 0) { sprinkle_column = -128; }
+    if (sprinkle_switch % 2 != 0) { sprinkle_column = s(-79); }
+    if (sprinkle_switch % 3 == 0) { sprinkle_column = s(-128); }
   }
   noStroke();
   fill('rgba(255,255,255, 0.85)');
@@ -1455,7 +1456,6 @@ function sprinklesGradientbg() {
   sourceSprinklesGradient = createGraphics(DIM, DIM);
   let x_lerp = 0; let y_lerp = 0;
   let w_lerp = DIM; let h_lerp = DIM;
-  let fake_grid_counter = 0; let fake_grid_counter_h = 0;
   for (var i = y_lerp; i <= y_lerp + h_lerp; i++) {
     let inter = map(i, y_lerp, y_lerp + h_lerp, 0, 1);
     let c = lerpColor(clrs[0], clrs[1], inter);
@@ -1464,25 +1464,25 @@ function sprinklesGradientbg() {
   }
   maskSprinkles = createGraphics(DIM, DIM);
   maskSprinkles.strokeCap(ROUND);
-  maskSprinkles.strokeWeight(6);
+  maskSprinkles.strokeWeight(s(6));
   maskSprinkles.stroke(0);
   let sprinkle_column = 0;
   let sprinkle_row = 0;
   let sprinkle_switch = 0;
   while (sprinkle_row < (round(1.1953125 * DIM))) { //UPDATED V03
     while (sprinkle_column < DIM) {
-      maskSprinkles.line(-6 + sprinkle_row, 16 + sprinkle_column, 4 + sprinkle_row, 30 + sprinkle_column);
-      maskSprinkles.line(-8 + sprinkle_row, 48 + sprinkle_column, 8 + sprinkle_row, 48 + sprinkle_column);
-      maskSprinkles.line(0 + sprinkle_row, 72 + sprinkle_column, 0 + sprinkle_row, 88 + sprinkle_column);
-      maskSprinkles.line(4 + sprinkle_row, 108 + sprinkle_column, -6 + sprinkle_row, 124 + sprinkle_column);
-      maskSprinkles.line(-8 + sprinkle_row, 148 + sprinkle_column, 8 + sprinkle_row, 148 + sprinkle_column);
-      sprinkle_column = sprinkle_column + 158;
+      maskSprinkles.line(s(-6) + sprinkle_row, s(16) + sprinkle_column, s(4) + sprinkle_row, s(30) + sprinkle_column);
+      maskSprinkles.line(s(-8) + sprinkle_row, s(48) + sprinkle_column, s(8) + sprinkle_row, s(48) + sprinkle_column);
+      maskSprinkles.line(0 + sprinkle_row, s(72) + sprinkle_column, 0 + sprinkle_row, s(88) + sprinkle_column);
+      maskSprinkles.line(s(4) + sprinkle_row, s(108) + sprinkle_column, s(-6) + sprinkle_row, s(124) + sprinkle_column);
+      maskSprinkles.line(s(-8) + sprinkle_row, s(148) + sprinkle_column, s(8) + sprinkle_row, s(148) + sprinkle_column);
+      sprinkle_column = sprinkle_column + s(158);
     }
     sprinkle_switch++;
-    sprinkle_row = sprinkle_row + 32;
+    sprinkle_row = sprinkle_row + s(32);
     if (sprinkle_switch % 2 == 0) { sprinkle_column = 0; }
-    if (sprinkle_switch % 2 != 0) { sprinkle_column = -79; }
-    if (sprinkle_switch % 3 == 0) { sprinkle_column = -128; }
+    if (sprinkle_switch % 2 != 0) { sprinkle_column = s(-79); }
+    if (sprinkle_switch % 3 == 0) { sprinkle_column = s(-128); }
   }
   applyMask(sourceSprinklesGradient, maskSprinkles);
 }

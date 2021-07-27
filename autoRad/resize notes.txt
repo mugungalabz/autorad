@@ -37,5 +37,14 @@ function xsBetween(x, a, b) {
   a = s(a); b = s(b);
   return (int)(a + (xx(x) / 255.0 * (b - a)));
 }
+
+6) Random function between two paramters needs to scale the two parameters.
+srandom(a,b) was created so don't actually change the incoming parameters, just the function. 
+
+random(-100,100)
+    ---becomes---
+srandom(-100,100)
+
 function xxs(a) { return (unhex(hash.substring(a, a + 2) / DEFAULT_SIZE) * DIM); }
 function s(a) { return (a / DEFAULT_SIZE) * DIM }
+function srandom(a, b) { a = s(a); b = s(b); return random(a, b) }
