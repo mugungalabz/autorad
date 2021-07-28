@@ -691,7 +691,7 @@ function draw() {
   }
   //TODO scale the radians in here?
   if (floatingShape1 > 99 && floatingShape1 < 125) { //----------Floating Arcs
-    strokeWeight(32); noFill(); stroke(nonBGColor(2)); strokeCap(SQUARE);
+    strokeWeight(s(32)); noFill(); stroke(nonBGColor(2)); strokeCap(SQUARE);
     let arcBegin = radians(abs(randomOffset4) + 10);
     let arcEnd = radians(abs(randomOffset5) + 10);
     arcBegin = arcBegin / 4;
