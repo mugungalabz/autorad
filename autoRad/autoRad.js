@@ -1247,7 +1247,7 @@ function draw() {
   //saveFrame(type+"palette#"+palette_select+bgType+"-FRAME-"+frameShape+framingShape+framingShapeType+"-CENTERED-"+centeredShapeType+"-"+centeredShape+"-"+day()+"-"+minute()+"-"+second()+".png");
 } //end onMouseClick
 function xx(a) { return unhex(hash.substring(a, a + 2)); }
-function xxs(a) { return (unhex(hash.substring(a, a + 2) / DEFAULT_SIZE) * DIM); }
+function xxs(a) { return ((unhex(hash.substring(a, a + 2)) / DEFAULT_SIZE) * DIM); }
 function s(a) {
   scaled_val = Math.ceil((a / DEFAULT_SIZE) * DIM);
   return scaled_val == 0 ? 1 : scaled_val;
