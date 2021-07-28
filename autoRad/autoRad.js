@@ -962,7 +962,7 @@ function draw() {
     bar_triangle = createGraphics(DIM, DIM);
     let barp = 0;
     bar_triangle.stroke(getColor(2));
-    bar_triangle.strokeWeight(10);
+    bar_triangle.strokeWeight(s(10));
     bar_triangle.noFill();
     while (barp < s(1424)) {
       bar_triangle.line(s(-100), s(-400) + barp, s(3400), s(800) + barp);
