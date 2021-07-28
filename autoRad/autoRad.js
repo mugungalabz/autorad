@@ -670,7 +670,7 @@ function draw() {
   if (floatingShape1 > 174 && floatingShape1 < 200 && bgType != "horizon" && centeredShapeType != "horizon") { //-------venetian circle lines circle
     console.log("FloatingShape1: venetian circle");
     bars_used = true; stroke(nonBGColor(2));
-    strokeWeight(4); strokeCap(ROUND);
+    strokeWeight(s(4)); strokeCap(ROUND);
     let radius = s(xx(30));
     if (radius < s(100)) { radius += s(76); }
     if (radius > s(200)) { radius -= s(55); }
