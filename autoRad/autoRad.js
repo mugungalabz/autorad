@@ -415,14 +415,12 @@ function draw() {
     applyMask(SourceRetroSun, MaskRetroSun);
     blendMode(BLEND);
   }
-  if (centeredShape > 64 && centeredShape < 128 && frameShape != "ellipse") { // solid ellipse
+   if (centeredShape > 64 && centeredShape < 128 && frameShape != "ellipse") { // solid ellipse
     console.log("CenteredShape: ", centeredShape);
     centeredShapeType = "solid"; noStroke();
-    let centEllipseScaler = centeredShape;
+    let centEllipseScaler = random(72,97);
     fill(clrs[0]);
-    if (centEllipseScaler < 10) centEllipseScaler = centEllipseScaler + 11;
-    if (centEllipseScaler > 100) centEllipseScaler = centEllipseScaler - 30;
-    ellipse(s(512), s(512), centEllipseScaler * 7 + (centEllipseScaler / 2), centEllipseScaler * 7 + (centEllipseScaler / 3));
+    ellipse(s(512), s(512), s(centEllipseScaler * 7 + (centEllipseScaler / 2)), s(centEllipseScaler * 7 + (centEllipseScaler / 3)));
   }
   if (centeredShape > 127 && centeredShape < 226) { //triangle centered shape
     console.log("CenteredShape: triangle");
