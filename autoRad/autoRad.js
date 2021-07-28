@@ -599,22 +599,23 @@ function draw() {
     gridSize = gridSize * 2;
     if (gridSize < 65) { gridSize = gridSize + 64; }
     if (gridSize > 500) { gridSize = Math.floor(gridSize / 2); }
-    let floatingGridCounter = 32;
-    let floatingGridCounterH = 32;
+    gridSize = s(gridSize);
+    let floatingGridCounter = s(32);
+    let floatingGridCounterH = s(32);
     let floatingGrid_height_failsafe = 0;
-    if (s(340) + randomOffset2 + floatingGridCounterH > s(512) && gridSize > 200) { floatingGrid_height_failsafe = -200; } //height failsafe
+    if (s(340) + randomOffset2 + floatingGridCounterH > s(512) && gridSize > s(200)) { floatingGrid_height_failsafe = s(-200); } //height failsafe
     noFill();
-    strokeWeight(2);
+    strokeWeight(s(2));
     if (type == "light") { stroke(0); }
     if (type == "dark") { stroke(255); }
     while (floatingGridCounterH < gridSize) {
       while (floatingGridCounter < gridSize) {
 
-        square(300 + randomOffset3 + floatingGridCounter, s(340) + randomOffset2 + floatingGridCounterH + floatingGrid_height_failsafe, 32);
-        floatingGridCounter = floatingGridCounter + 32;
+        square(s(300) + randomOffset3 + floatingGridCounter, s(340) + randomOffset2 + floatingGridCounterH + floatingGrid_height_failsafe, s(32));
+        floatingGridCounter = floatingGridCounter + s(32);
       }
-      floatingGridCounterH = floatingGridCounterH + 32;
-      floatingGridCounter = 32;
+      floatingGridCounterH = floatingGridCounterH + s(32);
+      floatingGridCounter = s(32);
     }
   }
   if (floatingShape1 > 149 && floatingShape1 < 175 && bgType != "horizon" && bgType != "grid" && bgType != "fakegrid" && bgType != "3Dgrid" && centeredShapeType != "horizon" && bars_used == false) { //----------floatingCheckers
