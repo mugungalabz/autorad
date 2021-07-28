@@ -1427,7 +1427,7 @@ function starscapebg(randomOffset4, randomOffset5) {
 function sprinklesbg() {
   background(255);
   strokeCap(ROUND);
-  strokeWeight(6);
+  strokeWeight(s(6));
   stroke(0);
   let sprinkle_column = 0;
   let sprinkle_row = 0;
