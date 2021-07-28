@@ -1180,7 +1180,7 @@ function draw() {
     quad(quote_mover + s(680) + quote_gap, quote_moverH + s(420) + quote_gap + (randomOffset / 4), quote_mover + s(712) + quote_gap, quote_moverH + s(432) + quote_gap + (randomOffset / 4), quote_mover + s(684) + quote_gap, quote_moverH + s(500) + quote_gap + (randomOffset / 4), quote_mover + s(658) + quote_gap, quote_moverH + s(488) + quote_gap + (randomOffset / 4));
   }
   if (floatingShape2 > 240 && floatingShape2 < 250 && two_straight == false) { //crispynoodle
-    strokeWeight(24); strokeCap(SQUARE);
+    strokeWeight(s(24)); strokeCap(SQUARE);
     stroke(nonBGColor(1)); noFill();
     let crispy_noodle = s(24); beginShape();
     vertex(s(400) + crispy_noodle + randomOffset, s(400) + crispy_noodle + randomOffset);
