@@ -1349,8 +1349,8 @@ function fakegridbg() {
     fakeGrid.line(x_lerp, i, x_lerp + w_lerp, i);
   }
   image(fakeGrid, 0, 0);//draw the fakeGrid to a graphics buffer
-  while (fake_grid_counter_h < DIM) { //draws squares to simulate a grid
-    while (fake_grid_counter < DIM) {
+while (fake_grid_counter_h < DIM+ s(32)) { //draws squares to simulate a grid
+    while (fake_grid_counter < DIM + s(32)) {
       fill(type == "light" ? 255 : 0);
       noStroke();
       square(fake_grid_counter - s(16), fake_grid_counter_h - s(16), s(64));
