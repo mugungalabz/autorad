@@ -1134,7 +1134,7 @@ function draw() {
   }
   if (floatingShape2 > 127 && floatingShape2 < 160 && two_straight == false) { //half arcnoodle  testing
     noFill(); stroke(clrs[1]);
-    strokeWeight(32); strokeCap(SQUARE);
+    strokeWeight(s(32)); strokeCap(SQUARE);
     let arcPosx = s(512) + randomOffset;
     let arcPosy = s(512) + randomOffset;
     arc(arcPosx, arcPosy, s(64), s(64), PI, TWO_PI, OPEN);
