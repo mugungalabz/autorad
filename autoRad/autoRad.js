@@ -1073,6 +1073,7 @@ function draw() {
     strokeWeight(s(6));
     strokeCap(SQUARE);
     stroke(clrs[4]);
+    noFill();
     let rotateRAD = (3 * PI / 4.0);
     rotate(rotateRAD); //rotate noodles
     while (arc_counter <= (6)) {
