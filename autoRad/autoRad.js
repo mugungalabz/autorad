@@ -134,9 +134,9 @@ function draw() {
   }
 
   let randomOffset = xxs(16);
-  if (randomOffset < 63) { randomOffset *= -5; }
-  else if (randomOffset < 126) { randomOffset *= 2; }
-  else if (randomOffset < 189) { randomOffset *= -3; randomOffset /= 2; }
+  if (randomOffset < s(63)) { randomOffset *= -5; }
+  else if (randomOffset < s(126)) { randomOffset *= 2; }
+  else if (randomOffset < s(189)) { randomOffset *= -3; randomOffset /= 2; }
   else { randomOffset /= 2; }
   let randomOffset2 = xx(26) < 165 ? 0 - xxs(26) : xxs(26);
   let randomOffset3 = xx(46) < 165 ? 0 - xxs(46) : xxs(46);
@@ -1148,10 +1148,10 @@ function draw() {
   }
   if (floatingShape2 > 160 && floatingShape2 < 180 && two_straight == false) { //double arcnoodle
     noFill(); stroke(nonBGColor(1));
-    strokeWeight(32); strokeCap(SQUARE);
+    strokeWeight(s(32)); strokeCap(SQUARE);
     let noodle_failsafe = 0;
     if (randomOffset < 0) {
-      noodle_failsafe = 250;
+      noodle_failsafe = s(250);
     }
     let arcPosx = s(256) + randomOffset + noodle_failsafe;
     let arcPosy = s(512) + randomOffset;
