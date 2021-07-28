@@ -411,6 +411,7 @@ function draw() {
     MaskRetroSun = createGraphics(DIM, DIM);
     if (centeredShape < 10) { centeredShape = centeredShape + 11; }
     if (centeredShape > 100) { centeredShape = centeredShape - 30; }
+    centeredShape = s(centeredShape);
     MaskRetroSun.ellipse(xPos, yPos, centeredShape * 7 + (centeredShape), centeredShape * 7 + (centeredShape));
     applyMask(SourceRetroSun, MaskRetroSun);
     blendMode(BLEND);
