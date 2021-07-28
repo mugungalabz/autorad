@@ -849,7 +849,7 @@ function draw() {
       curveHeightOffset = curveHeightInt;
       curveHeightOffset = curveHeightOffset * (-2);
     }
-    noFill(); strokeWeight(8); stroke(clrs[2]);
+    noFill(); strokeWeight(s(8)); stroke(clrs[2]);
     if (type == "dark" && clrs[2] == color('#000000')) { stroke(clrs[4]); } //low-effort failsafe for black flourishes on dark designs
     let failsafe_flourish_mover = 0;
     beginShape();
@@ -902,7 +902,7 @@ function draw() {
     if (curveOffset < s(64)) { curveOffset *= (-1); }
     if (curveOffset > s(100)) { curveOffset /= s(5); }
     if (curveOffset < s(165)) { curveHeightOffset = s(xx(24) * -2); }
-    noFill(); strokeWeight(8);
+    noFill(); strokeWeight(s(8));
     let failsafe_flourish_mover = 0;
     beginShape();
     if ((s(64) + curveOffset * 4) < 1) { failsafe_flourish_mover = s(200); }
