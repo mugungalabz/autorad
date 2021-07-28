@@ -719,7 +719,7 @@ function draw() {
     sourceWormsCircle.background(255);
     sourceWormsCircle.noFill();
     sourceWormsCircle.strokeCap(ROUND);
-    sourceWormsCircle.strokeWeight(5);
+    sourceWormsCircle.strokeWeight(s(5));
     sourceWormsCircle.stroke(0);
     let worm_column = 0;
     let worm_row = 0;
