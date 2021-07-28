@@ -1226,13 +1226,14 @@ function draw() {
     vertex(s(400) + 11 * crispy_noodle + randomOffset, s(400) + crispy_noodle + randomOffset + noodle_spacer);
     endShape();
   }
-  if (floatingShape2 > 64 && floatingShape2 < 100 && floatingShapeType != "dots_circle" && bars_used == false && worms_used == false) { // bars square
+   if (floatingShape2 > 64 && floatingShape2 < 100 && floatingShapeType != "dots_circle" && bars_used == false && worms_used == false) { // bars square
     console.log("FloatingShape2: bars square");
     let bars_square_counter = 0;
     bars_used = true;
     while (bars_square_counter < DIM / 4) {
-      noFill(); stroke(clrs[2]); strokeWeight(5);
-      line(floatingShape2 * 2, floatingShape2 * 2 + bars_square_counter, floatingShape2 * 6, floatingShape2 * 2 + bars_square_counter);
+      noFill(); stroke(clrs[2]); strokeWeight(s(5));
+      let bar_length = s(floatingShape2);
+      line(bar_length * 2, bar_length * 2 + bars_square_counter, bar_length * 6, bar_length * 2 + bars_square_counter);
       bars_square_counter = bars_square_counter + s(16);
     }
   }
