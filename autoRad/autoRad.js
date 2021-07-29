@@ -562,7 +562,7 @@ function draw() {
     console.log("image placement successful");
     blendMode(BLEND);
   }
-  if (floatingShape1 > 79 && floatingShape1 < 100) { //Masked circles filled w Sprinkles
+ if (floatingShape1 > 79 && floatingShape1 < 100) { //Masked circles filled w Sprinkles
     console.log("FloatingShape1: Sprinkles Circle");
     ss_circle = true;
     sprinkles_used = true;
@@ -572,23 +572,23 @@ function draw() {
     sourceSprinksCircle = createGraphics(DIM, DIM);
     sourceSprinksCircle.background(clrs[2]);
     sourceSprinksCircle.strokeCap(ROUND);
-    sourceSprinksCircle.strokeWeight(6);
+    sourceSprinksCircle.strokeWeight(s(6));
     sourceSprinksCircle.stroke(clrs[3]);
     let sprinkle_column = 0; let sprinkle_row = 0; let sprinkle_switch = 0;
-    while (sprinkle_row < round(DIM * 1.1953125)) { //UPDATED v03
+    while (sprinkle_row < (round(1.1953125 * DIM))) { //UPDATED V03
       while (sprinkle_column < DIM) {
-        sourceSprinksCircle.line(-6 + sprinkle_row, 16 + sprinkle_column, 4 + sprinkle_row, 30 + sprinkle_column);
-        sourceSprinksCircle.line(-8 + sprinkle_row, 48 + sprinkle_column, 8 + sprinkle_row, 48 + sprinkle_column);
-        sourceSprinksCircle.line(0 + sprinkle_row, 72 + sprinkle_column, 0 + sprinkle_row, 88 + sprinkle_column);
-        sourceSprinksCircle.line(4 + sprinkle_row, 108 + sprinkle_column, -6 + sprinkle_row, 124 + sprinkle_column);
-        sourceSprinksCircle.line(-8 + sprinkle_row, 148 + sprinkle_column, 8 + sprinkle_row, 148 + sprinkle_column);
-        sprinkle_column = sprinkle_column + 158;
+        sourceSprinksCircle.line(s(-6) + sprinkle_row, s(16) + sprinkle_column, s(4) + sprinkle_row, s(30) + sprinkle_column);
+        sourceSprinksCircle.line(s(-8) + sprinkle_row, s(48) + sprinkle_column, s(8) + sprinkle_row, s(48) + sprinkle_column);
+        sourceSprinksCircle.line(s(0) + sprinkle_row, s(72) + sprinkle_column, s(0) + sprinkle_row, s(88) + sprinkle_column);
+        sourceSprinksCircle.line(s(4) + sprinkle_row, s(108) + sprinkle_column, s(-6) + sprinkle_row, s(124) + sprinkle_column);
+        sourceSprinksCircle.line(s(-8) + sprinkle_row, s(148) + sprinkle_column, s(8) + sprinkle_row, s(148) + sprinkle_column);
+        sprinkle_column = sprinkle_column + s(158);
       }
       sprinkle_switch++;
-      sprinkle_row = sprinkle_row + 32;
-      if (sprinkle_switch % 2 == 0) { sprinkle_column = 0; }
-      if (sprinkle_switch % 2 != 0) { sprinkle_column = -79; }
-      if (sprinkle_switch % 3 == 0) { sprinkle_column = -128; }
+      sprinkle_row = sprinkle_row + s(32);
+      if (sprinkle_switch % 2 == 0) { sprinkle_column = s(0); }
+      if (sprinkle_switch % 2 != 0) { sprinkle_column = s(-79); }
+      if (sprinkle_switch % 3 == 0) { sprinkle_column = s(-128); }
     }
     maskSprinksCircle = createGraphics(DIM, DIM);
     maskSprinksCircle.ellipse(s(512) + randomOffset, s(512) + randomOffset, floatingShape1 * 2, floatingShape1 * 2);
