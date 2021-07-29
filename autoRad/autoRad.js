@@ -769,10 +769,10 @@ function draw() {
       while (dots_circle_counter < DIM) {
         sourceDotsCircle.noStroke();
         sourceDotsCircle.fill(clrs[1]);
-        sourceDotsCircle.ellipse(dots_circle_counter, dots_height_counter, 4, 4);
-        dots_circle_counter = dots_circle_counter + 8;
+        sourceDotsCircle.ellipse(dots_circle_counter, dots_height_counter, s(4), s(4));
+        dots_circle_counter = dots_circle_counter + s(8);
       }
-      dots_height_counter = dots_height_counter + 8;
+      dots_height_counter = dots_height_counter + s(8);
       dots_circle_counter = 0;
     }
     maskDotsCircle = createGraphics(DIM, DIM);
