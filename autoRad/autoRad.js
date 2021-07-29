@@ -417,10 +417,10 @@ function draw() {
     applyMask(SourceRetroSun, MaskRetroSun);
     blendMode(BLEND);
   }
-   if (centeredShape > 64 && centeredShape < 128 && frameShape != "ellipse") { // solid ellipse
+  if (centeredShape > 64 && centeredShape < 128 && frameShape != "ellipse") { // solid ellipse
     console.log("CenteredShape: ", centeredShape);
     centeredShapeType = "solid"; noStroke();
-    let centEllipseScaler = random(72,97);
+    let centEllipseScaler = random(72, 97);
     fill(clrs[0]);
     ellipse(s(512), s(512), s(centEllipseScaler * 7 + (centEllipseScaler / 2)), s(centEllipseScaler * 7 + (centEllipseScaler / 3)));
   }
@@ -563,7 +563,7 @@ function draw() {
     console.log("image placement successful");
     blendMode(BLEND);
   }
- if (floatingShape1 > 79 && floatingShape1 < 100) { //Masked circles filled w Sprinkles
+  if (floatingShape1 > 79 && floatingShape1 < 100) { //Masked circles filled w Sprinkles
     console.log("FloatingShape1: Sprinkles Circle");
     ss_circle = true;
     sprinkles_used = true;
@@ -903,7 +903,7 @@ function draw() {
     let curveHeightOffset = 0;
     if (curveOffset > s(63) && curveOffset < s(100)) { curveOffset *= 4; }
     if (curveOffset < s(64)) { curveOffset *= (-1); }
-    if (curveOffset > s(100)) { curveOffset /= s(5); }
+    if (curveOffset > s(100)) { curveOffset /= 5; }
     if (curveOffset < s(165)) { curveHeightOffset = s(xx(24) * -2); }
     noFill(); strokeWeight(s(8));
     let failsafe_flourish_mover = 0;
@@ -1231,7 +1231,7 @@ function draw() {
     vertex(s(400) + 11 * crispy_noodle + randomOffset, s(400) + crispy_noodle + randomOffset + noodle_spacer);
     endShape();
   }
-   if (floatingShape2 > 64 && floatingShape2 < 100 && floatingShapeType != "dots_circle" && bars_used == false && worms_used == false) { // bars square
+  if (floatingShape2 > 64 && floatingShape2 < 100 && floatingShapeType != "dots_circle" && bars_used == false && worms_used == false) { // bars square
     console.log("FloatingShape2: bars square");
     let bars_square_counter = 0;
     bars_used = true;
@@ -1350,7 +1350,7 @@ function fakegridbg() {
     fakeGrid.line(x_lerp, i, x_lerp + w_lerp, i);
   }
   image(fakeGrid, 0, 0);//draw the fakeGrid to a graphics buffer
-while (fake_grid_counter_h < DIM+ s(32)) { //draws squares to simulate a grid
+  while (fake_grid_counter_h < DIM + s(32)) { //draws squares to simulate a grid
     while (fake_grid_counter < DIM + s(32)) {
       fill(type == "light" ? 255 : 0);
       noStroke();
@@ -1417,7 +1417,7 @@ function starscapebg(randomOffset4, randomOffset5) {
   let starSize = 1;
   noStroke(); fill(255); background(0);
   while (bigBang < starAmt) {
-     ellipse(starPosX, starPosY, s(starSize), s(starSize));
+    ellipse(starPosX, starPosY, s(starSize), s(starSize));
     randomOffset5 = int(random(-255, 255)); //NOT DETERMINATIVE
     randomOffset4 = int(random(-255, 255)); //NOT DETERMINATIVE
     starPosX = randomOffset5 * 4;
