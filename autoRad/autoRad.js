@@ -104,8 +104,8 @@ function draw() {
   let testhash7 = "0x6c646f816692db533cf00dae1e12c4c46bd68efaabaf296ad738b9cc2b8901"; //gradient ellipse + dots circle
   let testhash8 = "0x8a50709af0d74174f86d04425fc3d483e6c5263998877c41766b8a3a608b6a"; //no flourish???
   let testhash9 = "0x141b7cd4f6fc09488c67cfe8b6bac179ec1c8e6f94a16082c2059968ea5741"; //splinter
-  let testhasha = "0x141b7cd4f6fc09488c672de8b6bac179ec1c8e6f94a16082c2059968ea5741"; //splinter
-  // hash = testhasha;
+  let testhasha = "0x27272727272727272727272727272727272727272727272727272727272727"; //splinter
+  hash = testhasha;
   randomSeed(hash);
 
   //global variable access for production
@@ -392,7 +392,7 @@ function draw() {
     rect_size = s(rect_size);
     rect(s(480) + rect_mover, s(220) + rect_mover2, rect_size + s(160), rect_size * 2 + s(320));
   }
-    if (centeredShape > 23 && centeredShape < 65 && frameShape != "ellipse" && bgType != "horizon") { // retro sun
+  if (centeredShape > 23 && centeredShape < 65 && frameShape != "ellipse" && bgType != "horizon") { // retro sun
     if (type == "based") { blendMode(ADD); } //avoids bw contrast for based
     console.log("CenteredShape: Retro Sun ", centeredShape);
     centeredShapeType = "horizon";
@@ -680,8 +680,8 @@ function draw() {
   //TODO scale the radians in here?
   if (floatingShape1 > 99 && floatingShape1 < 125) { //----------Floating Arcs
     strokeWeight(s(32)); noFill(); stroke(nonBGColor(2)); strokeCap(SQUARE);
-    let arcBegin = radians(random(0,200) + 10);
-    let arcEnd = radians(random(0,200) + 10);
+    let arcBegin = radians(random(0, 200) + 10);
+    let arcEnd = radians(random(0, 200) + 10);
     arcBegin = arcBegin / 4;
     arcEnd = arcEnd * 2;
     if (arcEnd - arcBegin < radians(50)) {
@@ -1315,7 +1315,7 @@ function horizonbg() {
   let horizon = 0; strokeWeight(1);
   while (horizon < DIM) {
     stroke(type == "light" ? 0 : 255); strokeWeight(horizon / 1.5);
-    line(0, s(512) + s(20) * horizon, DIM, s(512) + s(20) * horizon);
+    line(0, s(512) + 20 * horizon, DIM, s(512) + 20 * horizon);
     horizon += 1;
   }
 }
@@ -1401,9 +1401,9 @@ function starscapebg(randomOffset4, randomOffset5) {
   let starMin = 0;
   noStroke(); fill(255); background(0);
   while (bigBang < starAmt) {
-    if (s(starSize) < 1){starMin = 2;}
-    
-    ellipse(starPosX, starPosY, s(starSize)+starMin, s(starSize))+starMin;
+    if (s(starSize) < 1) { starMin = 2; }
+
+    ellipse(starPosX, starPosY, s(starSize) + starMin, s(starSize)) + starMin;
     randomOffset5 = int(random(-255, 255)); //NOT DETERMINATIVE
     randomOffset4 = int(random(-255, 255)); //NOT DETERMINATIVE
     starPosX = randomOffset5 * 4;
