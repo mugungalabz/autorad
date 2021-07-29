@@ -989,7 +989,7 @@ function draw() {
   }
   if (floatingShape2 > 7 && floatingShape2 < 17 && bars_used == false && bgType != "horizon") { //lines diamond (actually a triangle now)
     console.log("FloatingShape2: lines triangle");
-    strokeCap(ROUND); strokeWeight(4); stroke(nonBGColor(3));
+    strokeCap(ROUND); strokeWeight(s(4)); stroke(nonBGColor(3));
     bars_used = true;
     let halfway_point = false;
     let line_circle_var = s(Math.floor(floatingShape2 / 2));
