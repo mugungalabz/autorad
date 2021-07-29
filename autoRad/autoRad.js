@@ -1393,21 +1393,16 @@ function wormsbg() {
 function starscapebg(randomOffset4, randomOffset5) {
   bgType = "starscape";
   console.log("background = starscape");
-  let starAmt = abs(randomOffset5) * s(40);
+  let starAmt = abs(randomOffset5) * 40;
   let bigBang = 0;
-  let starPosX = randomOffset5 * s(4);
-  let starPosY = randomOffset4 * s(4);
+  let starPosX = random(0, DIM);
+  let starPosY = random(0, DIM);
   let starSize = 1;
-  let starMin = 0;
   noStroke(); fill(255); background(0);
   while (bigBang < starAmt) {
-    if (s(starSize) < 1) { starMin = 2; }
-
-    ellipse(starPosX, starPosY, s(starSize) + starMin, s(starSize)) + starMin;
-    randomOffset5 = int(random(-255, 255)); //NOT DETERMINATIVE
-    randomOffset4 = int(random(-255, 255)); //NOT DETERMINATIVE
-    starPosX = randomOffset5 * 4;
-    starPosY = randomOffset4 * 4;
+    ellipse(starPosX, starPosY, starSize, starSize);
+    starPosX = random(0, DIM);
+    starPosY = random(0, DIM);
     starSize = starSize + 1;
     if (starSize > 5) { starSize = 1; } bigBang += 1;
   }
