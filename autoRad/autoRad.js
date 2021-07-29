@@ -455,8 +455,8 @@ function draw() {
     }
     maskGradientRect = createGraphics(DIM, DIM);
     //TODO Scale these comparators below? < 100, > 99?
-    if (abs(randomOffset2) < 100) rect_size = 2 * (abs(randomOffset2));
-    if (abs(randomOffset2) > 99) rect_size = abs(randomOffset2) / 2;
+    if (abs(randomOffset2) < s(100)) rect_size = 2 * (abs(randomOffset2));
+    if (abs(randomOffset2) > s(99)) rect_size = abs(randomOffset2) / 2;
     rect_size = s(rect_size);
     maskGradientRect.rect(s(480) + rect_mover, s(320) + rect_mover2, rect_size + s(160), rect_size * 2 + s(320));
     applyMask(sourceGradientRect, maskGradientRect);
