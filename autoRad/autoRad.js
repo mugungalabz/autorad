@@ -1416,7 +1416,7 @@ function starscapebg(randomOffset4, randomOffset5) {
   let starSize = 1;
   noStroke(); fill(255); background(0);
   while (bigBang < starAmt) {
-    ellipse(starPosX, starPosY, starSize, starSize);
+     ellipse(starPosX, starPosY, s(starSize), s(starSize));
     randomOffset5 = int(random(-255, 255)); //NOT DETERMINATIVE
     randomOffset4 = int(random(-255, 255)); //NOT DETERMINATIVE
     starPosX = randomOffset5 * 4;
