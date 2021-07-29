@@ -853,7 +853,7 @@ function draw() {
     endShape();
   }
   if (curveType > 64 && curveType < 128) { //default flourish
-    let curveOffset = xx(26);
+    let curveOffset = xxs(26);
     let curveHeightOffset = 0;
     if (curveOffset > s(63) && curveOffset < s(100)) { curveOffset = curveOffset * 4; }
     if (curveOffset < s(64)) { curveOffset = curveOffset * (-1); }
