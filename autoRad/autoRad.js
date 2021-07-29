@@ -627,12 +627,12 @@ function draw() {
     console.log("FloatingShape1: checker grid");
     let gridSize = xx(40) * 2;
     gridSize = gridSize * 2;
-    if (gridSize < 65) { gridSize = gridSize + 64; }
-    if (gridSize > 500) { gridSize = Math.floor(gridSize / 2); }
+    if (gridSize < s(65)) { gridSize = gridSize + s(64); }
+    if (gridSize > s(500)) { gridSize = Math.floor(gridSize / 2); }
     gridSize = s(gridSize);
     let floatingGridCounter = s(32); let floatingGridCounterH = s(32);
     let floatingGrid_height_failsafe = 0;
-    if (s(340) + randomOffset2 + floatingGridCounterH > s(512) && gridSize > 200) { floatingGrid_height_failsafe = -200; } //height failsafe
+    if (s(340) + randomOffset2 + floatingGridCounterH > s(512) && gridSize > s(200)) { floatingGrid_height_failsafe = s(-200); } //height failsafe
     noFill(); strokeWeight(s(2));
     if (type == "light") { stroke(0); }
     if (type == "dark") { stroke(255); }
