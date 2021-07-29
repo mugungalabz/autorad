@@ -592,7 +592,7 @@ function draw() {
       if (sprinkle_switch % 3 == 0) { sprinkle_column = s(-128); }
     }
     maskSprinksCircle = createGraphics(DIM, DIM);
-    maskSprinksCircle.ellipse(s(512) + randomOffset, s(512) + randomOffset, floatingShape1 * 2, floatingShape1 * 2);
+    maskSprinksCircle.ellipse(s(512) + randomOffset, s(512) + randomOffset, floatingShape1 * s(2), floatingShape1 * s(2));
     applyMask(sourceSprinksCircle, maskSprinksCircle);
   }
   if (floatingShape1 > 69 && floatingShape1 < 150 && bgType != "horizon" && bgType != "grid" && bgType != "fakegrid" && bgType != "3Dgrid" && centeredShapeType != "horizon" && bars_used == false && grid_used == false) { //----------floatingGrid
