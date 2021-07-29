@@ -1351,7 +1351,7 @@ function gridbg() {
   let n = 0;
   while (n < DIM) {
     noFill();
-    strokeWeight(2);
+    strokeWeight(s(2));
     if (type == "light") { stroke(0); } else { stroke(255, 255, 255); }
     line(0, s(64) + n, DIM, s(64) + n);
     line(s(64) + n, 0, s(64) + n, DIM);
