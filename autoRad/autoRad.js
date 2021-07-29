@@ -633,38 +633,21 @@ function draw() {
     let floatingGridCounter = s(32); let floatingGridCounterH = s(32);
     let floatingGrid_height_failsafe = 0;
     if (s(340) + randomOffset2 + floatingGridCounterH > s(512) && gridSize > 200) { floatingGrid_height_failsafe = -200; } //height failsafe
-    let row_alternator = 0; let evenTest = s(32);
-    let evenTestCounter = 0;
     noFill(); strokeWeight(s(2));
     if (type == "light") { stroke(0); }
     if (type == "dark") { stroke(255); }
-    while (evenTest < gridSize) { evenTest = evenTest + s(32); evenTestCounter++; }
-    if (evenTest >= gridSize) { //checks number of iterations of demo loop to see if even or odd
-      if (evenTestCounter % 2 == 0) { checkerEven = true; }
-      if (evenTestCounter % 2 != 0) { checkerEven = false; }
-    }
     console.log("Checker Even: ", checkerEven);
+    let blackSquareStart = true;
     while (floatingGridCounterH < gridSize) {
+      currSquareBlack = blackSquareStart;
       while (floatingGridCounter < gridSize) {
-        if ((floatingGridCounter + row_alternator) % 2 == 0) {
-          fill(0);
-        }
-        if ((floatingGridCounter + row_alternator) % 2 != 0) { fill(255); } //checker
+        fill(currSquareBlack ? 0 : 255);
         square(s(300) + randomOffset3 + floatingGridCounter, s(340) + randomOffset2 + floatingGridCounterH + floatingGrid_height_failsafe, s(32));
-        if ((floatingGridCounter + s(32) >= gridSize) && checkerEven == false) {
-          row_alternator++; //extra adder for the last checker in an odd numbered gridsize
-        }
-        row_alternator++;
-        floatingGridCounter = floatingGridCounter + s(32);
+        floatingGridCounter += s(32);
+        currSquareBlack = !currSquareBlack;
       }
-
-      if (floatingGridCounterH + s(32) <= gridSize && checkerEven == true) { //worked for EVENS
-        row_alternator++;
-      }
-      if (checkerEven == false) {
-        row_alternator++;
-      }
-      floatingGridCounterH = floatingGridCounterH + s(32);
+      blackSquareStart = !blackSquareStart;
+      floatingGridCounterH += s(32);
       floatingGridCounter = s(32);
     }
     blendMode(BLEND); //undoes the possiblity of staying based (add mode)
