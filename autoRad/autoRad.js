@@ -959,7 +959,7 @@ function draw() {
     let bar_triangle_mask;
     bar_triangle_mask = createGraphics(DIM, DIM);
     bar_triangle_mask.triangle(
-      s(512) + randomOffset, s(512) + randomOffset,
+      xsBetween(8, 100, 400), xsBetween(18, 100, 400),
       xsBetween(7, 400, 550), xsBetween(19, 400, 550),
       xsBetween(17, 750, 950), s(512) - xsBetween(9, 100, 120));
     applyMask(bar_triangle, bar_triangle_mask);
