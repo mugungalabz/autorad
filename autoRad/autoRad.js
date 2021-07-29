@@ -967,7 +967,7 @@ function draw() {
   if (floatingShape2 < 7) { // 3 rects ascending
     console.log("FloatingShape2: rects ascending");
     noStroke(); fill(clrs[2]);
-    rect(s(512) - randomOffset, s(300) - randomOffset / 2, s(floatingShape2 + 16), s(floatingShape2 + s(16)) * 8);
+    rect(s(512) - randomOffset, s(300) - randomOffset / 2, s(floatingShape2 + 16), s(floatingShape2 + 16) * 8);
     rect(s(512) - randomOffset + s(64), s(300) - randomOffset / 2 - s(64), s(floatingShape2 + 16), s(floatingShape2 + 16) * 8);
     rect(s(512) - randomOffset + s(128), s(300) - randomOffset / 2 - s(128), s(floatingShape2 + 16), s(floatingShape2 + 16) * 8);
   }
