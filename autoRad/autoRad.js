@@ -1275,7 +1275,7 @@ function dotsbg() {//background
       noStroke();
       if (type == "light") { fill(0); }
       if (type == "dark") { fill(255); }
-      ellipse(dots_circle_counter, dots_height_counter, 3, 3);
+      ellipse(dots_circle_counter, dots_height_counter, s(3), s(3));
       dots_circle_counter = dots_circle_counter + s(64);
     }
     dots_height_counter = dots_height_counter + s(64);
