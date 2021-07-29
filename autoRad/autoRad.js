@@ -728,17 +728,17 @@ function draw() {
     let worm_column = 0;
     let worm_row = 0;
     let worm_switch = 0;
-    let bezX1 = 16;// 6 default
-    let bezX2 = 4;//4 default
-    let bezY1 = 32; // 24 default
+    let bezX1 = s(16);// 6 default
+    let bezX2 = s(4);//4 default
+    let bezY1 = s(32); // 24 default
     while (worm_row < s(1224)) {
       while (worm_column < DIM) {
         sourceWormsCircle.beginShape();
-        sourceWormsCircle.curveVertex(int(random(0, 12) - bezX1) + worm_row, int(random(0, 24)) - bezY1 + worm_column);
-        sourceWormsCircle.curveVertex(int(random(0, 24)) + worm_row, int(random(0, 24)) + worm_column);
-        sourceWormsCircle.curveVertex(int(random(0, 26)) + worm_row, int(random(0, 24)) + worm_column);
-        sourceWormsCircle.curveVertex(int(random(0, 32)) + worm_row, int(random(0, 24)) + worm_column);
-        sourceWormsCircle.curveVertex(int(random(0, 36)) + bezX2 + worm_row, int(random(0, 24)) + bezY1 + worm_column);
+        sourceWormsCircle.curveVertex(s(int(random(0, 12) - bezX1)) + worm_row, s(int(random(0, 24)) - bezY1) + worm_column);
+        sourceWormsCircle.curveVertex(s(int(random(0, 24))) + worm_row, s(int(random(0, 24))) + worm_column);
+        sourceWormsCircle.curveVertex(s(int(random(0, 26))) + worm_row, s(int(random(0, 24))) + worm_column);
+        sourceWormsCircle.curveVertex(s(int(random(0, 32))) + worm_row, int(random(0, 24)) + worm_column);
+        sourceWormsCircle.curveVertex(s(int(random(0, 36))) + bezX2 + worm_row, s(int(random(0, 24))) + bezY1 + worm_column);
         sourceWormsCircle.endShape();
         worm_column = worm_column + s(24);
       }
