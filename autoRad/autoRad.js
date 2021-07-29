@@ -1303,7 +1303,7 @@ function grid3Dbg() {
     GridCounter *= 1.1;
   }
   while (GridwCounter < DIM) {
-    line(GridwCounter, s(516), GridwCounter - (s(64) * GridLoop), DIM);
+    line(GridwCounter, s(512) + 4, GridwCounter - (s(64) * GridLoop), DIM);
     GridLoop -= 1;
     GridwCounter += s(64);
   }
