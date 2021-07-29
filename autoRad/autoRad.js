@@ -680,8 +680,8 @@ function draw() {
   //TODO scale the radians in here?
   if (floatingShape1 > 99 && floatingShape1 < 125) { //----------Floating Arcs
     strokeWeight(s(32)); noFill(); stroke(nonBGColor(2)); strokeCap(SQUARE);
-    let arcBegin = radians(abs(randomOffset4) + 10);
-    let arcEnd = radians(abs(randomOffset5) + 10);
+    let arcBegin = radians(random(0,200) + 10);
+    let arcEnd = radians(random(0,200) + 10);
     arcBegin = arcBegin / 4;
     arcEnd = arcEnd * 2;
     if (arcEnd - arcBegin < radians(50)) {
