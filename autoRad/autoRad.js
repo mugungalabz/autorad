@@ -901,8 +901,8 @@ function draw() {
     if (curveWiggler4 > s(170)) { curveWiggler4 -= s(100); }
     if (curveWiggler5 > s(170)) { curveWiggler5 -= s(100); }
     let curveHeightOffset = 0;
-    if (curveOffset > s(63) && curveOffset < s(100)) { curveOffset *= 4; }
-    if (curveOffset < s(64)) { curveOffset *= (-1); }
+    if (curveOffset > s(63) && curveOffset < s(100)) { curveOffset *= s(4); }
+    if (curveOffset < s(64)) { curveOffset *= s((-1)); }
     if (curveOffset > s(100)) { curveOffset /= s(5); }
     if (curveOffset < s(165)) { curveHeightOffset = s(xx(24) * -2); }
     noFill(); strokeWeight(s(8));
