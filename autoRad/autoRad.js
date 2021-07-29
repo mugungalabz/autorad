@@ -430,7 +430,7 @@ function draw() {
     if (centeredShapeType == "solid") {
       noStroke();
       fill(clrs[0]);
-      triangle(DIM / 6 + (centeredShape / 5), DIM / 6 + (centeredShape / 5), DIM / 2 + (centeredShape / 5), DIM / 2 + (centeredShape / 5), DIM / 3 + (centeredShape / 5), DIM / 1.5 + (centeredShape / 5));
+      triangle(DIM / 6 + (s(centeredShape) / 5), DIM / 6 + (s(centeredShape) / 5), DIM / 2 + (s(centeredShape) / 5), DIM / 2 + (s(centeredShape) / 5), DIM / 3 + (s(centeredShape) / 5), DIM / 1.5 + (s(centeredShape) / 5));
     }
   }
   if (centeredShape > 224 && frameShape != "square" && type == "dark") { // gradient rectangle
