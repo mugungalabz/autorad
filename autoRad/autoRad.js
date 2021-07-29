@@ -673,7 +673,7 @@ function draw() {
 
       line(s(412) + randomOffset2, s(356) + lineH + randomOffset + venetian_circle_failsafe, s(412) + firstlastline + sqrt(chord) + randomOffset2, s(356) + lineH + randomOffset + venetian_circle_failsafe);
       line(s(412) + randomOffset2, s(356) + lineH + randomOffset + venetian_circle_failsafe, s(412) - firstlastline - sqrt(chord) + randomOffset2, s(356) + lineH + randomOffset + venetian_circle_failsafe);
-      lineH = lineH + 16;
+      lineH = lineH + s(16);
       firstlastline = 0;
     }
   }
