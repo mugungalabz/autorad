@@ -795,16 +795,16 @@ function draw() {
     let curveOffset = s(xx(26));
     curveHeightOffset = curveHeightInt;
     curveHeightOffset = curveHeightOffset * (-2);
-    if (curveOffset > s(63) && curveOffset < s(100)) { curveOffset *= 4; }
-    if (curveOffset < 64) { curveOffset = curveOffset * (-1); }
-    if (curveOffset > 100) { curveOffset = curveOffset / 5; }
-    if (curveOffset < 165) { curveHeightOffset = curveHeightInt; curveHeightOffset = curveHeightOffset * (-2); }
+    if (xx(26) > 63 && xx(26) < 100) { curveOffset *= 4; }
+    if (xx(26) < 64) { curveOffset = curveOffset * (-1); }
+    if (xx(26) > 100) { curveOffset = curveOffset / 5; }
+    if (xx(26) < 165) { curveHeightOffset = curveHeightInt; curveHeightOffset = curveHeightOffset * (-2); }
     maskGradientCurve.noFill();
     maskGradientCurve.strokeWeight(s(8));
     maskGradientCurve.stroke(255);
     let failsafe_flourish_mover = 0;
     maskGradientCurve.beginShape();
-    if ((64 + curveOffset * 4) < 1) { failsafe_flourish_mover = 200; }
+    if ((s(64) + curveOffset * 4) < 1) { failsafe_flourish_mover = s(200); }
     let flourishOffset = s(-320);
     if (curveHeightOffset < s(-300)) { curveHeightOffset += s(300); }
     maskGradientCurve.curveVertex(flourishOffset + s(120) + curveOffset * 4 + curveWiggler1 + failsafe_flourish_mover, s(256) + curveWiggler2 + curveOffset + curveHeightOffset);
