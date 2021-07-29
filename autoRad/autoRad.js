@@ -392,7 +392,7 @@ function draw() {
     rect_size = s(rect_size);
     rect(s(480) + rect_mover, s(220) + rect_mover2, rect_size + s(160), rect_size * 2 + s(320));
   }
-  if (centeredShape > 23 && centeredShape < 65 && frameShape != "ellipse" && bgType != "horizon") { // retro sun
+    if (centeredShape > 23 && centeredShape < 65 && frameShape != "ellipse" && bgType != "horizon") { // retro sun
     if (type == "based") { blendMode(ADD); } //avoids bw contrast for based
     console.log("CenteredShape: Retro Sun ", centeredShape);
     centeredShapeType = "horizon";
@@ -401,12 +401,12 @@ function draw() {
     SourceRetroSun = createGraphics(DIM, DIM);
     SourceRetroSun.background(0, 0, 0);
     let horizon = 0;
-    SourceRetroSun.strokeWeight(1);
+    SourceRetroSun.strokeWeight(s(1));
     //TODO scale the 15 in the sun line calc???
     while (horizon < DIM / 3) {
       SourceRetroSun.stroke(diffColor(globalBlack, 0));
-      SourceRetroSun.strokeWeight(horizon / 1.5);
-      SourceRetroSun.line(0, s(400) + 15 * horizon, DIM, s(400) + 15 * horizon);
+      SourceRetroSun.strokeWeight(s(horizon / 1.5));
+      SourceRetroSun.line(0, s(400) + s(15) * horizon, DIM, s(400) + s(15) * horizon);
       horizon = horizon + 1;
     }
     MaskRetroSun = createGraphics(DIM, DIM);
