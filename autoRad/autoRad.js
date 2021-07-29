@@ -1379,7 +1379,7 @@ function wormsbg() {
   background(255);
   noFill();
   strokeCap(ROUND);
-  strokeWeight(5);
+  strokeWeight(s(5));
   stroke(0, 0, 0, 25);
   let worm_column = 0;
   let worm_row = 0;
