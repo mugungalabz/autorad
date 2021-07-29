@@ -105,7 +105,7 @@ function draw() {
   let testhash8 = "0x8a50709af0d74174f86d04425fc3d483e6c5263998877c41766b8a3a608b6a"; //no flourish???
   let testhash9 = "0x141b7cd4f6fc09488c67cfe8b6bac179ec1c8e6f94a16082c2059968ea5741"; //splinter
   let testhasha = "0x27272727272727272727272727272727272727272727272727272727272727"; //splinter
-  hash = testhasha;
+  // hash = testhasha;
   randomSeed(hash);
 
   //global variable access for production
@@ -134,9 +134,9 @@ function draw() {
   }
 
   let randomOffset = xxs(16);
-  if (randomOffset < s(63)) { randomOffset *= -5; }
-  else if (randomOffset < s(126)) { randomOffset *= 2; }
-  else if (randomOffset < s(189)) { randomOffset *= -3; randomOffset /= 2; }
+  if (xx(16) < 63) { randomOffset *= -5; }
+  else if (xx(16) < 126) { randomOffset *= 2; }
+  else if (xx(16) < 189) { randomOffset *= -3; randomOffset /= 2; }
   else { randomOffset /= 2; }
   let randomOffset2 = xx(26) < 165 ? 0 - xxs(26) : xxs(26);
   let randomOffset3 = xx(46) < 165 ? 0 - xxs(46) : xxs(46);
