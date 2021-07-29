@@ -1404,7 +1404,7 @@ function starscapebg(randomOffset4, randomOffset5) {
     starPosX = random(0, DIM);
     starPosY = random(0, DIM);
     starSize = starSize + 1;
-    if (starSize > 5) { starSize = 1; } bigBang += 1;
+    if (starSize > s(5)) { starSize = 1; } bigBang += 1;
   }
 }
 function sprinklesbg() {
