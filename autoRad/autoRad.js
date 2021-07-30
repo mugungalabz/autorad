@@ -95,10 +95,11 @@ function draw() {
   hash = "0x";
   while (hash.length < 64) hash = hash + chars.charAt(Math.floor(random(0, 16)));
  
-  randomSeed(hash);
+  
 
   //global variable access for production
   hash = tokenData.hash
+  randomSeed(hash);
 
   type = xx(2) == 69 ? "based" : xx(2) < 200 ? "light" : "dark";
 
