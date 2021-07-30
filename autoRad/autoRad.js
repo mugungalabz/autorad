@@ -94,22 +94,11 @@ function draw() {
   let chars = "abcdef1234567890";
   hash = "0x";
   while (hash.length < 64) hash = hash + chars.charAt(Math.floor(random(0, 16)));
-  console.log("Generated Seed:" + hash);
-  let testhash1 = "0xf553bed38bd649dba715cc70201624463a28a1baeff19cfd03b2d39f20a598";
-  let testhash2 = "0xb400272b2ec7fc76a0ec390393b401298ccd78f24212b135a6e96203267056";
-  let testhash3 = "0x7c964593c7d69ba14aee67ea780ecee59d9ee7cd69c833e02608facb64560f";
-  let testhash4 = "0x6a8e7e4a2eeba9d6aee2bc75f1172d02adaa051805728d4e97d5baceefbf0a"; //notebook bg
-  let testhash5 = "0x0a011c727ee0455047a573987a7c8fd82655abd6bf9241cf3dc8fba1ce0803"; //light notebook ellipse
-  let testhash6 = "0x7b892b356738095b266887c131935f7dd8f132bc8d3a71f9affd178cb8c548"; //gradient flourish test
-  let testhash7 = "0x6c646f816692db533cf00dae1e12c4c46bd68efaabaf296ad738b9cc2b8901"; //gradient ellipse + dots circle
-  let testhash8 = "0x8a50709af0d74174f86d04425fc3d483e6c5263998877c41766b8a3a608b6a"; //no flourish???
-  let testhash9 = "0x141b7cd4f6fc09488c67cfe8b6bac179ec1c8e6f94a16082c2059968ea5741"; //splinter
-  let testhasha = "0x27272727272727272727272727272727272727272727272727272727272727"; //splinter
-  // hash = testhasha;
+ 
   randomSeed(hash);
 
   //global variable access for production
-  //hash = tokenData.hash
+  hash = tokenData.hash
 
   type = xx(2) == 69 ? "based" : xx(2) < 200 ? "light" : "dark";
 
@@ -118,11 +107,8 @@ function draw() {
   let palette = palettes[2][0];
   if (type == "light") palette = palettes[0][palette_select];
   if (type == "dark") palette = palettes[1][palette_select];
-  //palette = palettes[1][22];
-  console.log("Palette Selected: ", type, palette_select);
 
   var sortCols = [0, 0, 0, 0, 0];
-  //sortCols[0] = x(6); clrs[0] = 0;
   for (var i = 0; i < 5; i++) {
     let j = i - 1;
     while (j >= 0 && xx(6 + 2 * i) < sortCols[j]) {
@@ -142,7 +128,6 @@ function draw() {
   let randomOffset3 = xx(46) < 165 ? 0 - xxs(46) : xxs(46);
   let randomOffset4 = xx(48) % 2 == 0 ? 0 - xxs(48) : xxs(48);
   let randomOffset5 = xx(52) % 2 == 0 ? 0 - xxs(52) : xxs(52);
-  console.log("randomOffset:", randomOffset, "randomOffset2:", randomOffset2, "randomOffset3:", randomOffset3, "randomOffset4:", randomOffset4, "randomOffset5:", randomOffset5);
   let bgSelect = xx(3);
 
 
@@ -186,11 +171,8 @@ function draw() {
     }
     image(basedGradient, 0, 0);
   }
-  console.log("Background: ", type, " ", bgSelect, " ", bgType, " Palette:", palette_select);
   let framingShape = xx(22) + framingShape_failsafe;
-  console.log("FramingShape#:", framingShape);
   if (framingShape > -1 && framingShape < 8 && bgType != "notebook") { //notebook framing ellipse
-    console.log("FramingShape: notebook framing ellipse");
     if (type == "based") { blendMode(ADD); } //avoids bw contrast for based
     frameShape = "ellipse"; framingShapeType = "notebook";
     let notebookFrameEllipse;
@@ -382,7 +364,6 @@ function draw() {
 
   if (centeredShape < 24 && frameShape != "square") { // rectangle
     if (frameShape == "square") centeredShape = (28); //unhexes a different block for the frameshape if there's a conflict
-    console.log("CenteredShape: Rectangle ", centeredShape);
     noStroke(); fill(clrs[0]);
     let rect_mover = randomOffset / 2;
     let rect_mover2 = randomOffset2 / 2;
@@ -394,7 +375,6 @@ function draw() {
   }
   if (centeredShape > 23 && centeredShape < 65 && frameShape != "ellipse" && bgType != "horizon") { // retro sun
     if (type == "based") { blendMode(ADD); } //avoids bw contrast for based
-    console.log("CenteredShape: Retro Sun ", centeredShape);
     centeredShapeType = "horizon";
     let SourceRetroSun;
     let MaskRetroSun;
@@ -418,14 +398,12 @@ function draw() {
     blendMode(BLEND);
   }
   if (centeredShape > 64 && centeredShape < 128 && frameShape != "ellipse") { // solid ellipse
-    console.log("CenteredShape: ", centeredShape);
     centeredShapeType = "solid"; noStroke();
     let centEllipseScaler = random(72, 97);
     fill(clrs[0]);
     ellipse(s(512), s(512), s(centEllipseScaler * 7 + (centEllipseScaler / 2)), s(centEllipseScaler * 7 + (centEllipseScaler / 3)));
   }
   if (centeredShape > 127 && centeredShape < 226) { //triangle centered shape
-    console.log("CenteredShape: triangle");
     centeredShapeType = "solid";
     if (centeredShapeType == "solid") {
       noStroke();
@@ -466,26 +444,21 @@ function draw() {
   if (floatingShape1 < 65 && floatingShape1 > 31) { //triangle
     noStroke(); fill(clrs[1]);
     triangle(s(128) + DIM / 2 + randomOffset, DIM / 2 + randomOffset, DIM / 3, DIM / 1.5, DIM / 4 + randomOffset, DIM / 4);
-    console.log("FloatingShape1: Triangle");
   }
 
   if (floatingShape1 < 32 && floatingShape1 > 16) { //strokedTriangle
     strokeWeight(s(16)); fill(clrs[1]); stroke(clrs[3]);
     triangle(s(128) + DIM / 2 + randomOffset, DIM / 2 + randomOffset, DIM / 3, DIM / 1.5, DIM / 4 + randomOffset, DIM / 4);
-    console.log("FloatingShape1: StrokedTriangle");
   }
   if (floatingShape1 < 16) { //strokedTriangle SPLIT TWO-PARTER
     strokeWeight(s(16)); fill(clrs[1]);
     triangle(s(128) + DIM / 2 + randomOffset, DIM / 2 + randomOffset, DIM / 3, DIM / 1.5, DIM / 4 + randomOffset, DIM / 4);
-    console.log("FloatingShape1: StrokedTriangle TWO PARTER Part 1");
   }
   if (floatingShape1 > 64 && floatingShape1 < 230) { //standard triangle -  -- GETS CALLED OFTEN
-    console.log("Floatingshape1: standard Triangle");
     noStroke(); fill(clrs[3]);
     triangle(s(768) + randomOffset / 4, s(420) + randomOffset2 / 2, s(626) + randomOffset2 / 2, s(824) + randomOffset3 / 3, s(400) + randomOffset3 / 3, s(512) + randomOffset / 2); //GREAT shape but too consistent
   }
   if (floatingShape1 > 229 && sprinkles_used == false) { //standard triangle w sprinkles
-    console.log("FloatingShape1: sprinkles Standard Triangle");
     sprinkles_used = true;
     let sourceSprinklesTriangle;
     let maskSprinklesTriangle;
@@ -520,7 +493,6 @@ function draw() {
     applyMask(sourceSprinklesTriangle, maskSprinklesTriangle);
   }
   if (floatingShape1 > 64 && floatingShape1 < 80 && bgType != "notebook" && framingShapeType != "notebook") { //LIGHT notebook ellipse
-    console.log("FloatingShape1: light notebook ellipse");
     let sourceNotebook; let maskNotebook;
     sourceNotebook = createGraphics(DIM, DIM);
     'use strict'
@@ -557,14 +529,13 @@ function draw() {
     if (abs(randomOffset * 3) < s(256)) notebookellipseX_failsafe = s(256);
     maskNotebook.ellipse(abs(randomOffset * 3) + notebookellipseX_failsafe, abs(randomOffset * 2) + notebookellipse_failsafe, abs(randomOffset2 * 2) + notebookellipseSize_failsafe, abs(randomOffset2 * 2) + notebookellipseSize_failsafe);
     if (type == "based") { blendMode(ADD); }
-    console.log("about to check width then mask");
-    console.log("width is: " + width);
+
     applyMask(sourceNotebook, maskNotebook);
-    console.log("image placement successful");
+
     blendMode(BLEND);
   }
   if (floatingShape1 > 79 && floatingShape1 < 100) { //Masked circles filled w Sprinkles
-    console.log("FloatingShape1: Sprinkles Circle");
+
     ss_circle = true;
     sprinkles_used = true;
     let sourceSprinksCircle;
@@ -597,7 +568,6 @@ function draw() {
   }
   if (floatingShape1 > 69 && floatingShape1 < 150 && bgType != "horizon" && bgType != "grid" && bgType != "fakegrid" && bgType != "3Dgrid" && centeredShapeType != "horizon" && bars_used == false && grid_used == false) { //----------floatingGrid
     bars_used = true;
-    console.log("FloatingShape1: floating Grid");
     let gridSize = xx(42);
     gridSize = gridSize * 2;
     if (gridSize < 65) { gridSize = gridSize + 64; }
@@ -624,7 +594,6 @@ function draw() {
   if (floatingShape1 > 149 && floatingShape1 < 175 && bgType != "horizon" && bgType != "grid" && bgType != "fakegrid" && bgType != "3Dgrid" && centeredShapeType != "horizon" && bars_used == false) { //----------floatingCheckers
     if (type == "based") { blendMode(ADD); } //makes based types not have the black white contrast
     bars_used = true;
-    console.log("FloatingShape1: checker grid");
     let gridSize = xx(40) * 2;
     gridSize = gridSize * 2;
     if (gridSize < s(65)) { gridSize = gridSize + s(64); }
@@ -636,7 +605,6 @@ function draw() {
     noFill(); strokeWeight(s(2));
     if (type == "light") { stroke(0); }
     if (type == "dark") { stroke(255); }
-    console.log("Checker Even: ", checkerEven);
     let blackSquareStart = true;
     while (floatingGridCounterH < gridSize) {
       currSquareBlack = blackSquareStart;
@@ -653,7 +621,6 @@ function draw() {
     blendMode(BLEND); //undoes the possiblity of staying based (add mode)
   }
   if (floatingShape1 > 174 && floatingShape1 < 200 && bgType != "horizon" && centeredShapeType != "horizon") { //-------venetian circle lines circle
-    console.log("FloatingShape1: venetian circle");
     bars_used = true; stroke(nonBGColor(2));
     strokeWeight(s(4)); strokeCap(ROUND);
     let radius = s(xx(30));
@@ -700,7 +667,6 @@ function draw() {
 
   if (floatingShape1 > 124 && floatingShape1 < 150 && bars_used == false) { //---------- Masked circles filled w worms
     if (type == "based") { blendMode(ADD); } //avoids black/white contrast for based comps
-    console.log("FloatingShape1: Worms Circle");
     worms_used = true;
     let sourceWormsCircle; let maskWormsCircle;
     sourceWormsCircle = createGraphics(DIM, DIM);
@@ -739,7 +705,6 @@ function draw() {
     blendMode(BLEND);
   }
   if (floatingShape1 > 200 && floatingShape1 < 241 && bgType != "dots") { // Masked circles filled with dots (alpha not possible)
-    console.log("FloatingShape1: Dots Circle");
     floatingShapeType = "dots_circle";
     let sourceDotsCircle;
     let maskDotsCircle;
@@ -768,9 +733,7 @@ function draw() {
   let curveWiggler4 = s(xx(20));
   let curveWiggler5 = s(xx(22));
   let curveType = xx(14);
-  console.log("curveType#: ", curveType);
   if (curveType < 16) { // gradient tertiary flourish
-    console.log("flourish gradient tertiary");
     let sourceGradientCurve;
     let maskGradientCurve;
     sourceGradientCurve = createGraphics(DIM, DIM);
@@ -874,7 +837,6 @@ function draw() {
     endShape();
   }
   if (curveType > 129 && curveType < 241) { //alt flourish
-    console.log("flourish alt");
     noFill();
     strokeWeight(s(10));
     stroke(nonBGColor(2));
@@ -903,7 +865,6 @@ function draw() {
   }
   if (curveType > 240) { //alt flourish gradient
     let sourceCurve; let maskCurve;
-    console.log("flourish alt gradient");
     sourceCurve = createGraphics(DIM, DIM);
     let x_lerp = 0; let y_lerp = 0;
     let w_lerp = DIM; let h_lerp = DIM;
@@ -945,7 +906,6 @@ function draw() {
   }
   let floatingShape2 = xx(18);
   if (floatingShape2 > 128 && floatingShape2 < 156) {
-    console.log("floating Shape 2 = f2 triangle");
     let bar_triangle;
     bar_triangle = createGraphics(DIM, DIM);
     let barp = 0;
@@ -965,14 +925,12 @@ function draw() {
     applyMask(bar_triangle, bar_triangle_mask);
   }
   if (floatingShape2 < 7) { // 3 rects ascending
-    console.log("FloatingShape2: rects ascending");
     noStroke(); fill(clrs[2]);
     rect(s(512) - randomOffset, s(300) - randomOffset / 2, s(floatingShape2 + 16), s(floatingShape2 + 16) * 8);
     rect(s(512) - randomOffset + s(64), s(300) - randomOffset / 2 - s(64), s(floatingShape2 + 16), s(floatingShape2 + 16) * 8);
     rect(s(512) - randomOffset + s(128), s(300) - randomOffset / 2 - s(128), s(floatingShape2 + 16), s(floatingShape2 + 16) * 8);
   }
-  if (floatingShape2 > 7 && floatingShape2 < 17 && bars_used == false && bgType != "horizon") { //lines diamond (actually a triangle now)
-    console.log("FloatingShape2: lines triangle");
+  if (floatingShape2 > 7 && floatingShape2 < 17 && bars_used == false && bgType != "horizon") { //lines triangle
     strokeCap(ROUND); strokeWeight(s(4)); stroke(nonBGColor(3));
     bars_used = true;
     let halfway_point = false;
@@ -990,12 +948,10 @@ function draw() {
       if (halfway_point == false) {
         line(line_anchorX - line_circle_counter * line_circle_var, line_anchorY + (line_circle_counter + height_adder) * line_circle_height + line_triangle_height_failsafe, line_anchorX + line_circle_counter * line_circle_var, line_anchorY + (line_circle_counter + height_adder) * line_circle_height + line_triangle_height_failsafe);
         line_circle_counter++;
-        //console.log("line circle counter", line_circle_counter);
       }
     }
   }
   if (floatingShape2 > 16 && floatingShape2 < 32) { //3 rects descending
-    console.log("FloatingShape2: rects descending");
     noStroke();
     fill(clrs[2]);
     rect(s(512) - randomOffset, s(300) - randomOffset / 2, s(floatingShape2), s(floatingShape2) * 8);
@@ -1004,7 +960,6 @@ function draw() {
   }
 
   if (floatingShape2 < 50 && type == "dark" && clrs[2] != color('#000000') && clrs[3] != color('#000000')) { //gradient triangle
-    console.log("FloatingShape: gradient triangle");
     let sourceGradient; let maskGradient;
     sourceGradient = createGraphics(DIM, DIM);
     let x_lerp = 0; let y_lerp = 0;
@@ -1027,7 +982,6 @@ function draw() {
     applyMask(sourceGradient, maskGradient);
   }
   if (floatingShape2 > 50 && type == "dark" && clrs[2] != color('#000000') && clrs[3] != color('#000000')) { //gradient ellipse
-    console.log("FloatingShape2: gradient ellipse");
     let sourceGradient; let maskGradient;
     sourceGradient = createGraphics(DIM, DIM);
     let x_lerp = 0; let y_lerp = 0;
@@ -1098,7 +1052,6 @@ function draw() {
     endShape();
   }
   if (floatingShape2 > 100 && floatingShape2 < 128) { //two straight lines
-    console.log("FloatingShape2: Two Straight Lines");
     two_straight = true;
     noFill(); stroke(clrs[1]); strokeWeight(s(16)); strokeCap(SQUARE);
     let straightLineLength = abs(randomOffset3) * 2;
@@ -1119,7 +1072,6 @@ function draw() {
     arcPosx = arcPosx + 2 * s(128);
     arc(arcPosx, arcPosy, s(128), s(128), PI, TWO_PI, OPEN);
     arc(arcPosx + s(128), (arcPosy - 1), s(128), s(128), 0, PI, OPEN);
-    console.log("FloatingShape2: Arcnoodles");
   }
   if (floatingShape2 > 127 && floatingShape2 < 160 && two_straight == false) { //half arcnoodle  testing
     noFill(); stroke(clrs[1]);
@@ -1131,7 +1083,6 @@ function draw() {
     arcPosx = arcPosx + 2 * s(64);
     arc(arcPosx, arcPosy, s(64), s(64), PI, TWO_PI, OPEN);
     arc(arcPosx + s(64), (arcPosy - 1), s(64), s(64), 0, PI, OPEN);
-    console.log("FloatingShape1: half Arcnoodles");
   }
   if (floatingShape2 > 160 && floatingShape2 < 180 && two_straight == false) { //double arcnoodle
     noFill(); stroke(nonBGColor(1));
@@ -1154,7 +1105,6 @@ function draw() {
     arcPosx = arcPosx + 2 * s(128);
     arc(arcPosx, arcPosy, s(128), s(128), PI, TWO_PI, OPEN);
     arc(arcPosx + s(128), (arcPosy - 1), s(128), s(128), 0, PI, OPEN);
-    console.log("FloatingShape1: Double Arcnoodles");
   }
   if (floatingShape2 > 179 && floatingShape2 < 241) { //quotemarks quad
     noStroke(); fill(clrs[4]);
@@ -1215,7 +1165,6 @@ function draw() {
     endShape();
   }
   if (floatingShape2 > 64 && floatingShape2 < 100 && floatingShapeType != "dots_circle" && bars_used == false && worms_used == false) { // bars square
-    console.log("FloatingShape2: bars square");
     let bars_square_counter = 0;
     bars_used = true;
     while (bars_square_counter < DIM / 4) {
@@ -1228,11 +1177,9 @@ function draw() {
   if (floatingShape1 < 16) { //strokedTriangle SPLIT TWO-PARTER DRAWN HERE OUT OF ORDER - still calling function from part 1
     strokeWeight(s(16)); noFill(); stroke(diffColor(clrs[1], 3));
     triangle(s(128) + DIM / 2 + randomOffset, DIM / 2 + randomOffset, DIM / 3, DIM / 1.5, DIM / 4 + randomOffset, DIM / 4);
-    console.log("FloatingShape1: StrokedTriangle TWO-PARTER part 2");
   }
-  console.log("DIM:" + DIM);
   noLoop();
-  //saveFrame(type+"palette#"+palette_select+bgType+"-FRAME-"+frameShape+framingShape+framingShapeType+"-CENTERED-"+centeredShapeType+"-"+centeredShape+"-"+day()+"-"+minute()+"-"+second()+".png");
+  
 } //end onMouseClick
 function xx(a) { return unhex(hash.substring(a, a + 2)); }
 function xxs(a) { return ((unhex(hash.substring(a, a + 2)) / DEFAULT_SIZE) * DIM); }
@@ -1249,7 +1196,7 @@ function xsBetween(x, a, b) {
 }
 function srandom(a, b) { a = s(a); b = s(b); return random(a, b) }
 function dotsbg() {//background
-  console.log("dots");
+
   let dots_circle_counter = 0;
   let dots_height_counter = 0;
   if (type == "light") { background(255, 255, 255); } //light white background
@@ -1392,7 +1339,6 @@ function wormsbg() {
 }
 function starscapebg(randomOffset4, randomOffset5) {
   bgType = "starscape";
-  console.log("background = starscape");
   let starAmt = abs(randomOffset5) * 40;
   let bigBang = 0;
   let starPosX = random(0, DIM);
