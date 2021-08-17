@@ -1,17 +1,24 @@
 
 //delete this since they declare features and hash
-features = []
+var features = []
 let chars = "abcdef1234567890";
-hash = "0x";
-while (hash.length < 64) hash = hash + chars.charAt(Math.floor(random(0, 16)));
-featuresReduced = features;
+var hash = "0x";
+while (hash.length < 64) hash = hash + chars.charAt(Math.floor(Math.random() * 16));
+var featuresReduced = features;
 
 //uncomment this in final script
 // hash = tokenData.hash 
-randomSeed(hash);
+
+console.log("hash:" + hash)
 features.push(xx(2) == 69 ? "based" : xx(2) < 200 ? "light" : "dark");
 console.log(features)
+console.log(xx(2))
 
+function xx(a) {
+    return parseInt(hash.substring(a, a + 2), 16)
+}
+///////////////CUTOFF HERE, EVERYTHING BELOW NEEDS TO BE DELETED, 
+///////////////OR REDUCED TO FEATURE LOGIC ABOVE THIS LINE
 function draw() {
     frameShape = "";
     type = "based";
@@ -1408,9 +1415,7 @@ function draw() {
     noLoop();
 
 }
-function xx(a) {
-    return unhex(hash.substring(a, a + 2));
-}
+
 
 function xxs(a) {
     return ((unhex(hash.substring(a, a + 2)) / DEFAULT_SIZE) * DIM);
