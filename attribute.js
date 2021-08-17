@@ -8,7 +8,7 @@ var featuresReduced = features;
 
 //uncomment this in final script
 // hash = tokenData.hash 
-
+var bgType;
 console.log("hash:" + hash)
 let type = xx(2) == 69 ? "based" : xx(2) < 200 ? "light" : "dark"
 features.push("Color Mode: " + xx(2) == 69 ? "Based" : xx(2) < 200 ? "Light" : "Dark");
@@ -28,6 +28,7 @@ if (type == "light") {
         // gridbg();
     }
     if (bgSelect > 99 && bgSelect < 126) {
+        bgType = "notebook"
         features.push("Background: 90's Notebook")
         // notebookbg(width);
     }
@@ -83,6 +84,7 @@ if (type == "dark") {
     }
     if (bgSelect > 175 && bgSelect < 227) {
         features.push("Background: 90's Notebook")
+        bgType = "notebook"
         // notebookbg();
     }
     if (bgSelect > 226) {
@@ -117,225 +119,50 @@ let randomOffset3 = xx(46) < 165 ? 0 - xxs(46) : xxs(46);
 let randomOffset4 = xx(48) % 2 == 0 ? 0 - xxs(48) : xxs(48);
 let randomOffset5 = xx(52) % 2 == 0 ? 0 - xxs(52) : xxs(52);
 
-let framingShape = xx(22) + framingShape_failsafe;
+let framingShape = xx(22);
 if (framingShape > -1 && framingShape < 8 && bgType != "notebook") {
-    if (type == "based") {
-        blendMode(ADD);
-    }
-    frameShape = "ellipse";
-    framingShapeType = "notebook";
-    let notebookFrameEllipse;
-    let notebookFrameEllipseMask;
-    notebookFrameEllipse = createGraphics(DIM, DIM);
-    let f = 0.02;
-    'use strict'
-    let grid = []
-    let notebook = []
-    var seed = floor(xx(18))
-    noiseSeed(seed)
-    notebook[0] = color(0, 0, 0);
-    notebook[1] = color(255, 255, 255);
-    let ratio = .5;
-    if (type == "light") {
-        ratio = .39
-    } else {
-        ratio = .58
-    }
-    notebookFrameEllipse.noStroke();
-    for (var y = 0; y < DIM; y++) {
-        for (var x = 0; x < DIM; x++) {
-            let i = noise(x * f, y * f) < ratio ? 1 : 0;
-            grid.push({
-                x,
-                y,
-                i
-            });
-        }
-    }
-    grid.forEach((g, index) => {
-        notebookFrameEllipse.fill(notebook[g.i])
-        notebookFrameEllipse.rect(g.x, g.y, 1, 1);
-    });
-    notebookFrameEllipseMask = createGraphics(DIM, DIM);
-    notebookFrameEllipseMask.noStroke();
-    notebookFrameEllipseMask.fill(255);
-    let frameOffset = randomOffset / 3;
-    let frameOffset2 = randomOffset2 / 3;
-    notebookFrameEllipseMask.ellipse(DIM / 2.0 + frameOffset, DIM / 2.0 + frameOffset2, DIM - s(456) - frameOffset, DIM - s(456) - frameOffset);
-    applyMask(notebookFrameEllipse, notebookFrameEllipseMask);
-    noFill();
-    stroke(clrs[4]);
-    strokeWeight(s(16));
-    ellipse(s(512) + frameOffset, s(512) + frameOffset2, DIM - s(456) - frameOffset, DIM - s(456) - frameOffset);
-    blendMode(BLEND);
+    features.push("Frame: 90's Notebook Ellipse")
 }
 if (framingShape > 7 && framingShape < 16) {
     frameShape = "ellipse";
-    noFill();
-    strokeWeight(s(16));
-    stroke(nonBGColor(4));
-    let frameOffset = xsBetween(19, -100, 100)
-    let frameOffset2 = xsBetween(20, -100, 100)
-    let diameter = xsBetween(21, 550, 800)
-    ellipse(s(512) + frameOffset, s(512) + frameOffset2, diameter, diameter);
+    features.push("Frame: Ellipse")
 }
 if (framingShape > 15 && framingShape < 26) {
     frameShape = "square";
-    noFill();
-    strokeWeight(s(16));
-    stroke(nonBGColor(4));
-    let frameOffset = Math.floor(randomOffset / 3);
-    let frameOffset2 = Math.floor(randomOffset2 / 3);
-    square(s(256) + frameOffset, s(256) + frameOffset2, DIM / 2 - frameOffset);
+    features.push("Frame: Square")
 }
 if (framingShape > 25 && framingShape < 41) {
     frameShape = "default_triangle";
-    noFill();
-    strokeWeight(s(16));
-    stroke(nonBGColor(4));
-    let frameOffset = randomOffset / 3;
-    let frameOffset2 = randomOffset2 / 3;
-    triangle(s(128) + frameOffset, s(768) + frameOffset, s(768) + frameOffset2, s(128) + frameOffset2, s(720) + frameOffset, s(940) + frameOffset);
+    features.push("Frame: Triangle")
 }
 if (framingShape > 40 && framingShape < 50) {
     frameShape = "gradient_default_triangle";
-    let sourceDefaultFramingTriangle;
-    let maskDefaultFramingTriangle;
-    sourceDefaultFramingTriangle = createGraphics(DIM, DIM);
-    let x_lerp = 0;
-    let y_lerp = 0;
-    let w_lerp = DIM;
-    let h_lerp = DIM;
-    for (var i = y_lerp; i <= y_lerp + h_lerp; i++) {
-        let inter = map(i, y_lerp, y_lerp + h_lerp, 0, 1);
-        let c = lerpColor(clrs[0], clrs[1], inter);
-        sourceDefaultFramingTriangle.strokeWeight(2);
-        sourceDefaultFramingTriangle.stroke(c);
-        sourceDefaultFramingTriangle.line(x_lerp, i, x_lerp + w_lerp, i);
-    }
-    maskDefaultFramingTriangle = createGraphics(DIM, DIM);
-    maskDefaultFramingTriangle.noFill();
-    maskDefaultFramingTriangle.strokeWeight(s(16));
-    maskDefaultFramingTriangle.stroke(255);
-    let frameOffset = randomOffset / 3;
-    let frameOffset2 = randomOffset2 / 3;
-    maskDefaultFramingTriangle.triangle(s(128) + frameOffset, s(768) + frameOffset, s(768) + frameOffset2, s(128) + frameOffset2, s(720) + frameOffset, s(940) + frameOffset);
-    applyMask(sourceDefaultFramingTriangle, maskDefaultFramingTriangle);
+    features.push("Frame: Gradient Triangle")
 }
 if (framingShape > 249 && bgType == "grid") framingShape = 50;
 if (framingShape > 49 && framingShape < 75) {
     frameShape = "gradient_flipped_triangle";
-    let sourceFlippedFramingTriangle;
-    let maskFlippedFramingTriangle;
-    sourceFlippedFramingTriangle = createGraphics(DIM, DIM);
-    let x_lerp = 0;
-    let y_lerp = 0;
-    let w_lerp = DIM;
-    let h_lerp = DIM;
-    for (var i = y_lerp; i <= y_lerp + h_lerp; i++) {
-        let inter = map(i, y_lerp, y_lerp + h_lerp, 0, 1);
-
-        let c = lerpColor(clrs[0], clrs[1], inter);
-        sourceFlippedFramingTriangle.strokeWeight(2);
-        sourceFlippedFramingTriangle.stroke(c);
-        sourceFlippedFramingTriangle.line(x_lerp, i, x_lerp + w_lerp, i);
-    }
-    maskFlippedFramingTriangle = createGraphics(DIM, DIM);
-    maskFlippedFramingTriangle.noFill();
-    maskFlippedFramingTriangle.strokeWeight(s(16));
-    maskFlippedFramingTriangle.stroke(255);
-    let frameOffset = randomOffset / 3;
-    let frameOffset2 = randomOffset2 / 3;
-    maskFlippedFramingTriangle.triangle(s(900) - frameOffset, s(738) + frameOffset, s(400) + frameOffset, s(128) + frameOffset2, s(256) + frameOffset, s(938) + frameOffset);
-    applyMask(sourceFlippedFramingTriangle, maskFlippedFramingTriangle);
+    features.push("Frame: Flipped Gradient Triangle")
 }
 if (framingShape > 74 && framingShape < 120) {
     frameShape = "flipped_triangle";
-    noFill();
-    strokeWeight(s(16));
-    stroke(clrs[4]);
-    if (type == "dark" && clrs[4] == color('#000000')) stroke(clrs[3]);
-    if (type == "light" && clrs[4] == color('#FFFFFF')) stroke(clrs[3]);
-    let frameOffset = randomOffset / 3;
-    let frameOffset2 = randomOffset2 / 3;
-    triangle(s(900) - frameOffset, s(738) + frameOffset, s(400) + frameOffset, s(128) + frameOffset2, s(256) + frameOffset, s(938) + frameOffset);
+    features.push("Frame: Flipped Triangle")
 }
 if (framingShape > 119 && framingShape < 150) {
     frameShape = "gradientellipse";
-    let sourceGradientFrameEllipse;
-    let maskGradientFrameEllipse;
-    sourceGradientFrameEllipse = createGraphics(DIM, DIM);
-    let x_lerp = 0;
-    let y_lerp = 0;
-    let w_lerp = DIM;
-    let h_lerp = DIM;
-    for (var i = y_lerp; i <= y_lerp + h_lerp; i++) {
-        let inter = map(i, y_lerp, y_lerp + h_lerp, 0, 1);
-        let c = lerpColor(clrs[3], clrs[4], inter);
-        sourceGradientFrameEllipse.strokeWeight(2);
-        sourceGradientFrameEllipse.stroke(c);
-        sourceGradientFrameEllipse.line(i, x_lerp, i, x_lerp + w_lerp);
-    }
-    maskGradientFrameEllipse = createGraphics(DIM, DIM);
-    maskGradientFrameEllipse.noFill();
-    maskGradientFrameEllipse.strokeWeight(s(16));
-    maskGradientFrameEllipse.stroke(255);
-    let frameOffset = randomOffset / 3;
-    let frameOffset2 = randomOffset2 / 3;
-    maskGradientFrameEllipse.ellipse(s(512) + frameOffset, s(512) + frameOffset2, DIM - s(456) - frameOffset, DIM - s(456) - frameOffset);
-    applyMask(sourceGradientFrameEllipse, maskGradientFrameEllipse);
+    features.push("Frame: Gradient Ellipse")
 }
 if (framingShape > 149 && framingShape < 225) {
     frameShape = "inverse_flipped_triangle";
-    noFill();
-    strokeWeight(s(16));
-    stroke(nonBGColor(4));
-    let frameOffset = randomOffset / 3;
-    let frameOffset2 = randomOffset2 / 3;
-    triangle(s(900) - frameOffset, s(256) + frameOffset, s(600) - frameOffset, s(800) + frameOffset2, s(128) + frameOffset, s(256) + frameOffset2);
+    features.push("Frame: Inverse Flipped Triangle")
 }
 if (framingShape > 224 && framingShape < 250) {
     frameShape = "default_flipped_triangle";
-    noFill();
-    strokeWeight(s(16));
-    stroke(nonBGColor(4));
-    let frameOffset = randomOffset / 3;
-    let frameOffset2 = randomOffset2 / 3;
-    triangle(s(128) + frameOffset, s(128) + frameOffset2, s(512) + frameOffset2, s(940) - frameOffset2, s(720) + frameOffset, s(128) + frameOffset);
+    features.push("Frame: Flipped Triangle")
 }
 if (framingShape > 249 && bgType != "grid") {
-    if (type == "based") {
-        blendMode(ADD);
-    }
     frameShape = "gridTriangle";
-    grid_used = true;
-    let sourceDiagGrid;
-    let maskDiagGrid;
-    let diagLineCounter = (-1) * DIM;
-    sourceDiagGrid = createGraphics(DIM, DIM);
-    if (type == "light") {
-        sourceDiagGrid.background(255);
-        sourceDiagGrid.stroke(0);
-    }
-    if (type == "dark") {
-        sourceDiagGrid.background(0);
-        sourceDiagGrid.stroke(255);
-    }
-    while (diagLineCounter < DIM) {
-        sourceDiagGrid.line(0, 0 + diagLineCounter, DIM, DIM + diagLineCounter);
-        sourceDiagGrid.line(DIM, 0 + diagLineCounter, 0, DIM + diagLineCounter);
-        diagLineCounter = diagLineCounter + s(64);
-    }
-    maskDiagGrid = createGraphics(DIM, DIM);
-    let frameOffset = randomOffset / 3;
-    let frameOffset2 = randomOffset2 / 3;
-    maskDiagGrid.triangle(s(128) + frameOffset, s(128) + frameOffset2, s(512) + frameOffset2, s(940) - frameOffset2, s(720) + frameOffset, s(128) + frameOffset);
-    applyMask(sourceDiagGrid, maskDiagGrid);
-    noFill();
-    strokeWeight(s(16));
-    stroke(nonBGColor(4));
-    triangle(s(128) + frameOffset, s(128) + frameOffset2, s(512) + frameOffset2, s(940) - frameOffset2, s(720) + frameOffset, s(128) + frameOffset);
-    blendMode(BLEND);
+    features.push("Frame: Grid Triangle")
 }
 
 let centeredShape = xx(6);
@@ -344,242 +171,49 @@ let yPos = s(512);
 
 if (centeredShape < 24 && frameShape != "square") {
     if (frameShape == "square") centeredShape = (28);
-    noStroke();
-    fill(clrs[0]);
-    let rect_mover = randomOffset / 2;
-    let rect_mover2 = randomOffset2 / 2;
-    let rect_size = 0;
-    if (abs(randomOffset2) < 100) rect_size = 2 * (abs(randomOffset2));
-    if (abs(randomOffset2) > 99) rect_size = abs(randomOffset2) / 2;
-    rect_size = s(rect_size);
-    rect(s(480) + rect_mover, s(220) + rect_mover2, rect_size + s(160), rect_size * 2 + s(320));
+    features.push("Shape: Square")
 }
 if (centeredShape > 23 && centeredShape < 65 && frameShape != "ellipse" && bgType != "horizon") {
     if (type == "based") {
         blendMode(ADD);
     }
-    centeredShapeType = "horizon";
-    let SourceRetroSun;
-    let MaskRetroSun;
-    SourceRetroSun = createGraphics(DIM, DIM);
-    SourceRetroSun.background(0, 0, 0);
-    let horizon = 0;
-    SourceRetroSun.strokeWeight(s(1));
-
-    while (horizon < DIM / 3) {
-        SourceRetroSun.stroke(diffColor(globalBlack, 0));
-        SourceRetroSun.strokeWeight(s(horizon / 1.5));
-        SourceRetroSun.line(0, s(400) + s(15) * horizon, DIM, s(400) + s(15) * horizon);
-        horizon = horizon + 1;
-    }
-    MaskRetroSun = createGraphics(DIM, DIM);
-    if (centeredShape < 10) {
-        centeredShape = centeredShape + 11;
-    }
-    if (centeredShape > 100) {
-        centeredShape = centeredShape - 30;
-    }
-    centeredShape = s(centeredShape);
-    MaskRetroSun.ellipse(xPos, yPos, centeredShape * 7 + (centeredShape), centeredShape * 7 + (centeredShape));
-    applyMask(SourceRetroSun, MaskRetroSun);
-    blendMode(BLEND);
+    features.push("Shape: Retro Sun")
 }
 if (centeredShape > 64 && centeredShape < 128 && frameShape != "ellipse") {
     centeredShapeType = "solid";
-    noStroke();
-    let centEllipseScaler = random(72, 97);
-    fill(clrs[0]);
-    ellipse(s(512), s(512), s(centEllipseScaler * 7 + (centEllipseScaler / 2)), s(centEllipseScaler * 7 + (centEllipseScaler / 3)));
+    features.push("Shape: Solid Circle")
 }
 if (centeredShape > 127 && centeredShape < 226) {
     centeredShapeType = "solid";
-    if (centeredShapeType == "solid") {
-        noStroke();
-        fill(clrs[0]);
-        triangle(DIM / 6 + (s(centeredShape) / 5), DIM / 6 + (s(centeredShape) / 5), DIM / 2 + (s(centeredShape) / 5), DIM / 2 + (s(centeredShape) / 5), DIM / 3 + (s(centeredShape) / 5), DIM / 1.5 + (s(centeredShape) / 5));
-    }
+    features.push("Shape: Solid Triangle")
 }
 if (centeredShape > 224 && frameShape != "square" && type == "dark") {
     if (frameShape == "square") centeredShape = xx(28);
-    let sourceGradientRect;
-    let maskGradientRect;
-    let rect_mover = Math.floor(randomOffset / 2);
-    let rect_mover2 = Math.floor(randomOffset2 / 2);
-    let rect_size = 0;
-    sourceGradientRect = createGraphics(DIM, DIM);
-    let y_lerp = 0;
-    let gradientShapePosX = int(srandom(228, 724));
-    let gradientShapePosY = int(srandom(128, 724));
-    let w_lerp = gradientShapePosX + s(340);
-    let h_lerp = gradientShapePosY + s(340);
-    for (var i = (s(320) + rect_mover2); i <= ((s(320) + rect_mover2) + (rect_size * 2 + s(320))) * 2; i++) {
-        let inter = map(i, y_lerp, y_lerp + h_lerp, 0, 1);
-        let c = lerpColor(clrs[2], clrs[0], inter);
-        sourceGradientRect.strokeWeight(2);
-        sourceGradientRect.stroke(c);
-        sourceGradientRect.line(0, i, DIM + w_lerp, i);
-    }
-    maskGradientRect = createGraphics(DIM, DIM);
-    if (abs(randomOffset2) < s(100)) rect_size = 2 * (abs(randomOffset2));
-    if (abs(randomOffset2) > s(99)) rect_size = abs(randomOffset2) / 2;
-    rect_size = s(rect_size);
-    maskGradientRect.rect(s(480) + rect_mover, s(320) + rect_mover2, rect_size + s(160), rect_size * 2 + s(320));
-    applyMask(sourceGradientRect, maskGradientRect);
+    features.push("Shape: Gradient Rectangle")
 }
 
 let floatingShape1 = xx(14);
 if (floatingShape1 < 65 && floatingShape1 > 31) {
-    noStroke();
-    fill(clrs[1]);
-    triangle(s(128) + DIM / 2 + randomOffset, DIM / 2 + randomOffset, DIM / 3, DIM / 1.5, DIM / 4 + randomOffset, DIM / 4);
+    features.push("Shape: Triangle")
 }
 
 if (floatingShape1 < 32 && floatingShape1 > 16) {
-    strokeWeight(s(16));
-    fill(clrs[1]);
-    stroke(clrs[3]);
-    triangle(s(128) + DIM / 2 + randomOffset, DIM / 2 + randomOffset, DIM / 3, DIM / 1.5, DIM / 4 + randomOffset, DIM / 4);
+    features.push("Shape: Thic Triangle")
 }
 if (floatingShape1 < 16) {
-    strokeWeight(s(16));
-    fill(clrs[1]);
-    triangle(s(128) + DIM / 2 + randomOffset, DIM / 2 + randomOffset, DIM / 3, DIM / 1.5, DIM / 4 + randomOffset, DIM / 4);
+    features.push("Shape: Thic Triangle")
 }
 if (floatingShape1 > 64 && floatingShape1 < 230) {
-    noStroke();
-    fill(clrs[3]);
-    triangle(s(768) + randomOffset / 4, s(420) + randomOffset2 / 2, s(626) + randomOffset2 / 2, s(824) + randomOffset3 / 3, s(400) + randomOffset3 / 3, s(512) + randomOffset / 2);
+    features.push("Shape: Triangle")
 }
 if (floatingShape1 > 229 && sprinkles_used == false) {
-    sprinkles_used = true;
-    let sourceSprinklesTriangle;
-    let maskSprinklesTriangle;
-    sourceSprinklesTriangle = createGraphics(DIM, DIM);
-    sourceSprinklesTriangle.background(clrs[1]);
-    sourceSprinklesTriangle.strokeCap(ROUND);
-    sourceSprinklesTriangle.strokeWeight(s(6));
-    sourceSprinklesTriangle.stroke(clrs[3]);
-    let sprinkle_column = 0;
-    let sprinkle_row = 0;
-    let sprinkle_switch = 0;
-
-    while (sprinkle_row < (round(1.1953125 * DIM))) {
-        while (sprinkle_column < DIM) {
-            sourceSprinklesTriangle.line(s(-6) + sprinkle_row, s(16) + sprinkle_column, s(4) + sprinkle_row, s(30) + sprinkle_column);
-            sourceSprinklesTriangle.line(s(-8) + sprinkle_row, s(48) + sprinkle_column, s(8) + sprinkle_row, s(48) + sprinkle_column);
-            sourceSprinklesTriangle.line(s(0) + sprinkle_row, s(72) + sprinkle_column, s(0) + sprinkle_row, s(88) + sprinkle_column);
-            sourceSprinklesTriangle.line(s(4) + sprinkle_row, s(108) + sprinkle_column, s(-6) + sprinkle_row, s(124) + sprinkle_column);
-            sourceSprinklesTriangle.line(s(-8) + sprinkle_row, s(148) + sprinkle_column, s(8) + sprinkle_row, s(148) + sprinkle_column);
-            sprinkle_column = sprinkle_column + s(158);
-        }
-        sprinkle_switch++;
-        sprinkle_row = sprinkle_row + s(32);
-        if (sprinkle_switch % 2 == 0) {
-            sprinkle_column = s(0);
-        }
-        if (sprinkle_switch % 2 != 0) {
-            sprinkle_column = s(-79);
-        }
-        if (sprinkle_switch % 3 == 0) {
-            sprinkle_column = s(-128);
-        }
-    }
-    maskSprinklesTriangle = createGraphics(DIM, DIM);
-    maskSprinklesTriangle.noStroke();
-    maskSprinklesTriangle.fill(255);
-    maskSprinklesTriangle.triangle(s(768) + randomOffset / 4, s(420) + randomOffset2 / 2, s(626) + randomOffset2 / 2, s(824) + randomOffset / 3, s(400) + randomOffset / 3, s(512) + randomOffset / 2);
-    applyMask(sourceSprinklesTriangle, maskSprinklesTriangle);
+    features.push("Shape: Sprinkles Triangle")
 }
 if (floatingShape1 > 64 && floatingShape1 < 80 && bgType != "notebook" && framingShapeType != "notebook") {
-    let sourceNotebook;
-    let maskNotebook;
-    sourceNotebook = createGraphics(DIM, DIM);
-    'use strict'
-    let grid = [];
-    let notebook = [];
-    let f = 0.02;
-    let seed = floor(xx(17));
-    noiseSeed(seed);
-    notebook[0] = color(0, 0, 0);
-    notebook[1] = color(255, 255, 255);
-    let ratio = .5;
-    if (type == "light") {
-        ratio = .39
-    } else {
-        ratio = .58
-    }
-    for (let y = 0; y < DIM; y++) {
-        for (let x = 0; x <= DIM; x++) {
-            let i = noise(x * f, y * f) < ratio ? 1 : 0;
-            grid.push({
-                x,
-                y,
-                i
-            });
-        }
-    }
-    sourceNotebook.noStroke();
-    grid.forEach((g, index) => {
-        sourceNotebook.fill(notebook[g.i])
-        sourceNotebook.rect(g.x, g.y, 1, 1);
-    });
-    maskNotebook = createGraphics(DIM, DIM);
-    maskNotebook.noStroke();
-    maskNotebook.fill(255);
-    let notebookellipse_failsafe = 0;
-    let notebookellipseX_failsafe = 0;
-    let notebookellipseSize_failsafe = 0;
-    if (abs(randomOffset * 2) < s(256)) notebookellipse_failsafe = s(480);
-    if (abs(randomOffset2 * 2) > s(400)) notebookellipseSize_failsafe = s(-100);
-    if (abs(randomOffset2 * 2) < s(65)) notebookellipseSize_failsafe = s(256);
-    if (abs(randomOffset * 3) < s(256)) notebookellipseX_failsafe = s(256);
-    maskNotebook.ellipse(abs(randomOffset * 3) + notebookellipseX_failsafe, abs(randomOffset * 2) + notebookellipse_failsafe, abs(randomOffset2 * 2) + notebookellipseSize_failsafe, abs(randomOffset2 * 2) + notebookellipseSize_failsafe);
-    if (type == "based") {
-        blendMode(ADD);
-    }
-
-    applyMask(sourceNotebook, maskNotebook);
-
-    blendMode(BLEND);
+    features.push("Shape: Sprinkles Circle")
 }
 if (floatingShape1 > 79 && floatingShape1 < 100) {
-
-    ss_circle = true;
-    sprinkles_used = true;
-    let sourceSprinksCircle;
-    let maskSprinksCircle;
-    sourceSprinksCircle = createGraphics(DIM, DIM);
-    sourceSprinksCircle.background(clrs[2]);
-    sourceSprinksCircle.strokeCap(ROUND);
-    sourceSprinksCircle.strokeWeight(s(6));
-    sourceSprinksCircle.stroke(clrs[3]);
-    let sprinkle_column = 0;
-    let sprinkle_row = 0;
-    let sprinkle_switch = 0;
-    while (sprinkle_row < (round(1.1953125 * DIM))) {
-        while (sprinkle_column < DIM) {
-            sourceSprinksCircle.line(s(-6) + sprinkle_row, s(16) + sprinkle_column, s(4) + sprinkle_row, s(30) + sprinkle_column);
-            sourceSprinksCircle.line(s(-8) + sprinkle_row, s(48) + sprinkle_column, s(8) + sprinkle_row, s(48) + sprinkle_column);
-            sourceSprinksCircle.line(s(0) + sprinkle_row, s(72) + sprinkle_column, s(0) + sprinkle_row, s(88) + sprinkle_column);
-            sourceSprinksCircle.line(s(4) + sprinkle_row, s(108) + sprinkle_column, s(-6) + sprinkle_row, s(124) + sprinkle_column);
-            sourceSprinksCircle.line(s(-8) + sprinkle_row, s(148) + sprinkle_column, s(8) + sprinkle_row, s(148) + sprinkle_column);
-            sprinkle_column = sprinkle_column + s(158);
-        }
-        sprinkle_switch++;
-        sprinkle_row = sprinkle_row + s(32);
-        if (sprinkle_switch % 2 == 0) {
-            sprinkle_column = s(0);
-        }
-        if (sprinkle_switch % 2 != 0) {
-            sprinkle_column = s(-79);
-        }
-        if (sprinkle_switch % 3 == 0) {
-            sprinkle_column = s(-128);
-        }
-    }
-    maskSprinksCircle = createGraphics(DIM, DIM);
-    maskSprinksCircle.ellipse(s(512) + randomOffset, s(512) + randomOffset, floatingShape1 * s(2), floatingShape1 * s(2));
-    applyMask(sourceSprinksCircle, maskSprinksCircle);
+    features.push("Shape: Sprinkles Circle")
 }
 if (floatingShape1 > 69 && floatingShape1 < 150 && bgType != "horizon" && bgType != "grid" && bgType != "fakegrid" && bgType != "3Dgrid" && centeredShapeType != "horizon" && bars_used == false && grid_used == false) {
     bars_used = true;
