@@ -8,11 +8,13 @@ var featuresReduced = features;
 
 //uncomment this in final script
 // hash = tokenData.hash 
+
 var bgType;
 console.log("hash:" + hash)
 let type = xx(2) == 69 ? "based" : xx(2) < 200 ? "light" : "dark"
-features.push("Color Mode: " + xx(2) == 69 ? "Based" : xx(2) < 200 ? "Light" : "Dark");
-console.log(features)
+
+features.push("Color Mode: " + type);
+
 console.log(xx(2))
 let bgSelect = xx(3);
 if (type == "light") {
@@ -96,29 +98,6 @@ if (type == "based") {
     features.push("Background: Based Gradient")
 
 }
-
-function xx(a) {
-    return parseInt(hash.substring(a, a + 2), 16)
-}
-///////////////CUTOFF HERE, EVERYTHING BELOW NEEDS TO BE DELETED, 
-///////////////OR REDUCED TO FEATURE LOGIC ABOVE THIS LINE
-
-let randomOffset = xxs(16);
-if (xx(16) < 63) {
-    randomOffset *= -5;
-} else if (xx(16) < 126) {
-    randomOffset *= 2;
-} else if (xx(16) < 189) {
-    randomOffset *= -3;
-    randomOffset /= 2;
-} else {
-    randomOffset /= 2;
-}
-let randomOffset2 = xx(26) < 165 ? 0 - xxs(26) : xxs(26);
-let randomOffset3 = xx(46) < 165 ? 0 - xxs(46) : xxs(46);
-let randomOffset4 = xx(48) % 2 == 0 ? 0 - xxs(48) : xxs(48);
-let randomOffset5 = xx(52) % 2 == 0 ? 0 - xxs(52) : xxs(52);
-
 let framingShape = xx(22);
 if (framingShape > -1 && framingShape < 8 && bgType != "notebook") {
     features.push("Frame: 90's Notebook Ellipse")
@@ -164,6 +143,30 @@ if (framingShape > 249 && bgType != "grid") {
     frameShape = "gridTriangle";
     features.push("Frame: Grid Triangle")
 }
+console.log(features)
+function xx(a) {
+    return parseInt(hash.substring(a, a + 2), 16)
+}
+///////////////CUTOFF HERE, EVERYTHING BELOW NEEDS TO BE DELETED, 
+///////////////OR REDUCED TO FEATURE LOGIC ABOVE THIS LINE
+
+// let randomOffset = xxs(16);
+// if (xx(16) < 63) {
+//     randomOffset *= -5;
+// } else if (xx(16) < 126) {
+//     randomOffset *= 2;
+// } else if (xx(16) < 189) {
+//     randomOffset *= -3;
+//     randomOffset /= 2;
+// } else {
+//     randomOffset /= 2;
+// }
+// let randomOffset2 = xx(26) < 165 ? 0 - xxs(26) : xxs(26);
+// let randomOffset3 = xx(46) < 165 ? 0 - xxs(46) : xxs(46);
+// let randomOffset4 = xx(48) % 2 == 0 ? 0 - xxs(48) : xxs(48);
+// let randomOffset5 = xx(52) % 2 == 0 ? 0 - xxs(52) : xxs(52);
+
+
 
 let centeredShape = xx(6);
 let xPos = s(512);
