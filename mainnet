@@ -491,8 +491,8 @@ function draw() {
           if (centeredShape > 100) {
                centeredShape = centeredShape - 30;
           }
-          centeredShape = s(centeredShape);
-          MaskRetroSun.ellipse(xPos, yPos, centeredShape * 7 + (centeredShape), centeredShape * 7 + (centeredShape));
+          cShapeComp = s(centeredShape);
+          MaskRetroSun.ellipse(xPos, yPos, cShapeComp * 7 + (cShapeComp), cShapeComp * 7 + (cShapeComp));
           applyMask(SourceRetroSun, MaskRetroSun);
           blendMode(BLEND);
      }
@@ -1583,7 +1583,7 @@ function notebookbg(width) {
 function grid3Dbg() {
      bgType = "3Dgrid";
      background(type == "light" ? 255 : 0);
-     strokeWeight(1);
+     strokeWeight(s(1));
      let GridCounter = 4;
      let GridwCounter = 0 - DIM;
      let GridLoop = 24;
@@ -1607,12 +1607,12 @@ function horizonbg() {
           background(0, 0, 0);
      }
      let horizon = 0;
-     strokeWeight(1);
+     strokeWeight(s(1));
      while (horizon < DIM) {
           stroke(type == "light" ? 0 : 255);
           strokeWeight(horizon / 1.5);
           line(0, s(512) + 20 * horizon, DIM, s(512) + 20 * horizon);
-          horizon += 1;
+          horizon += s(1);
      }
 }
 
