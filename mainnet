@@ -1317,6 +1317,7 @@ function draw() {
      if (floatingShape2 > 74 && floatingShape2 < 101) {
           noStroke();
           fill(clrs[4]);
+          randomSeed(hash)
           let zotOffset = srandom(-128, 128);
           let zotOffset2 = srandom(-100, 100);
           beginShape();
