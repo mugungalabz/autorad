@@ -731,7 +731,7 @@ function draw() {
                blendMode(ADD);
           } 
           bars_used = true;
-          let gridSize = xx(40) * 2;
+          let gridSize = s(xx(40)) * 2;
           gridSize = gridSize * 2;
           if (gridSize < s(65)) {
                gridSize = gridSize + s(64);
@@ -739,7 +739,6 @@ function draw() {
           if (gridSize > s(500)) {
                gridSize = Math.floor(gridSize / 2);
           }
-          gridSize = s(gridSize);
           let floatingGridCounter = s(32);
           let floatingGridCounterH = s(32);
           let floatingGrid_height_failsafe = 0;
