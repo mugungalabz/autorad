@@ -813,7 +813,7 @@ function draw() {
           if (arcEnd - arcBegin > radians(330)) {
                arcEnd = arcEnd / 3;
           }
-          if (randomOffset4 > 125) {
+          if (randomOffset4 > s(125)) {
                arcBegin = arcBegin + radians(180);
                arcEnd = arcEnd + radians(180);
           }
