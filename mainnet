@@ -461,8 +461,8 @@ function draw() {
           let rect_mover = randomOffset / 2;
           let rect_mover2 = randomOffset2 / 2;
           let rect_size = 0;
-          if (abs(randomOffset2) < 100) rect_size = 2 * (abs(randomOffset2));
-          if (abs(randomOffset2) > 99) rect_size = abs(randomOffset2) / 2;
+          if (abs(randomOffset2) < s(100)) rect_size = 2 * (abs(randomOffset2));
+          if (abs(randomOffset2) > s(99)) rect_size = abs(randomOffset2) / 2;
           rect(s(480) + rect_mover, s(220) + rect_mover2, rect_size + s(160), rect_size * 2 + s(320));
      }
      if (centeredShape > 23 && centeredShape < 65 && frameShape != "ellipse" && bgType != "horizon") {
@@ -1563,7 +1563,9 @@ function notebookbg(width) {
      }
      for (let y = 0; y < DIM; y++) {
           for (let x = 0; x <= DIM; x++) {
-               let i = noise(x * f, y * f) < ratio ? 1 : 0;
+               let xsc = floor(x/dimScale)
+			let ysc = floor(y/dimScale)
+               let i = noise(xsc * f, ysc * f) < ratio ? 1 : 0;
                grid.push({
                     x,
                     y,
