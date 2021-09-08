@@ -463,7 +463,6 @@ function draw() {
           let rect_size = 0;
           if (abs(randomOffset2) < 100) rect_size = 2 * (abs(randomOffset2));
           if (abs(randomOffset2) > 99) rect_size = abs(randomOffset2) / 2;
-          rect_size = s(rect_size);
           rect(s(480) + rect_mover, s(220) + rect_mover2, rect_size + s(160), rect_size * 2 + s(320));
      }
      if (centeredShape > 23 && centeredShape < 65 && frameShape != "ellipse" && bgType != "horizon") {
