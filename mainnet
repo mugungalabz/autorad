@@ -254,9 +254,12 @@ function draw() {
                ratio = .58
           }
           notebookFrameEllipse.noStroke();
+          let dimScale = DIM/DEFAULT_SIZE
           for (var y = 0; y < DIM; y++) {
                for (var x = 0; x < DIM; x++) {
-                    let i = noise(x * f, y * f) < ratio ? 1 : 0;
+                    let xsc = floor(x/dimScale)
+				let ysc = floor(y/dimScale)
+                    let i = noise(xsc * f, ysc * f) < ratio ? 1 : 0;
                     grid.push({
                          x,
                          y,
@@ -617,9 +620,12 @@ function draw() {
           } else {
                ratio = .58
           }
+          let dimScale = DIM/DEFAULT_SIZE
           for (let y = 0; y < DIM; y++) {
                for (let x = 0; x <= DIM; x++) {
-                    let i = noise(x * f, y * f) < ratio ? 1 : 0;
+                    let xsc = floor(x/dimScale)
+				let ysc = floor(y/dimScale)
+                    let i = noise(xsc * f, ysc * f) < ratio ? 1 : 0;
                     grid.push({
                          x,
                          y,
@@ -1561,6 +1567,7 @@ function notebookbg(width) {
      } else {
           ratio = .39
      }
+     let dimScale = DIM/DEFAULT_SIZE
      for (let y = 0; y < DIM; y++) {
           for (let x = 0; x <= DIM; x++) {
                let xsc = floor(x/dimScale)
