@@ -436,6 +436,7 @@ function draw() {
                sourceDiagGrid.background(0);
                sourceDiagGrid.stroke(255);
           }
+          sourceDiagGrid.strokeWeight(s(1))
           while (diagLineCounter < DIM) {
                sourceDiagGrid.line(0, 0 + diagLineCounter, DIM, DIM + diagLineCounter);
                sourceDiagGrid.line(DIM, 0 + diagLineCounter, 0, DIM + diagLineCounter);
@@ -1243,6 +1244,7 @@ function draw() {
           sourceGradient = createGraphics(DIM, DIM);
           let x_lerp = 0;
           let y_lerp = 0;
+          randomSeed(hash)
           let gradientShapePosX = int(srandom(128, 824));
           let gradientShapePosY = int(srandom(128, 824));
           let w_lerp = gradientShapePosX + gradientShapePosX;
